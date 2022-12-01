@@ -32,6 +32,9 @@ const LoginForm = (props) => {
     } catch (err) {
       console.error(err);
     }
+
+    setEmail('')
+    setPassword('')
   };
   const showLogin = useSelector((state) => state.showLoginSlice.showHide);
   const dispatch = useDispatch();

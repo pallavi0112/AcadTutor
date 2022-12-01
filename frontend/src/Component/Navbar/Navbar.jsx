@@ -54,12 +54,12 @@ function Navbar(props) {
               );
             })}
           </ul>
-          {guestLinks}
-          {/* {isAuthenticated ? authlinks : guestLinks} */}
-          {/* <div className="btnBlock">
+          {/* {guestLinks}
+          {isAuthenticated ? authlinks : guestLinks} */}
+          <div className="btnBlock">
             <Button title="SignIn" cname="btn signin" />
             <Button title="SignUp" cname="btn signup" path="/signup" />
-          </div> */}
+          </div>
         </div>
       </nav>
     </>

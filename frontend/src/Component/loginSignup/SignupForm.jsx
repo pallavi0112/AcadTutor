@@ -39,7 +39,6 @@ const SignupForm = () => {
   }
 
 
-  console.log(newstudent)
   const [teacher, setTeacher] = useState(false)
   const [student, setStudent] = useState(true)
   const [slide, setSlide] = useState(true)
