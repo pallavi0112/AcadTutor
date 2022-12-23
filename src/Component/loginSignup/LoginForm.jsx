@@ -11,6 +11,7 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState();
   const LoginUser = async () => {
     try {
+
       const response = await axios.post(
         `http://127.0.0.1:8000/accounts/login`,
         {
@@ -23,12 +24,15 @@ const LoginForm = (props) => {
             "X-CSRFToken": Cookies.get('csrftoken')
 
           },
-        }
+        },
       );
       console.log({ BACKEND_RESPONSE: response });
     } catch (err) {
       console.error(err);
     }
+
+    setEmail('')
+    setPassword('')
   };
   const showLogin = useSelector((state) => state.showLoginSlice.showHide);
   const dispatch = useDispatch();

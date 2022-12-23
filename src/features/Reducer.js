@@ -16,5 +16,4 @@ export const showLoginSlice = createSlice({
 })
 
 export const {showHide} = showLoginSlice.actions;
-export default showLoginSlice.reducer
-
+export default showLoginSlice.reducer 

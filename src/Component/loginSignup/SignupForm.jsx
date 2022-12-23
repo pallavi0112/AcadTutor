@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios";
-import './SignupForm.css'
+import './SignupForm.css';
+import Cookies from 'js-cookie';
 const SignupForm = () => {
   const [newstudent, setNewstudent] = useState({
     student_name: "",
@@ -38,7 +39,6 @@ const SignupForm = () => {
   }
 
 
-  console.log(newstudent)
   const [teacher, setTeacher] = useState(false)
   const [student, setStudent] = useState(true)
   const [slide, setSlide] = useState(true)
@@ -69,6 +69,8 @@ const SignupForm = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            "X-CSRFToken": Cookies.get('csrftoken')
+
           },
         }
       );
