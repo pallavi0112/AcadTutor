@@ -49,7 +49,7 @@ function Navbar(props) {
               }
               return (
                 <li key={item.id} className={item.cName}>
-                  <Link to={`/${item.path}`} state={{data:false}} >{item.title}</Link>
+                  <Link to={`${item.path}`}>{item.title}</Link>
                 </li>
               );
             })}

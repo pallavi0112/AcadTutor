@@ -1,4 +1,6 @@
 import React,{useEffect}from 'react'
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/swiper.min.css'
 import 'swiper/modules/pagination/pagination.min.css'
@@ -19,6 +21,22 @@ const Semester = (props) => {
       }
     );
   }, [])
+
+
+// axios.defaults.withCredentials = true;
+// const GetSubs = () => {
+//   const GetSub = async () => {
+//     try {
+//       console.log(Cookies.get('csrftoken'))
+      
+//       const response = await axios.get(
+//         `http://127.0.0.1:8000/content/addsubj`,{'withCredentials': true }
+//       ); 
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };}
+
   return (
     <div data-aos={props.fade} className='semester'>
         <h2 className='sem-heading'>{props.sem} semester</h2>

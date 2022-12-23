@@ -1,26 +1,50 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Unit.css'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import {Link} from 'react-router-dom';
 import {FaRegPlayCircle} from 'react-icons/fa';
+import { useDispatch, useSelector } from "react-redux";
+import { setSubTopics } from "../../features/TopicReducer";
 axios.defaults.withCredentials = true;
+
+
 const Unit = () => {
-  const GetUnits = async () => {
-    try {
-      console.log(Cookies.get('csrftoken'))
+  const SubTopics = useSelector((state) => state.SubTopicsSlice.setSubTopics);
+  const dispatch = useDispatch();
+  const [topics , setTopics] = useState([
+    {
+      "topic_name" : "",
+      "link" : "",
+      "notes" : ""
+    }
+  ])
+
+  const GetUnits = async (unit_id) => { 
+    try { 
       const response = await axios.get(
-        `http://127.0.0.1:8000/content/6386186dc0545823cd2e2930/get_unit`,{'withCredentials': true }
+        `http://127.0.0.1:8000/content/${unit_id}/get_unit`,{'withCredentials': true }
       ); 
-      console.log(response.data);
+      const data = response.data.subtopics
+      console.log(data)
+      data.map((object) => {
+        console.log(`objects : ${object.subtopic_name}`)
+        setTopics((topics) => [
+          ...topics,
+          {
+            topic_name: object.subtopic_name,
+            link: object.link,
+            notes: object.notes,
+          }
+        ]);
+      }); 
     } catch (err) {
       console.error(err);
     }
   };
   return (
-
     <div className='unit_con'>
-    <span>Unit-1 Introduction</span>
-    <a><button type='button' onClick={GetUnits}><FaRegPlayCircle/>Start Learning</button></a>
+    <Link to=''><button type='button' onClick={()=> GetUnits("638de9462f72b8c1a32682aa")}><FaRegPlayCircle/>Start Learning</button></Link>
     </div>
   )
 }
