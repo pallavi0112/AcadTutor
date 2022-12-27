@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar2 from '../Component/Navbar/Navbar2'
 import UnitContent from '../Component/UnitsContent/UnitContent'
-import Trashing from '../Component/UnitsContent/Trashing'
+import Location from '../Component/UnitsContent/Location'
 
 import { useNavigate, useParams } from 'react-router-dom' ;
 const ContentPage = () => {
@@ -9,7 +9,7 @@ const ContentPage = () => {
   return ( 
     <section className='content_page'>
         <Navbar2/>
-        <Trashing/>
+        <Location/>
         <UnitContent/>
     </section>
   )

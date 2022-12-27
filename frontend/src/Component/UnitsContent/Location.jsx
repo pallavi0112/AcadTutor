@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
-import './Trashing.css'
+import './Location.css'
 import {FaChevronRight, FaPassport} from  'react-icons/fa'
-import { useLocation, useNavigate, useParams } from 'react-router-dom' ; 
+import { useLocation } from 'react-router-dom' ; 
 
 
-const Trashing = () => {
+const Location = () => {
     const navigate = useLocation()
     const path = navigate.pathname;
     const patharray = path.split("/")
@@ -25,4 +25,4 @@ const Trashing = () => {
   )
 }
 
-export default Trashing;
+export default Location;
