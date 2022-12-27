@@ -4,14 +4,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import {Link} from 'react-router-dom';
 import {FaRegPlayCircle} from 'react-icons/fa';
-import { useDispatch, useSelector } from "react-redux";
-import { setSubTopics } from "../../features/TopicReducer";
+
 axios.defaults.withCredentials = true;
 
 
 const Unit = () => {
-  const SubTopics = useSelector((state) => state.SubTopicsSlice.setSubTopics);
-  const dispatch = useDispatch();
   const [topics , setTopics] = useState([
     {
       "topic_name" : "",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect , Fragment} from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Dropdown from "./Dropdown";
@@ -6,12 +6,12 @@ import Button from "./Button";
 
 function Navbar(props) {
   const guestLinks = (
-   <>
+   <Fragment>
     <div className="btnBlock">
             <Button title="SignIn" cname="btn signin" />
             <Button title="SignUp" cname="btn signup" path="/signup" />
     </div>
-   </>
+   </Fragment>
   );
 
   const [dropdown, setDropdown] = useState(false);
@@ -54,12 +54,12 @@ function Navbar(props) {
               );
             })}
           </ul>
-          {/* {guestLinks}
-          {isAuthenticated ? authlinks : guestLinks} */}
-          <div className="btnBlock">
+          {guestLinks}
+          
+          {/* <div className="btnBlock">
             <Button title="SignIn" cname="btn signin" />
             <Button title="SignUp" cname="btn signup" path="/signup" />
-          </div>
+          </div> */}
         </div>
       </nav>
     </>
