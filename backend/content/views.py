@@ -1,3 +1,5 @@
+import requests
+from acadtutor.azure import upload
 from django.shortcuts import render
 from acadtutor.utils import get_collection_handle,get_db_handle
 from acadtutor.azure import ALLOWED_EXTENTIONS,upload
@@ -50,12 +52,17 @@ def createSubj(request):
                         branch = hod.branch
                     syllabus_file = request.FILES['s_file']
                     book_file = request.FILES['b_file']
+                    img_file= request.FILES['img_file']
                     s_upload_link = upload(syllabus_file)
                     b_upload_link = upload(book_file)
+                    img_link = upload(img_file)
                     ext = Path(syllabus_file.name).suffix
+                    img_ext  = Path(img_file.name).suffix
                     print(data)
                     if not s_upload_link :
                         return Response({'error':f"{ext} not allowed only accept {', '.join(ext for ext in ['.pdf','.doc','.docx'])} "})
+                    if not img_link :
+                        return Response({'error':f"{ext} not allowed only accept {', '.join(ext for ext in ['.jpg','.jpeg','.png'])} "})
                     dict = {
                         "c_name":data['subj_name'],
                         "sem": data['sem'],
@@ -63,11 +70,11 @@ def createSubj(request):
                         "branch": branch,
                         "units":[],
                         "start_date":data['date'],
-                        "weightage": data['weightage'],
                         "author_email":user.email,
                         "author_name":user.name,
                         "syllabus_link":s_upload_link,
                         "book_link":b_upload_link,
+                        "img_link" : img_link,
 
                     }
                     sub = subj_collection_handle.insert_one(dict)
@@ -80,6 +87,7 @@ def createSubj(request):
                         "sub_id":str(sub.inserted_id),
                         "summary": data['summary'],
                         "author_email":user.email,
+                        "img_link" : img_link,
                         }
                     
                     }}
@@ -192,13 +200,12 @@ def getUnit(request,unit_id):
         except Exception as e:
             # return Response({ 'error': 'Something went wrong when checking authentication status' })
             return Response({ 'error': str(e) })
-
 @csrf_protect
 @api_view(('GET',))
 def getBranch(request,branch):
     if (request.method == 'GET'):
             obj = branch_collection_handle.find_one({"branch": branch},{"_id": 0 })
-            data = obj
+            data = obj                     
             if obj is not None:
                 return Response(data)
             else:
