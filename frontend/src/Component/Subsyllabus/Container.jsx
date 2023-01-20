@@ -1,13 +1,16 @@
 import React from 'react'
 import './Container.css'
 import youtube from '../../Images/YouTube.png'
+import HOD from '../../Images/HOD.jpg'
+import Navbar2 from '../Navbar/Navbar2'
 const Container = () => {
   return (
     <>
+        <Navbar2/>
         <div className='subsyllabus_con'>
             <div className='row'>
                 <div className='imgBx'>
-                    <img src={youtube} />
+                    <img src={HOD} />
                 </div>
                 <div className='detail'>
                     <h3 className='teacherName'>Dr. Shanu K Rakesh Kuttan</h3>

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Container2.css';
 import youtube from '../../Images/YouTube.png'
-const Container2 = () => {
+const Container2 = (props) => {
   return (
     <div className='sub_con'>
       <div className='row'>

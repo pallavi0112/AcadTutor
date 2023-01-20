@@ -39,7 +39,6 @@ const SignupForm = () => {
   }
 
 
-  console.log(newstudent)
   const [teacher, setTeacher] = useState(false)
   const [student, setStudent] = useState(true)
   const [slide, setSlide] = useState(true)
@@ -57,7 +56,6 @@ const SignupForm = () => {
   const AddStudent = async () => {
     console.log(" AddStudent Function is running");
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/accounts/csrf_cookie`);
       const response = await axios.post(
         `http://127.0.0.1:8000/accounts/register`,
         {
