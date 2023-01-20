@@ -3,6 +3,9 @@ import base64
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
+from acadtutor.azure import upload
+import requests
+
 
 BRANCH_CHOICES = [
     ('CS', 'Computer Science Engineering'),
@@ -50,16 +53,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_teach = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
+    # img = models.CharField(blank=True,max_length=100)
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+    
     def __str__(self):
         if self.is_student == True:
             return self.email + " - is_student"
         else:
-            return self.email + " - is_teacher"
+            return self.email + " - is_teacher"        
     def get_absolute_url(self):
         return "/users/%s/" % (self.pk)
     def get_email(self):
@@ -83,14 +88,24 @@ class HOD(models.Model):
 
 class Teacher(models.Model):
     hod = models.ForeignKey(HOD,on_delete=models.CASCADE)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,primary_key=True)    
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,primary_key=True)
+    designation = models.CharField(max_length=30,blank=True)
+    youtube_link =  models.CharField(max_length=30,blank=True)
+    bio = models.CharField(max_length=256,blank=True)
     def __str__(self):
         return CustomUser.get_email(self.user) + " - is_teacher"
 
 class Student(models.Model):
     branch = models.CharField(null=True,blank=True,max_length=10)
     sem = models.IntegerField(null=True,blank=True)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,primary_key=True)    
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,primary_key=True)
     def __str__(self):
         return CustomUser.get_email(self.user) + " - is_student"
 
+class Subject(models.Model):
+    name = models.CharField(max_length=50)
+    subj_id = models.CharField(max_length=100,primary_key=True)
+
+class Enroll(models.Model):
+    student = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
