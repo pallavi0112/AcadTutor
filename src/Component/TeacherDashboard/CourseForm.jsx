@@ -5,7 +5,7 @@ import axios from "axios";
 import CourseFormImg from '../../Images/CourseFormImg.png';
 import UploadIcon from '../../Images/UploadIcon.png';
 
-const CourseForm = (props) => {
+const CourseForm = () => {
     const [course, setCourse] = useState(
         {
             subj_name: "",
@@ -34,13 +34,17 @@ const CourseForm = (props) => {
                 `http://127.0.0.1:8000/content/addsubj`,
                 {
                     subj_name: course.subj_name,
-                    branch: course.branch,
+                    // branch: course.branch,
                     sem: course.sem,
-                    summary: course.summary
+                    summary: course.summary,
+                    weightage:course.weightage,
+                    date:course.date,
+                    // b_file:course.book,
+                    // s_file:course.syllabus,
                 },
                 {
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "multipart/form-data",
                         "X-CSRFToken": Cookies.get('csrftoken')
 
                     },

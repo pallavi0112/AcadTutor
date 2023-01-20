@@ -19,7 +19,7 @@ const App = () => {
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path=":branch">
               <Route index element={<BranchPage />} />
-              <Route path=":sem/:subject">
+              <Route path=":subject_id">
                 <Route index element={<Subject />} />
                 <Route path=":unit" element={<ContentPage />} />
               </Route>
