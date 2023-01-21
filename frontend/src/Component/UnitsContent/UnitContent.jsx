@@ -1,7 +1,42 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import ReactPlayer from 'react-player/youtube'
 import './UnitContent.css'
+import axios from "axios";
 const UnitContent = () => {
-  
+  const [topics , setTopics] = useState([
+    {
+      "topic_name" : "",
+      "link" : "",
+      "notes" : ""
+    }
+  ])
+useEffect(()=>{
+  const GetContent = async (unit_id) => { 
+    try { 
+      const response = await axios.get(
+        `http://127.0.0.1:8000/content/${unit_id}/get_unit`,{'withCredentials': true }
+      ); 
+      const data = response.data.subtopics
+      console.log(data)
+      data.map((object) => {
+        console.log(`objects : ${object.subtopic_name}`)
+        setTopics((topics) => [
+          ...topics,
+          {
+            topic_name: object.subtopic_name,
+            link: object.link,
+            notes: object.notes,
+          }
+        ]);
+      }); 
+    } catch (err) {
+      console.error(err);
+    }
+  };
+ 
+  GetContent();
+},[])
+ 
   return (
     <div className='contents_container'>
       <div class="topics">
@@ -42,7 +77,7 @@ const UnitContent = () => {
       <div class="rightcont">
         <div id='Array' className='video_note'>
           <div className='yt_video'>
-            <embed src='https://www.youtube.com/embed/PyTK_g1l8V8'></embed>
+            <ReactPlayer url='https://www.youtube.com/watch?v=vLHiV_QKTg0&list=PL3R9-um41JszlOtyQCWIy0WQNm30y3NMN' />
           </div>
           <div className='notes_container'>
             <h2>Notes</h2>

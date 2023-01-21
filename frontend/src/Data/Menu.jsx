@@ -22,32 +22,32 @@ export const navItems = [
 export const BranchSubmenu = [
         {
             id: 1,
-            title: "Computer Science Enginerring",
-            path: "/cs",
+            title: "Computer Science Engineering",
+            path: "cs",
          
         },
         {
             id: 2,
-            title: "Civil",
-            path: "/civil",
+            title: "Civil Engineering",
+            path: "ce",
           
         },
           {
             id: 3,
-            title: "Mechanical",
-            path: "/mechanical",
+            title: "Mechanical Engineering",
+            path: "me",
           
           },
           {
             id: 4,
             title: " Electronics and Tele-Communication Engineering",
-            path: "/et&t",
+            path: "et",
            
           }, 
           {
             id: 5,
             title: "Electrical and Electronics Engineering",
-            path: "/eee", 
+            path: "ee", 
            
           },
 ];
