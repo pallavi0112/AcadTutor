@@ -9,4 +9,6 @@ urlpatterns = [
     path('<str:unit_id>/get_unit',views.getUnit,name='getuint'),
     path('<str:branch>/get_branch',views.getBranch,name='getbranch'),
     path('<str:subj_id>/get_subj',views.getSubj,name='getsubj'),
+    path('<str:subtopic_id>/get_subtopic',views.getSubtopic,name='getsubtopic'),
+
 ]
