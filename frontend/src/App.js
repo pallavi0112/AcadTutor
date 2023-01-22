@@ -12,6 +12,8 @@ import Courses from "./Component/TeacherDashboard/Courses";
 import Assignments from "./Component/TeacherDashboard/Assignments";
 import Doubts from "./Component/TeacherDashboard/Doubts";
 import Dashboard from "./Component/TeacherDashboard/Dashboard";
+import StudentProfile from "./Pages/StudentProfile";
+import TeacherProfile from "./Pages/TeacherProfile"
 import PrivateRoute from "./Component/PrivateRoute";
 const App = () => {
   return (
@@ -27,7 +29,9 @@ const App = () => {
             </Route>
             <Route path="/signup" element={<SignUp />} />
             
-            
+            <Route path="/studentprofile" element={<StudentProfile/>}></Route>
+            <Route path="/teacherprofile" element={<TeacherProfile/>}></Route>
+
             <Route  exact path="teacherdashboard" element={<TeacherDashboard />}>
               <Route path="" element={<Dashboard />}/>
               <Route path="courses" element={<Courses />} />
