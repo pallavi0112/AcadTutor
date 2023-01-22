@@ -16,6 +16,7 @@ db_handle, mongo_client = get_db_handle()
 subj_collection_handle = get_collection_handle(db_handle, "subjects")
 unit_collection_handle = get_collection_handle(db_handle, "units")
 branch_collection_handle = get_collection_handle(db_handle, "branches")
+subtopic_collection_handle = get_collection_handle(db_handle, "subtopics")
 # uncomment to create branches
 # def createbranch():
 #     dict=[{
@@ -162,11 +163,12 @@ def addSubTopic(request):
                         "upload_type":ext,
                         "upload_link":upload_link
                     }
+                    subtopic = subtopic_collection_handle.insert_one(topic_dict)
                     unit_collection_handle.find_one_and_update(
                         {
                             "_id": ObjectId(data['unit_id'])
                         },
-                        {'$push': {'subtopics': topic_dict}}
+                        {'$push': {'subtopics':{ 'subtopic_name': data['subtopic_name'],'subtopic_id':str(subtopic.inserted_id)}}}
                     )
                     return Response({'success':f"add subtopic successfully"})
                 else:
@@ -182,8 +184,7 @@ def addSubTopic(request):
 @api_view(('GET',))
 def getUnit(request,unit_id):
     if (request.method == 'GET'):
-        user = request.user
-        print(user)
+        
         try:
             obj = unit_collection_handle.find_one(
                 {"_id": ObjectId(unit_id)},{"_id": 0 }
@@ -211,6 +212,17 @@ def getBranch(request,branch):
 def getSubj(request,subj_id):
     if (request.method == 'GET'):
             obj = subj_collection_handle.find_one({"_id": ObjectId(subj_id)},{"_id": 0 })
+            data = obj
+            if obj is not None:
+                return Response(data)
+            else:
+                return Response({'error':"Invalid request"})
+
+@csrf_protect
+@api_view(('GET',))
+def getSubtopic(request,subtopic_id):
+    if (request.method == 'GET'):
+            obj = subtopic_collection_handle.find_one({"_id": ObjectId(subtopic_id)},{"_id": 0 })
             data = obj
             if obj is not None:
                 return Response(data)
