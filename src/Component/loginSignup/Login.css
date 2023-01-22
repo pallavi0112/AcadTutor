@@ -44,7 +44,7 @@
 }
   .Loginform_Wrapper form a{
     text-decoration: none;
-    color:var(--color);
+    color:#ff9900;
     font-weight:400;
 
   }

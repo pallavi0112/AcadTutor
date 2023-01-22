@@ -27,6 +27,7 @@ const LoginForm = (props) => {
         },
       );
       console.log({ BACKEND_RESPONSE: response });
+      localStorage.setItem('type',response.data.type)
     } catch (err) {
       console.error(err);
     }
@@ -68,7 +69,7 @@ const LoginForm = (props) => {
           <button
             type="button"
             className="Formbutton"
-            style={{ backgroundColor: "#3f6b80" }}
+            style={{ backgroundColor: "#ff9900" }}
             onClick={LoginUser}
           >
             Login

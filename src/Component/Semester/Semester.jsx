@@ -41,7 +41,7 @@ const Semester = (props) => {
       >
         {
           props.subData.map((val, index) => {
-            return <SwiperSlide><Subject key={index} img={val.img} name={val.sub_name} desc={val.summary} subId={val.sub_id} /></SwiperSlide>
+            return <SwiperSlide><Subject key={index}  name={val.sub_name} desc={val.summary} subId={val.sub_id} img={val.img_link} /></SwiperSlide>
           })
         }
       </Swiper>

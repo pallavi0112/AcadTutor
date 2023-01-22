@@ -31,17 +31,6 @@ const Branch = () => {
               sub
             }
           ]);
-          // console.log(sub, sub.length)
-          // sub.map((element) => {
-          //   setSemesterData((item) => [
-          //     ...item,
-          //     {
-          //       sub_name: element.sub_name,
-          //       sub_id: element.sub_id,
-          //       summary: element.summary,
-          //     }
-          //   ]);
-          //   });
         });
 
       } catch (err) {
@@ -62,7 +51,7 @@ return (
   <div className='branch'>
     <Container branch={branch} />
     {semesterData.map((val , index) =>{
-       console.log("val : " , val)
+       console.log("val : " , val.img_link)
        return  <Semester subData={val.sub} sem={index + 1} fade="fade-up-right" key={index} />
     })}
     {/* <Semester subData={props.subData} sem='7th' fade='fade-up-left' />
