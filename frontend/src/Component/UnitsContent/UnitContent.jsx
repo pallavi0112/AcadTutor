@@ -4,13 +4,8 @@ import './UnitContent.css'
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
 const UnitContent = () => {
-  const [topics , setTopics] = useState([
-    {
-      "topic_name" : "",
-      "link" : "",
-      "notes" : ""
-    }
-  ])
+  const [topics , setTopics] = useState([])
+  const [u_name , setU_name] = useState("")
   const navigate = useLocation()
   const path = navigate.pathname;
   const patharray = path.split("/")
@@ -22,19 +17,11 @@ useEffect(()=>{
         `http://127.0.0.1:8000/content/${unit_id}/get_unit`,{'withCredentials': true }
       ); 
       const data = response.data.subtopics
+      setU_name(response.data.u_name)
+      setTopics(data) 
       console.log('data : ' , response.data)
       console.log(data)
-      // data.map((object) => {
-      //   console.log(`objects : ${object.subtopic_name}`)
-      //   setTopics((topics) => [
-      //     ...topics,
-      //     {
-      //       topic_name: object.subtopic_name,
-      //       link: object.link,
-      //       notes: object.notes,
-      //     }
-      //   ]);
-      // }); 
+      
     } catch (err) {
       console.error(err);
       alert(err)
@@ -43,19 +30,19 @@ useEffect(()=>{
  
   GetContent(unit_id);
 },[])
+console.log('topics' ,topics)
+topics.map((obj)=>{
+  console.log(obj.subtopic_name)
+})
+useEffect(()=>{
 
+},[topics])
  
   return (
     <div className='contents_container'>
       <div class="topics">
-        <h2>Datastructure</h2>
+        <h2>{u_name}</h2>
         <ul>
-          <li class="Array active_topic">Array</li>
-          <li class="Matrix">Matrix</li>
-          <li class="String">String</li>
-          <li class="Array active_topic">Array</li>
-          <li class="Matrix">Matrix</li>
-          <li class="String">String</li>
           <li class="Array active_topic">Array</li>
           <li class="Matrix">Matrix</li>
           <li class="String">String</li>
