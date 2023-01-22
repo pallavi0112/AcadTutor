@@ -34,7 +34,7 @@
   font-weight: 600;
   text-transform: uppercase;
   color: #fff;
-  background-color: var(--color);
+  background-color:#000;
   border-radius: 0.2rem;
   cursor:pointer;
 }

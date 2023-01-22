@@ -8,3 +8,27 @@
     margin:13px 0 30px;
     padding:0 1rem;
 }
+ul.breadcrumb{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul.breadcrumb li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style:none;
+}
+ul.breadcrumb li a{
+    text-decoration:none;
+    color:#000;
+}
+ul.breadcrumb li a.link{
+    text-decoration:none;
+    color:#0275d8;
+    transition: all 0.3s linear;
+}
+ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
