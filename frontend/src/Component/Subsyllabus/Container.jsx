@@ -2,12 +2,11 @@ import React from 'react'
 import './Container.css'
 import youtube from '../../Images/YouTube.png'
 import HOD from '../../Images/HOD.jpg'
-import Navbar2 from '../Navbar/Navbar2'
 const Container = () => {
   return (
     <>
-        <Navbar2/>
         <div className='subsyllabus_con'>
+            <h3 className='class_heading'>Teacher In Charge</h3>
             <div className='row'>
                 <div className='imgBx'>
                     <img src={HOD} />

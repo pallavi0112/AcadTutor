@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 import './Subject.css'
 const Subject = (props) => {
+   console.log(props.img)
   return (
      <div className='Subject'>
         <img src={props.img} alt={props.name} className="sub-img"></img>

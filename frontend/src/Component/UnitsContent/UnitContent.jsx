@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import ReactPlayer from 'react-player/youtube'
 import './UnitContent.css'
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
 const UnitContent = () => {
   const [topics , setTopics] = useState([
     {
@@ -10,6 +11,10 @@ const UnitContent = () => {
       "notes" : ""
     }
   ])
+  const navigate = useLocation()
+  const path = navigate.pathname;
+  const patharray = path.split("/")
+  const unit_id = patharray[patharray.length - 1];
 useEffect(()=>{
   const GetContent = async (unit_id) => { 
     try { 
@@ -17,25 +22,28 @@ useEffect(()=>{
         `http://127.0.0.1:8000/content/${unit_id}/get_unit`,{'withCredentials': true }
       ); 
       const data = response.data.subtopics
+      console.log('data : ' , response.data)
       console.log(data)
-      data.map((object) => {
-        console.log(`objects : ${object.subtopic_name}`)
-        setTopics((topics) => [
-          ...topics,
-          {
-            topic_name: object.subtopic_name,
-            link: object.link,
-            notes: object.notes,
-          }
-        ]);
-      }); 
+      // data.map((object) => {
+      //   console.log(`objects : ${object.subtopic_name}`)
+      //   setTopics((topics) => [
+      //     ...topics,
+      //     {
+      //       topic_name: object.subtopic_name,
+      //       link: object.link,
+      //       notes: object.notes,
+      //     }
+      //   ]);
+      // }); 
     } catch (err) {
       console.error(err);
+      alert(err)
     }
   };
  
-  GetContent();
+  GetContent(unit_id);
 },[])
+
  
   return (
     <div className='contents_container'>
@@ -77,7 +85,7 @@ useEffect(()=>{
       <div class="rightcont">
         <div id='Array' className='video_note'>
           <div className='yt_video'>
-            <ReactPlayer url='https://www.youtube.com/watch?v=vLHiV_QKTg0&list=PL3R9-um41JszlOtyQCWIy0WQNm30y3NMN' />
+            <ReactPlayer url='https://www.youtube.com/watch/emLHiV_QKTg0&list=PL3R9-um41JszlOtyQCWIy0WQNm30y3NMN' />
           </div>
           <div className='notes_container'>
             <h2>Notes</h2>

@@ -21,8 +21,7 @@ const LoginForm = (props) => {
         {
           headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken": Cookies.get('csrftoken')
-
+            "X-CSRFToken": Cookies.get('csrftoken'),
           },
         },
       );
@@ -68,7 +67,7 @@ const LoginForm = (props) => {
           <button
             type="button"
             className="Formbutton"
-            style={{ backgroundColor: "#3f6b80" }}
+            style={{ backgroundColor: "#ff9900" }}
             onClick={LoginUser}
           >
             Login
