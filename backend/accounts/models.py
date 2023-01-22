@@ -53,7 +53,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_teach = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
-    # img = models.CharField(blank=True,max_length=100)
+    img = models.CharField(default="https://acadtutor.blob.core.windows.net/acadtutor/6769264_60111.jpg",max_length=100)
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []

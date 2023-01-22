@@ -122,9 +122,9 @@ def Login(request):
             login(request, user)
             type_obj = CustomUser.objects.get(email=email)
             if user.is_authenticated and type_obj.is_student:
-                return Response({'url': 'student dashboard'}) 
+                return Response({'type': 'student'}) 
             elif user.is_authenticated and type_obj.is_teach:
-                return Response({'url':'teacheher dashboard'}) 
+                return Response({'type':'teacher'}) 
         else:
             return Response({'error':'Invalid Email/Password'})
     except Exception as e:

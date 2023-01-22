@@ -4,7 +4,7 @@ from pathlib import Path
 from azure.storage.blob import BlobServiceClient
 
 conn_key = "DefaultEndpointsProtocol=https;AccountName=acadtutor;AccountKey=cCVS7Z+eO2u4OP7C026jQJe2ARP46U2CGGYfzRkZBdejOB0NxaMhCML3bZ3x7Mc7Q8/DPm1SFKnR+AStjcHWmA==;EndpointSuffix=core.windows.net"
-ALLOWED_EXTENTIONS = ['.pdf','.doc','.docx','.mp4','.ogg','.webm','.jpg','.jpeg','png']
+ALLOWED_EXTENTIONS = ['.pdf','.doc','.docx','.mp4','.ogg','.webm','.jpg','.jpeg','.png']
 
 def create_blob_client(file_name):
     blob_service_client = BlobServiceClient.from_connection_string(conn_key)
