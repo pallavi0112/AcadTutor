@@ -12,6 +12,7 @@ import Courses from "./Component/TeacherDashboard/Courses";
 import Assignments from "./Component/TeacherDashboard/Assignments";
 import Doubts from "./Component/TeacherDashboard/Doubts";
 import Dashboard from "./Component/TeacherDashboard/Dashboard";
+import PrivateRoute from "./Component/PrivateRoute";
 const App = () => {
   return (
     <>
@@ -26,9 +27,9 @@ const App = () => {
             </Route>
             <Route path="/signup" element={<SignUp />} />
             
-
-            <Route exact path="teacherdashboard" element={<TeacherDashboard />}>
-              <Route path="" element={<Dashboard />} />
+            
+            <Route  exact path="teacherdashboard" element={<TeacherDashboard />}>
+              <Route path="" element={<Dashboard />}/>
               <Route path="courses" element={<Courses />} />
               <Route path="assignment" element={<Assignments />} />
               <Route path="doubts" element={<Doubts />} />

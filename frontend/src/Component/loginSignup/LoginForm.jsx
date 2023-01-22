@@ -22,11 +22,11 @@ const LoginForm = (props) => {
           headers: {
             "Content-Type": "application/json",
             "X-CSRFToken": Cookies.get('csrftoken')
-
           },
         },
       );
       console.log({ BACKEND_RESPONSE: response });
+      localStorage.setItem('type',response.data.type)
     } catch (err) {
       console.error(err);
     }

@@ -185,17 +185,13 @@ def getUnit(request,unit_id):
         user = request.user
         print(user)
         try:
-            isAuth = user.is_authenticated
-            if isAuth:
-                obj = unit_collection_handle.find_one(
-                    {"_id": ObjectId(unit_id)},{"_id": 0 }
-                    )
-                if obj is not None:
-                    return Response(obj)
-                else:
-                    return Response({'error':"Invalid request"})
+            obj = unit_collection_handle.find_one(
+                {"_id": ObjectId(unit_id)},{"_id": 0 }
+                )
+            if obj is not None:
+                return Response(obj)
             else:
-                return Response({'error':'You are not authenticated, please login first'})
+                return Response({'error':"Invalid request"})
         except Exception as e:
             # return Response({ 'error': 'Something went wrong when checking authentication status' })
             return Response({ 'error': str(e) })
