@@ -78,6 +78,7 @@ const SignupForm = () => {
     } catch (err) {
       console.error(err);
     }
+    setNewstudent('')
   };
   const AddTeacher = async () => {
     console.log(" AddTeacher Function is running");
@@ -101,7 +102,9 @@ const SignupForm = () => {
     } catch (err) {
       console.error(err);
     }
+    AddNewteacher('')
   };
+
   return (
     <>
       <div className='wrapper'>

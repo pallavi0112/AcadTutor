@@ -15,23 +15,21 @@
 .navbar-logo {
   color: #000;
   text-decoration: none;
-  font-size: 2.4rem;
+  font-size:2.1rem;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-family: "Calvier";
   font-style: normal;
-  font-weight: 400;
-  font-size: 40px;
   line-height: 50px;
 }
 .navbar-logo span {
   color: #ff9900;
   font-family: "Calvier";
   font-style: normal;
-  font-weight: 400;
-  font-size: 40px;
+  font-weight: 800;
+  font-size:2.1rem;
   line-height: 50px;
 }
 .navbar .menu-container {
@@ -66,7 +64,8 @@
   text-decoration: none;
   color: #000;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  font-family: "inter";
   padding: 0%;
   cursor: pointer;
 }

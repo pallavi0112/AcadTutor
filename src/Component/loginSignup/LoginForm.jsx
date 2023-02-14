@@ -29,7 +29,7 @@ const LoginForm = (props) => {
       console.log({ BACKEND_RESPONSE: response });
       localStorage.setItem('type', response.data.type)
       if (response.data.type == "teacher") {
-        return Navigate('/teacherprofile');
+        return Navigate('/teacherdashboard');
       }
       else if(response.data.type == "student"){
         return Navigate('/studentprofile')

@@ -20,9 +20,9 @@ const Location = () => {
                 if(index == 0)
                     return null
                 else if(index < cond-1)
-                    return <><li><a href='/' key={index} className='link'>{val}</a><FaChevronRight/></li></>
+                    return <><li key={index}><a href='/' className='link'>{val}</a><FaChevronRight/></li></>
                 else
-                    return <><li>{val}</li></>
+                    return <><li key={index}>{val}</li></>
           })
         }
 
