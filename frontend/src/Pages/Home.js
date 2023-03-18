@@ -9,7 +9,7 @@ const Home = () => {
     <>
     <Navbar menu={navItems} submenu={BranchSubmenu} />
     <LoginForm />
-    <CourseForm/>
+    {/* <CourseForm/> */}
     </>
   )
 }
