@@ -3,9 +3,8 @@ from io import BytesIO
 from pathlib import Path
 from azure.storage.blob import BlobServiceClient
 
-conn_key = "DefaultEndpointsProtocol=https;AccountName=acadtutor;AccountKey=cCVS7Z+eO2u4OP7C026jQJe2ARP46U2CGGYfzRkZBdejOB0NxaMhCML3bZ3x7Mc7Q8/DPm1SFKnR+AStjcHWmA==;EndpointSuffix=core.windows.net"
 ALLOWED_EXTENTIONS = ['.pdf','.doc','.docx','.mp4','.ogg','.webm','.jpg','.jpeg','.png']
-
+conn_key = "DefaultEndpointsProtocol=https;AccountName=acadtutor;AccountKey=xPAnHYEpyRbOvK/NwaTKAtyrqLwRIbvGA20/A4aw3oHvjxxNkKnrFCZ00/HKuKIWlquvp/0WFrC5+AStAFKzQg==;EndpointSuffix=core.windows.net"
 def create_blob_client(file_name):
     blob_service_client = BlobServiceClient.from_connection_string(conn_key)
     blob_client = blob_service_client.get_blob_client(container='acadtutor', blob=file_name)
