@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import axios from "axios";
 import './SignupForm.css';
 import Cookies from 'js-cookie';
-import { NewStudent } from '../../features/student/AddStudentSlice';
-import { NewTeacher } from '../../features/teacher/AddTeacherSlice';
+import { NewStudent , NewTeacher } from '../../features/student/AddStudentSlice';
 import { useSelector , useDispatch } from 'react-redux';
+import {Link , Navigate} from 'react-router-dom'
 const SignupForm = () => {
   const dispatch = useDispatch();
-  const stud_status = useSelector((state) => state.StudentSignUp.status)
-  const stud_error = useSelector((state) => state.StudentSignUp.error)
+  const status = useSelector((state) => state.SignUp.status)
+  const error = useSelector((state) => state.SignUp.error)
   
-  const tea_status = useSelector((state) => state.TeacherSignUp.status)
-  const tea_error = useSelector((state) => state.TeacherSignUp.error)
+  // const tea_status = useSelector((state) => state.TeacherSignUp.status)
+  // const tea_error = useSelector((state) => state.TeacherSignUp.error)
 
   const [newstudent, setNewstudent] = useState({
     student_name: "",
@@ -20,6 +20,13 @@ const SignupForm = () => {
     student_cpswd: "",
     Branch: "",
     semester: ""
+  })
+  const [newteacher, setNewteacher] = useState({
+    teacher_name: "",
+    teacher_email: "",
+    teacher_pswd: "",
+    teacher_cpswd: "",
+    teacher_refc: ""
   })
   const AddNewStudent = (e) => {
     const { name, value } = e.target;
@@ -30,14 +37,6 @@ const SignupForm = () => {
       }
     })
   }
-  
-  const [newteacher, setNewteacher] = useState({
-    teacher_name: "",
-    teacher_email: "",
-    teacher_pswd: "",
-    teacher_cpswd: "",
-    teacher_refc: ""
-  })
   const AddNewteacher = (e) => {
     const { name , value } = e.target;
     setNewteacher((predata) => {
@@ -60,18 +59,17 @@ const SignupForm = () => {
     setTeacher(false);
     setStudent(true);
   }
-  
   const AddStudent = (e)=>{
-       e.preventDefault()
-       dispatch(NewStudent(newstudent))
-       setNewstudent({
-        student_name: "",
-        student_email: "",
-        student_pswd: "",
-        student_cpswd: "",
-        Branch: "",
-        semester: ""
-      })
+    e.preventDefault()
+    dispatch(NewStudent(newstudent))
+    setNewstudent({
+      student_name: "",
+      student_email: "",
+      student_pswd: "",
+      student_cpswd: "",
+      Branch: "",
+      semester: ""
+    })
   }
   const AddTeacher = (e)=>{
     e.preventDefault()
@@ -84,6 +82,19 @@ const SignupForm = () => {
       teacher_refc: ""
     })
   }
+  if (status === "loading") {
+    return console.log("loading");
+  }
+
+  if (status === "failed") {
+    return console.log(error);
+  }
+
+  if (status === "succeeded"){
+     Navigate("/");
+  }
+
+  
 
   // const AddStudent = async (e) => {
   //   e.preventDefault();
@@ -185,7 +196,7 @@ const SignupForm = () => {
               >
                 Signup
               </button>
-              <p className="signup-link">Already have an account? <a href="/">Sign in</a></p>
+              <p className="signup-link">Already have an account? <Link to="/">Sign in</Link></p>
             </form>
             <form action="#" className={teacher ? "teacher_form" : "teacher_signup "} onSubmit={AddTeacher}>
               <input type="txt" placeholder="Your Name" name='teacher_name' value={newteacher.teacher_name} onChange={AddNewteacher}/>
@@ -198,11 +209,10 @@ const SignupForm = () => {
               <button
                 type="submit"
                 className="Formbutton"
-                // onClick={AddTeacher}
               >
                 Signup
               </button>
-              <p className="signup-link">Already have an account? <a href="/">Sign in</a></p>
+              <p className="signup-link">Already have an account? <Link to="/">Sign in</Link></p>
             </form>
           </div>
         </div>

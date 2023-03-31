@@ -34,7 +34,7 @@ const App = () => {
 
             <Route  exact path="teacherdashboard" element={<TeacherDashboard />}>
               <Route path="" element={<Dashboard />}/>
-              <Route path="courses" element={<Courses />} />
+              <Route path="courses" element={<Courses />}></Route>
               <Route path="assignment" element={<Assignments />} />
               <Route path="doubts" element={<Doubts />} />
               <Route path="createcourse" elment={<CourseForm/>}/>

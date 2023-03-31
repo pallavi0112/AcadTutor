@@ -1,4 +1,4 @@
-import {createSlice , createAsyncThunk} from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 export const NewStudent = createAsyncThunk(
     "accounts/register",
@@ -46,6 +46,6 @@ export const NewStudent = createAsyncThunk(
             state.status = "succeeded"
         })
 
-    }
-  })
-  export default StudentSignUpSlice.reducer ;
+  }
+})
+export default SignUpSlice.reducer;

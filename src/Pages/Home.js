@@ -7,9 +7,9 @@ import CourseForm from '../Component/TeacherDashboard/CourseForm';
 const Home = () => {
   return (
     <>
-    <Navbar menu={navItems} submenu={BranchSubmenu} />
     <LoginForm />
-    {/* <CourseForm/> */}
+    <Navbar menu={navItems} submenu={BranchSubmenu} />
+    <CourseForm/>
     </>
   )
 }
