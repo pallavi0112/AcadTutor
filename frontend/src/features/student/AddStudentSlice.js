@@ -3,7 +3,6 @@ import axios from 'axios'
 export const NewStudent = createAsyncThunk(
     "accounts/register",
     async (student , { rejectWithValue }) => {
-        console.log(student)
       try{
         const response = await axios.post("http://127.0.0.1:8000/accounts/register",
         {
@@ -39,7 +38,7 @@ export const NewStudent = createAsyncThunk(
         .addCase(NewStudent.rejected , (state , action)=>{
             state.status = "failed"
             console.log("failed")
-            console.log(action.payload)
+            console.log(action)
             state.error = action.payload
         })
         .addCase(NewStudent.fulfilled , (state , action)=>{

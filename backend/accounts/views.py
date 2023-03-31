@@ -16,7 +16,7 @@ def home(request):
 @permission_classes([permissions.AllowAny])
 @api_view(('GET',))
 def get_CSRF_token(request):
-    return Response({ 'success': 'CSRF cookie set' })
+    return Response({ 'message': 'CSRF cookie set' })
 
 @permission_classes([permissions.AllowAny])
 @csrf_protect
@@ -24,8 +24,7 @@ def get_CSRF_token(request):
 def student_register(request):
     if (request.method == 'POST'):
         data = request.data
-        print(data)
-        # name = data['name']
+        name = data['name']
         print(request)
         email = data['email']
         password = data['password']
@@ -35,10 +34,10 @@ def student_register(request):
         try:
             if password == re_password:
                 if CustomUser.objects.filter(email=email).exists():
-                    return Response({ 'error': 'Email already exists' })
+                    return Response({ 'message': 'Email already exists' },status=status.HTTP_409_CONFLICT)
                 else:
                     user = CustomUser.objects.create_user(
-                        email=email,
+                        email=email,name=name
                     )
                     user.set_password(password)
                     user.is_student = True
@@ -46,14 +45,12 @@ def student_register(request):
                     stud = Student(user=user,branch=branch,sem=sem)
                     stud.save()
                     user.save()
-                    return Response({ 'success': 'User created successfully' })
+                    return Response({ 'message': 'User created successfully' })
             else:
-                    return Response({ 'error': 'Passwords do not match' })
-
-            
+                    return Response({ 'message': 'Passwords do not match' },status=status.HTTP_401_UNAUTHORIZED)
         except Exception as e:
             # return Response({ 'error': 'Something went wrong when registering account' })
-            return Response({ 'error': str(e) })
+            return Response({ 'message': str(e) })
 
 
 @permission_classes([permissions.AllowAny])
@@ -71,7 +68,7 @@ def teacher_register(request):
         try:
             if password == re_password:
                 if CustomUser.objects.filter(email=email).exists():
-                    return Response({ 'error': 'Email already exists' })
+                    return Response({ 'message': 'Email already exists' },status=status.HTTP_409_CONFLICT)
                 else:
                     if HOD.objects.filter(refid=ref).exists():
                         user = CustomUser.objects.create_user(
@@ -84,16 +81,16 @@ def teacher_register(request):
                         Hod = HOD.objects.get(refid=ref)
                         teacher = Teacher(hod=Hod,user=user)
                         teacher.save()
-                        return Response({ 'success': 'User created successfully' })
+                        return Response({ 'message': 'User created successfully' })
                     else:
-                        return Response({ 'error': 'Referal Code not valid' })
+                        return Response({ 'message': 'Referal Code not valid' },status=status.HTTP_400_BAD_REQUEST)
             else:
-                    return Response({ 'error': 'Passwords do not match' })
+                    return Response({ 'message': 'Passwords do not match' },status=status.HTTP_401_UNAUTHORIZED)
 
             
         except Exception as e:
             # return Response({ 'error': 'Something went wrong when registering account' })
-            return Response({ 'error': str(e) })
+            return Response({ 'message': str(e) })
 
 @permission_classes([permissions.AllowAny])
 @csrf_protect
@@ -108,7 +105,7 @@ def IsAuthenticated(request):
             return Response({ 'isAuthenticated': 'error' })
     except Exception as e:
         # return Response({ 'error': 'Something went wrong when checking authentication status' })
-        return Response({ 'error': str(e) })
+        return Response({ 'message': str(e) })
 
 @csrf_protect
 @permission_classes([permissions.AllowAny])
@@ -131,14 +128,14 @@ def Login(request):
             return Response({'message':'Invalid Login ID/Password','error':True},status=status.HTTP_401_UNAUTHORIZED)
     except Exception as e:
         # return Response({ 'error': 'Something went wrong while Login' })
-        return Response({ 'error': str(e) })
+        return Response({ 'message': str(e) })
 
 @csrf_protect
 @api_view(('POST',))
 def Logut(request):
     try:
         logout(request)
-        return Response({ 'success': 'Loggout Out' })
+        return Response({ 'message': 'Loggout Out' })
     except Exception as e:
         # return Response({ 'error': 'Something went wrong while Lggout' })
-        return Response({ 'error': str(e) })
+        return Response({ 'message': str(e) })
