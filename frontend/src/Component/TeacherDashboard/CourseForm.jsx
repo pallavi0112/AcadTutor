@@ -70,7 +70,7 @@ const CourseForm = () => {
                     </div>
                 </div>
                 <div className="right_side">
-                    <form action="#" className="CourseForm">
+                    <form  className="CourseForm">
                         <div>
                             <label>Title</label>
                             <input

@@ -5,7 +5,15 @@ export const NewTeacher = createAsyncThunk(
     async ( teacher , { rejectWithValue }) => {
         console.log(teacher)
       try{
-        const response = await axios.post("http://127.0.0.1:8000/accounts/teacher_register", teacher);
+        const response = await axios.post("http://127.0.0.1:8000/accounts/teacher_register", 
+        {
+                  name : teacher.teacher_name,
+                  email: teacher.teacher_email,
+                  password : teacher.teacher_pswd,
+                  re_password : teacher.teacher_cpswd,
+                  refc : teacher.teacher_refc
+                },
+        );
         return response.data;
       }
       catch (e) {
