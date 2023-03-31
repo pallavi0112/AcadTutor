@@ -1,50 +1,78 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Cookies from 'js-cookie';
-import axios from "axios";
-import { useNavigate } from "react-router-dom"
+// import Cookies from "js-cookie";
+// import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { showHide } from "../../features/Reducer";
+import { loginUser } from "../../features/users/authSlice";
 
 const LoginForm = (props) => {
+  const dispatch = useDispatch();
+  const showLogin = useSelector((state) => state.showLoginSlice.showHide);
+  const user = useSelector((state) => state.auth.user);
+  const status = useSelector((state) => state.auth.status);
+  const error = useSelector((state) => state.auth.error);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const Navigate = useNavigate();
-  const LoginUser = async () => {
-    try {
-      const response = await axios.post(
-        `http://127.0.0.1:8000/accounts/login`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": Cookies.get('csrftoken')
-          },
-        },
-      );
-      console.log({ BACKEND_RESPONSE: response });
-      localStorage.setItem('type', response.data.type)
-      if (response.data.type == "teacher") {
-        return Navigate('/teacherdashboard');
-      }
-      else if(response.data.type == "student"){
-        return Navigate('/studentprofile')
-      }
-      else{
-        return (Navigate('/')) 
-      }
-    } catch (err) {
-      console.error(err);
-    }
-    setEmail('')
-    setPassword('')
+  // const LoginUser = async (event) => {
+  //   event.preventDefault();
+  //   console.log({ EVENT: event });
+  //   try {
+  //     const response = await axios.post(
+  //       `http://127.0.0.1:8000/accounts/login`,
+  //       {
+  //         email,
+  //         password,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "X-CSRFToken": Cookies.get("csrftoken"),
+  //         },
+  //       }
+  //     );
+  //     console.log({ BACKEND_RESPONSE: response });
+  //     localStorage.setItem("type", response.data.type);
+  //     if (response.data.type == "teacher") {
+  //       return Navigate("/teacherdashboard");
+  //     } else if (response.data.type == "student") {
+  //       return Navigate("/studentprofile");
+  //     } else {
+  //       return Navigate("/");
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  //   setEmail("");
+  //   setPassword("");
+  // };
+
+  const LoginUser = (e) => {
+    e.preventDefault();
+    dispatch(loginUser({ email, password }));
+    setEmail("");
+    setPassword("");
   };
-  const showLogin = useSelector((state) => state.showLoginSlice.showHide);
-  const dispatch = useDispatch();
+  if (status === "loading") {
+    return console.log("loading");
+  }
+
+  if (status === "failed") {
+    return console.log(error);
+  }
+
+  if (status === "succeeded") {
+    if (user === "teacher") {
+            return Navigate("/teacherdashboard");
+    } else if (user === "student") {
+            return Navigate("/studentprofile");
+    }else {
+            return Navigate("/");
+          }
+  }
   if (!showLogin) {
     return null;
   }
@@ -55,7 +83,7 @@ const LoginForm = (props) => {
           <FaTimes />
         </button>
         <h2>Login Page</h2>
-        <form action="#" className="LoginForm" >
+        <form className="LoginForm" onSubmit={LoginUser}>
           <input
             type="email"
             placeholder="Email Address"
@@ -74,14 +102,12 @@ const LoginForm = (props) => {
           <a to="/" className="FP">
             Forgot Password ?
           </a>
-          <button
-            type="button"
+          <input
+            type="submit"
             className="Formbutton"
             style={{ backgroundColor: "#ff9900" }}
-            onClick={LoginUser}
-          >
-            Login
-          </button>
+            value="Login"
+          />
           <p>
             don't have account ? <a href="/signup">Signup Now</a>
           </p>

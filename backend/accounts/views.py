@@ -1,6 +1,7 @@
 from rest_framework.decorators import permission_classes,api_view
 from rest_framework import permissions
 from . models import CustomUser,Teacher,HOD,Student
+from rest_framework import status
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.contrib.auth import authenticate,login,logout
@@ -23,20 +24,21 @@ def get_CSRF_token(request):
 def student_register(request):
     if (request.method == 'POST'):
         data = request.data
-        name = data['name']
+        print(data)
+        # name = data['name']
+        print(request)
         email = data['email']
         password = data['password']
         re_password = data['re_password']
         branch = data['branch']
         sem = data['semester']
-
         try:
             if password == re_password:
                 if CustomUser.objects.filter(email=email).exists():
                     return Response({ 'error': 'Email already exists' })
                 else:
                     user = CustomUser.objects.create_user(
-                        email=email,name=name
+                        email=email,
                     )
                     user.set_password(password)
                     user.is_student = True
@@ -126,7 +128,7 @@ def Login(request):
             elif user.is_authenticated and type_obj.is_teach:
                 return Response({'type':'teacher'}) 
         else:
-            return Response({'error':'Invalid Email/Password'})
+            return Response({'message':'Invalid Login ID/Password','error':True},status=status.HTTP_401_UNAUTHORIZED)
     except Exception as e:
         # return Response({ 'error': 'Something went wrong while Login' })
         return Response({ 'error': str(e) })

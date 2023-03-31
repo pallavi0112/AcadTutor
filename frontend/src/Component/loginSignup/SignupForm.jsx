@@ -2,7 +2,17 @@ import React, { useState } from 'react'
 import axios from "axios";
 import './SignupForm.css';
 import Cookies from 'js-cookie';
+import { NewStudent } from '../../features/student/AddStudentSlice';
+import { NewTeacher } from '../../features/teacher/AddTeacherSlice';
+import { useSelector , useDispatch } from 'react-redux';
 const SignupForm = () => {
+  const dispatch = useDispatch();
+  const stud_status = useSelector((state) => state.StudentSignUp.status)
+  const stud_error = useSelector((state) => state.StudentSignUp.error)
+  
+  const tea_status = useSelector((state) => state.TeacherSignUp.status)
+  const tea_error = useSelector((state) => state.TeacherSignUp.error)
+
   const [newstudent, setNewstudent] = useState({
     student_name: "",
     student_email: "",
@@ -20,7 +30,7 @@ const SignupForm = () => {
       }
     })
   }
-
+  
   const [newteacher, setNewteacher] = useState({
     teacher_name: "",
     teacher_email: "",
@@ -29,7 +39,7 @@ const SignupForm = () => {
     teacher_refc: ""
   })
   const AddNewteacher = (e) => {
-    const { name, value } = e.target;
+    const { name , value } = e.target;
     setNewteacher((predata) => {
       return {
         ...predata,
@@ -37,8 +47,6 @@ const SignupForm = () => {
       }
     })
   }
-
-
   const [teacher, setTeacher] = useState(false)
   const [student, setStudent] = useState(true)
   const [slide, setSlide] = useState(true)
@@ -52,58 +60,84 @@ const SignupForm = () => {
     setTeacher(false);
     setStudent(true);
   }
+  
+  const AddStudent = (e)=>{
+       e.preventDefault()
+       dispatch(NewStudent(newstudent))
+       setNewstudent({
+        student_name: "",
+        student_email: "",
+        student_pswd: "",
+        student_cpswd: "",
+        Branch: "",
+        semester: ""
+      })
+  }
+  const AddTeacher = (e)=>{
+    e.preventDefault()
+    dispatch(NewTeacher(newteacher))
+    setNewteacher({
+      teacher_name: "",
+      teacher_email: "",
+      teacher_pswd: "",
+      teacher_cpswd: "",
+      teacher_refc: ""
+    })
+  }
 
-  const AddStudent = async () => {
-    console.log(" AddStudent Function is running");
-    try {
-      const response = await axios.post(
-        `http://127.0.0.1:8000/accounts/register`,
-        {
-          email: newstudent.student_email,
-          password : newstudent.student_pswd,
-          re_password : newstudent.student_cpswd,
-          name : newstudent.student_name,
-          branch : newstudent.Branch,
-          semester : newstudent.semester
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": Cookies.get('csrftoken')
+  // const AddStudent = async (e) => {
+  //   e.preventDefault();
+  //   console.log(newstudent)
+  //   console.log(" AddStudent Function is running");
+  //   try {
+  //     const response = await axios.post(
+  //       `http://127.0.0.1:8000/accounts/register`,
+  //       {
+  //         email: newstudent.student_email,
+  //         password : newstudent.student_pswd,
+  //         re_password : newstudent.student_cpswd,
+  //         name : newstudent.student_name,
+  //         branch : newstudent.Branch,
+  //         semester : newstudent.semester
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "X-CSRFToken": Cookies.get('csrftoken')
 
-          },
-        }
-      );
-      console.log({ BACKEND_RESPONSE: response });
-    } catch (err) {
-      console.error(err);
-    }
-    setNewstudent('')
-  };
-  const AddTeacher = async () => {
-    console.log(" AddTeacher Function is running");
-    try {
-      const response = await axios.post(
-        `http://127.0.0.1:8000/accounts/teacher_register`,
-        {
-          name : newteacher.teacher_name,
-          email: newteacher.teacher_email,
-          password : newteacher.teacher_pswd,
-          re_password : newteacher.teacher_cpswd,
-          refc : newteacher.teacher_refc
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log({ BACKEND_RESPONSE: response });
-    } catch (err) {
-      console.error(err);
-    }
-    AddNewteacher('')
-  };
+  //         },
+  //       }
+  //     );
+  //     console.log({ BACKEND_RESPONSE: response });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  //   setNewstudent('')
+  // };
+  // const AddTeacher = async () => {
+  //   console.log(" AddTeacher Function is running");
+  //   try {
+  //     const response = await axios.post(
+  //       `http://127.0.0.1:8000/accounts/teacher_register`,
+  //       {
+  //         name : newteacher.teacher_name,
+  //         email: newteacher.teacher_email,
+  //         password : newteacher.teacher_pswd,
+  //         re_password : newteacher.teacher_cpswd,
+  //         refc : newteacher.teacher_refc
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     console.log({ BACKEND_RESPONSE: response });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  //   AddNewteacher('')
+  // };
 
   return (
     <>
@@ -115,7 +149,7 @@ const SignupForm = () => {
             <input type="button" value="Teacher" onClick={updateTeacherForm}></input>
           </div>
           <div className='innerForm-container'>
-            <form action="#" className={student ? "student_form" : "student_signup"}>
+            <form action="#" className={student ? "student_form" : "student_signup"} onSubmit={AddStudent}>
               <input type="text" placeholder='Your Name' value={newstudent.student_name} name='student_name' onChange={AddNewStudent} />
               <input type="email" placeholder="Email Address" value={newstudent.student_email} name='student_email' onChange={AddNewStudent} />
               <div className='pswd_box'>
@@ -135,25 +169,25 @@ const SignupForm = () => {
                 </select>
                 <select value={newstudent.semester} onChange={AddNewStudent} name="semester">
                   <option value="0">Semester</option>
-                  <option value="1st">1st</option>
-                  <option value="2nd">2nd</option>
-                  <option value="3rd">3rd</option>
-                  <option value="4th">4th</option>
-                  <option value="5th">5th</option>
-                  <option value="6th">6th</option>
-                  <option value="7th">7th</option>
-                  <option value="8th">8th</option>
+                  <option value="1">1st</option>
+                  <option value="2">2nd</option>
+                  <option value="3">3rd</option>
+                  <option value="4">4th</option>
+                  <option value="5">5th</option>
+                  <option value="6">6th</option>
+                  <option value="7">7th</option>
+                  <option value="8">8th</option>
                 </select>
               </div>
               <button
-                type="button"
-                onClick={AddStudent}
+                type="submit"
+                // onClick={AddStudent}
               >
                 Signup
               </button>
               <p className="signup-link">Already have an account? <a href="/">Sign in</a></p>
             </form>
-            <form action="#" className={teacher ? "teacher_form" : "teacher_signup "}>
+            <form action="#" className={teacher ? "teacher_form" : "teacher_signup "} onSubmit={AddTeacher}>
               <input type="txt" placeholder="Your Name" name='teacher_name' value={newteacher.teacher_name} onChange={AddNewteacher}/>
               <input type="email" placeholder="Email Address" name='teacher_email' value={newteacher.teacher_email} onChange={AddNewteacher}/>
               <div className='pswd_box'>
@@ -162,9 +196,9 @@ const SignupForm = () => {
               </div>
               <input type="text" placeholder="Referral Code" name='teacher_refc' value={newteacher.teacher_refc} onChange={AddNewteacher}/>
               <button
-                type="button"
+                type="submit"
                 className="Formbutton"
-                onClick={AddTeacher}
+                // onClick={AddTeacher}
               >
                 Signup
               </button>
