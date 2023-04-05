@@ -1,0 +1,207 @@
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 8vh);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-primary);
+  color: var(--text-color);
+  padding: max(2rem, 3vw);
+}
+section {
+  width: 100%;
+  /* height: calc(100vh - 8vh); */
+  height: auto;
+  /* position: relative; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.section-2 .hero-section {
+  background: rgba(255, 153, 0, 0.18);
+  color: #000;
+}
+.section-2 .hero-section .button {
+  background-color: #000;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.4);
+}
+.ImgBx img {
+  width: max(250px, 47vw);
+  height: max(250px, 33vw);
+}
+.strong {
+  font-size: 3.5rem;
+  color: var(--color2);
+}
+.contentBx {
+  width: 40vw;
+}
+.title {
+  font-size: 2.2rem;
+  line-height: 3rem;
+  word-spacing: 0.3rem;
+  margin-bottom: max(1.5rem, 3vh);
+}
+.content {
+  font-size: 1.1rem;
+  line-height: 1.7rem;
+  margin-bottom: max(2rem, 4vh);
+}
+.card-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: max(2rem, 3vw);
+  background-color: var(--bg-primary);
+  color: var(--text-color);
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+  margin-top: max(2rem, 7vh);
+  transition: all 0.3s ease-in-out;
+}
+
+.card-container .deprt-card {
+  position: relative;
+  height: 320px;
+  width: max(250px, 20vw);
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: max(1rem, 1vh);
+  background-color: var(--text-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease-in-out;
+  opacity:1;
+}
+.card-container .deprt-card .overlay-card {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  width: max(250px, 20vw);
+  /* background-color:rgba(255, 237, 209,0.3); */
+  background-color: rgba(255, 255, 255, 0.6);
+  opacity:0;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+.card-container .deprt-card:hover{
+  transform: scale(1.02);
+  box-shadow: 0px 0px 4px 4px rgba(255, 255, 255, 0.5);
+}
+.card-container .deprt-card:hover .overlay-card{
+    opacity: 1;
+  }
+.card-container .deprt-card .deprt-name {
+  color: #000;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+.card-container .deprt-card .deprt-img {
+  width: 200px;
+  height: 200px;
+}
+.features-container {
+  padding: max(2rem, 3vw);
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: max(300px, 80vh);
+  margin-top: max(2rem, 5vh);
+}
+.features-imgcontainer .features-imgBx {
+  position: relative;
+  margin-top: max(1.5rem, 3vh);
+}
+.features-imgcontainer .features-imgBx img {
+  position: absolute;
+  width: max(300px, 33vw);
+  height: max(300px, 33vw);
+}
+/* .heading-cont{
+    position: absolute;
+    top:20%;
+    right:5%;
+} */
+.features-imgcontainer .features-imgBx img:nth-child(2) {
+  animation: features 4s linear 2s infinite alternate;
+  top: 0%;
+  left: 0%;
+}
+@keyframes features {
+  0% {
+    top: 0px;
+  }
+  25% {
+    top: 15px;
+  }
+  50% {
+    top: 30px;
+  }
+  75% {
+    top: 15px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+.features-content {
+  position: absolute;
+}
+.features-card {
+  width: min(250px, 20vw);
+  height: 100px;
+  padding: 1rem;
+  box-shadow: 0px 0px 9px 2px rgba(255, 153, 0, 0.85);
+  border-radius: 20px;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.card-container .button {
+  background-color: transparent;
+  border: 2px solid var(--color2);
+  box-shadow: none;
+  padding: 0.4rem 1rem;
+  border-radius: 1.2rem;
+  margin-top: 1rem;
+}
+.card-container .button a {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.button {
+  display: inline-block;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  font-size: 1.1rem;
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: 0.3s all ease-out;
+  cursor: pointer;
+  background-color: var(--color2);
+  box-shadow: var(--btn-box-shadow);
+}
+.button a {
+  text-decoration: none;
+}

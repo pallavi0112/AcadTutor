@@ -13,9 +13,9 @@ const Courses = () => {
                         type="button"
                         className="Formbutton"
                     >
-                    <Link to='/createcourse'>
-                        Create New Course <FaPlusCircle />
-                    </Link>
+                        <Link to='/teacherdashboard/createcourse'>
+                            Create New Course  +
+                        </Link>
                     </button>
                 </div>
                 <div className='grid_container'>

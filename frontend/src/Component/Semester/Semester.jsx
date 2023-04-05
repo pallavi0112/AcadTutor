@@ -21,9 +21,6 @@ const Semester = (props) => {
     );
   }, [])
 
-
-
-
   return (
     <div data-aos={props.fade} className='semester'>
       <h2 className='sem-heading'>{props.sem} semester</h2>

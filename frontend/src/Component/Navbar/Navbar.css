@@ -1,19 +1,19 @@
 .navbar {
   position: sticky;
   top: 0%;
-  height: 8vh;
-  width: 100vw;
-  background: #fff;
+  left:0%;
+  height:8vh;
+  width: 100%;
+  background:var(--bg-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 -0.2rem 0.7rem rgba(0, 0, 0, 0.6);
   transition: all 0.3s ease-in-out;
   z-index: 900;
   padding: 0% 2.5rem;
 }
 .navbar-logo {
-  color: #000;
+  color:var(--text-color);
   text-decoration: none;
   font-size:2.1rem;
   font-weight: 800;
@@ -62,8 +62,8 @@
 }
 .nav-item a {
   text-decoration: none;
-  color: #000;
-  font-weight: 600;
+  color:var(--text-color);
+  font-weight:550;
   font-size: 1.2rem;
   font-family: "inter";
   padding: 0%;
@@ -85,3 +85,20 @@
 .btnBlock.hidden {
   display: block;
 }
+
+/* ***************************************************************************************************************************************************** */
+
+
+.navbar2 {
+  position: sticky;
+  top: 0%;
+  height:7.2vh;
+  width:100vw;
+  background:#ffff !important ;
+} 
+.navbar2 .navbar-logo {
+  color:#000 !important;
+}
+
+
+

@@ -32,25 +32,52 @@
   .Loginform_Wrapper form{
     margin:1.3rem auto;
   }
+  .Loginform_Wrapper form div{
+    margin: 1.2rem auto;
+  }
   .Loginform_Wrapper form input{
     display: block; 
     padding: 0.6rem 0.8rem;
-    margin: 1.2rem auto;
+    margin: 0.3rem auto;
     font-size:0.9rem;
     width:20rem;
     outline:none;
     color:rgba(0, 0, 0, 0.9);
     border:1px solid rgba(0, 0, 0, 0.2);  
-}
+  }
+  .field_error{
+    text-align:left;
+    border: 2px solid rgb(255, 9, 9)!important;
+  }
+  .res-error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(255, 9, 9);
+    margin-top :max(0.5rem , 2vh);
+    padding:0.3rem ;
+    color:rgb(255, 9, 9);
+
+  }
+  .error{
+    color:rgb(255, 9, 9);
+    font-weight:500;
+    font-size:0.8rem;
+  }
   .Loginform_Wrapper form a{
     text-decoration: none;
     color:#ff9900;
     font-weight:400;
 
   }
+  .Loginform_Wrapper form a:hover{
+    color:#ff7b00
+  }
   .Loginform_Wrapper form .FP{
     line-height: 0%;
     margin-top: 0%;
+    cursor: pointer;
+    margin-bottom:0.5rem;
 }
   .Loginform_Wrapper form p{
         text-align: center;
@@ -73,7 +100,7 @@
     width:20rem;
     margin:auto auto;
   }
-  .Loginform_Wrapper form button{
+  .Loginform_Wrapper form .Formbutton{
     cursor:pointer;
     display: block;
     width:20rem;
@@ -84,7 +111,13 @@
     font-size:1.1rem;
     font-weight: 600;
     border:none;
+    outline:none;
+    transition: all 0.3s linear;
   }
+  .Loginform_Wrapper form .Formbutton:hover{
+    background-color: #ff7b00;
+  }
+  
   @keyframes fadeInDown {
     0% {
       opacity: 0;

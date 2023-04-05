@@ -23,6 +23,7 @@ const initialState = {
   user: null,
   status: "idle",
   error: null,
+  isAuthenticated:false,
 };
 
 const authSlice = createSlice({
@@ -42,6 +43,7 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log(action)
         state.status = "succeeded";
+        state.isAuthenticated = true ;
         console.log("loginUser.fulfilled");
         state.user = action.payload.type;
       });

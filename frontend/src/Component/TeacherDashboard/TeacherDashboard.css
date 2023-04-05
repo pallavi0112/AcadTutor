@@ -1,7 +1,57 @@
+/* *************************************************************** */
+#teacherDashboard{
+  position: relative;
+  width:100vw;
+  height:100%;
+  background-color:#F4F6F8;
+}
+#teacherDashboard  .sidebar_container{
+  position:fixed;
+  top:10%;
+  left:0%;
+  width: 13vw;
+  height:calc(100vh - 10vh);
+  border: 1px solid red;
+}
+
+#teacherDashboard  .sidebarDetail_container{
+  position:relative;
+  top:10%;
+  left:16vw;
+  width:calc(100vw - 20vw);
+  border: 1px solid red;
+  margin: 0%;
+}
+/* /* #teacherDashboard .dashboard_container{
+  width:100vw;
+  height:calc(100vh - 8vh);
+  /* display:flex;
+  flex-direction: row;
+  justify-content: space-between; 
+}  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ********************************************************************************** */
 #dash_container {
   position:relative;
-  width: 93%;
-  margin: 1.5rem auto;
+  width:100%;
   border:1px solid green;
 }
 #dash_container h3 {
@@ -10,7 +60,6 @@
   font-weight: 600;
   font-size: 1.3rem;
   letter-spacing: 0.35px;
-
   color: #000000;
 }
 .Courses_Subdetail_Container {
@@ -263,3 +312,12 @@
     background-color: rgba(0, 0, 0, 0.09);
     border: 1px solid rgba(0, 0, 0, 0.09);
 }
+
+
+
+
+
+/* ****************************************************************************************************************************************** */
+
+
+

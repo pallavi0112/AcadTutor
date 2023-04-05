@@ -48,4 +48,4 @@ export const NewStudent = createAsyncThunk(
 
   }
 })
-export default SignUpSlice.reducer;
+export default StudentSignUpSlice.reducer;
