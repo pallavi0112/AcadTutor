@@ -11,7 +11,9 @@ import ReactQuill from 'react-quill'
 import '../../../node_modules/react-quill/dist/quill.snow.css';
 // import { showHide } from "../../features/Reducer";
 
-
+axios.defaults.withCredentials = true
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 const modules = {
     toolbar: [
         [{ header: "1"}, {header:"2"}, {header:[3,4,5,6]}],
