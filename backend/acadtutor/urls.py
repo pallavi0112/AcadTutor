@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('accounts.urls')),
     path('content/',include('content.urls')),
+    path('forms/',include('forms.urls')),
 
 ]
 # urlpatterns+=[re_path(r'^.*',TemplateView.as_view(template_name='index.html'))]

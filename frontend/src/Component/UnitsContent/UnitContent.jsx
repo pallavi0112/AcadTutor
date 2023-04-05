@@ -3,6 +3,9 @@ import ReactPlayer from 'react-player/youtube'
 import './UnitContent.css'
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+axios.defaults.withCredentials = true
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 const UnitContent = () => {
   const [topics , setTopics] = useState([])
   const [u_name , setU_name] = useState("")

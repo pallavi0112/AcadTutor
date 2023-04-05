@@ -121,9 +121,9 @@ def Login(request):
             login(request, user)
             type_obj = CustomUser.objects.get(email=email)
             if user.is_authenticated and type_obj.is_student:
-                return Response({'type': 'student'}) 
+                return Response({'type': 'student'},headers={'Access-Control-Allow-Credentials': 'true'}) 
             elif user.is_authenticated and type_obj.is_teach:
-                return Response({'type':'teacher'}) 
+                return Response({'type':'teacher'},headers={'Access-Control-Allow-Credentials': 'true'}) 
         else:
             return Response({'message':'Invalid Login ID/Password','error':True},status=status.HTTP_401_UNAUTHORIZED)
     except Exception as e:

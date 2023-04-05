@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 export const loginUser = createAsyncThunk(
   "accounts/login",
   async ({ email, password } , { rejectWithValue }) => {
@@ -9,6 +12,7 @@ export const loginUser = createAsyncThunk(
         email,
         password,}
         );
+        console.log(response)
       return response.data;
     }
     catch (e) {

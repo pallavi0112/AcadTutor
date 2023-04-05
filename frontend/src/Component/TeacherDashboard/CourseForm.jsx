@@ -4,7 +4,9 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import CourseFormImg from '../../Images/CourseFormImg.png';
 import UploadIcon from '../../Images/UploadIcon.png';
-
+axios.defaults.withCredentials = true
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 const CourseForm = () => {
     const [course, setCourse] = useState(
         {
