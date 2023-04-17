@@ -16,27 +16,27 @@ const Dashboard = () => {
         <h3>Your Courses</h3>
         <div className='Courses_Subdetail_Container'>
           <div>
-            <img src=" " />
+            <img src=" " alt='' />
             <span className='title'>ML</span>
             <span className='sem'> semester</span>
           </div>
           <div>
-            <img src=" " />
+            <img src=" " alt='' />
             <span className='title'>CN</span>
             <span className='sem'> semester</span>
           </div>
           <div>
-            <img src=" " />
+            <img src=" "  alt=''/>
             <span className='title'>Python</span>
             <span className='sem'> semester</span>
           </div>
           <div>
-            <img src=" " />
+            <img src=" " alt='' />
             <span className='title'>TOC</span>
             <span className='sem'> semester</span>
           </div>
           <div>
-            <img src=" " />
+            <img src=" "  alt=''/>
             <span className='title'>View all Courses</span>
 
           </div>

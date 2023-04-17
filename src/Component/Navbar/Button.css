@@ -1,7 +1,7 @@
 .btnBlock .btn {
     display: inline-block;
     border: none;
-    background: transparent;
+    background-color:transparent;
     padding: 0.6rem 1.1rem;
     font-size: 1.1rem;
     color:#fff;
@@ -11,31 +11,32 @@
     margin:0  0.7rem;
 }
 .btnBlock .btn.signin{
-    border:2px solid #000;
-    color:#000;
+    border:2px solid var(--text-color);
+    color:var(--text-color);
     transition: all 0.5s ease;
 }
 .btnBlock .btn.signin:hover{
-    border:2px solid #000;
-    background-color: #000;
-    color: #fff;
+    border:2px solid var(--text-color);
+    background-color:#fff;
+    color:#000;
 }
 .btnBlock .btn.signup{
-    border:2px solid #000;
-    background-color: #000;
+    border:2px solid #fff;
+    background-color: #fff;
+    color: #000;
     transition: all 0.5s ease;
 }
 .btnBlock .btn.signup:hover{
-    border:2px solid #000;
-    color:#000;
-    background-color: transparent;
-}
-/* .scrolled-navbar .btnBlock .btn.signin{
     border:2px solid #fff;
     color:#fff;
+    background-color: transparent;
+}
+.scrolled-navbar .btnBlock .btn.signin{
+    border:2px solid #000;
+    color:#000;
 }
 .scrolled-navbar .btnBlock .btn.signup{
-    border:2px solid #fff;
-    background-color: #fff;
-    color: var(--color2);
-} */
+    border:2px solid #000;
+    background-color: #000;
+    color: var(--text-color);
+}

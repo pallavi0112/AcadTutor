@@ -1,5 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+
+import {createSlice , createAsyncThunk} from '@reduxjs/toolkit';
+import axios from 'axios';
+axios.defaults.withCredentials = true
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 export const NewStudent = createAsyncThunk(
     "accounts/register",
     async (student , { rejectWithValue }) => {
@@ -48,4 +53,4 @@ export const NewStudent = createAsyncThunk(
 
   }
 })
-export default SignUpSlice.reducer;
+export default StudentSignUpSlice.reducer;

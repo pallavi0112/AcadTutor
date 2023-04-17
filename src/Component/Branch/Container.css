@@ -1,7 +1,7 @@
 .branchHero_con{
     width:100%;
-    height: 60vh;
-    margin:2rem 0 3rem;
+    height:70vh;
+    /* margin:2rem 0 3rem; */
     display: flex;
     flex-direction: row;
     justify-content:space-between;

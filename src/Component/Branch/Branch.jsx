@@ -13,15 +13,18 @@ const Branch = () => {
   const path = navigate.pathname;
   const patharray = path.split("/")
   const branch = patharray[patharray.length - 1].toUpperCase();
-
+  axios.defaults.withCredentials = true
+  axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  axios.defaults.xsrfCookieName = "csrftoken";
   useEffect(() => {
     const GetSemesterData = async (branch) => {
       console.log("function branch : " + branch)
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/content/${branch}/get_branch`, { 'withCredentials': true }
+          `http://localhost:8000/content/${branch}/get_branch`,
         );
         console.log("response : " , response.data)
+        console.log("HELLO",Cookies.get("csrftoken"))
         const sem = response.data.semester
         sem.map((object, index) => {
           const sub = object.subjects
@@ -39,9 +42,7 @@ const Branch = () => {
     };
 GetSemesterData(branch);
   }, [])
-// setstate async type ka function hai isliye baad mein update hota hai isliye aisa print krr re, 
-//aur jo do baar axios run ho ra hai
-// vo stictmode ki vajah se hai 
+
 useEffect(() => {
   console.log("semester data",semesterData);
 

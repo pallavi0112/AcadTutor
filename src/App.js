@@ -15,31 +15,34 @@ import Dashboard from "./Component/TeacherDashboard/Dashboard";
 import StudentProfile from "./Pages/StudentProfile";
 import TeacherProfile from "./Pages/TeacherProfile"
 import PrivateRoute from "./Component/PrivateRoute";
+import Navbar from './Component/Navbar/Navbar'
+import {navItems , BranchSubmenu}  from "./Data/Menu";
 const App = () => {
   return (
     <>
-          <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-            <Route exact path=":branch">
-              <Route index element={<BranchPage />} />
-              <Route path=":subject_id">
-                <Route index element={<Subject />} />
-                <Route path=":unit" element={<ContentPage />} />
-              </Route>
-            </Route>
-            <Route path="/signup" element={<SignUp />} />
-            
-            <Route path="/studentprofile" element={<StudentProfile/>}></Route>
-            <Route path="/teacherprofile" element={<TeacherProfile/>}></Route>
+    {/* <Navbar menu={navItems} submenu={BranchSubmenu} /> */}
+      <Routes>
+        <Route exact path="/" element={<Home />}></Route>
+        <Route exact path=":branch">
+          <Route index element={<BranchPage />} />
+          <Route path=":subject_id">
+            <Route index element={<Subject />} />
+            <Route path=":unit" element={<ContentPage />} />
+          </Route>
+        </Route>
+        <Route path="/signup" element={<SignUp />} />
 
-            <Route  exact path="teacherdashboard" element={<TeacherDashboard />}>
-              <Route path="" element={<Dashboard />}/>
-              <Route path="courses" element={<Courses />}></Route>
-              <Route path="assignment" element={<Assignments />} />
-              <Route path="doubts" element={<Doubts />} />
-              <Route path="createcourse" elment={<CourseForm/>}/>
-            </Route>
-          </Routes>
+        <Route path="/studentprofile" element={<StudentProfile />}></Route>
+        <Route path="/teacherprofile" element={<TeacherProfile />}></Route>
+
+        <Route exact path="teacherdashboard" element={<TeacherDashboard />}>
+          <Route index element={<Dashboard />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="assignment" element={<Assignments />} />
+          <Route path="doubts" element={<Doubts />} />
+          <Route path="createcourse" element={<CourseForm />} />
+        </Route>
+      </Routes>
     </>
   );
 }

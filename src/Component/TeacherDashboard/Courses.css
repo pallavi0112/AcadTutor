@@ -1,13 +1,18 @@
+.teacherCourses_container{
+    width:100%;
+    height: auto;
+}
 .teacherCourses_container .grid_container{
-    width:85%;
+    width:90%;
     display:grid;
     gap:1.2rem;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr) ) ;
     margin:1.5rem auto;
 }
 .teacherCourses_container .heading{
-
-    /* border:1px solid red; */
+    width:90%;
+    border:1px solid red;
+    margin-inline: auto;
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -19,19 +24,19 @@
     text-align: center;
 }
 .teacherCourses_container .heading .Formbutton{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-self: flex-end;
     background-color:#15A6FF;
     border:none;
     color: #fff;
-    width:12rem;
-    padding:0.5rem;
+    width: 200px;
+    padding:0.6rem 0.3rem;
     border-radius:1.5rem;
-    margin-top:0.8rem;
     cursor:pointer;
+    outline:none;
+}
+.teacherCourses_container .heading .Formbutton a{
+    text-decoration: none;
+    color:#fff ;
+    font-size:0.9rem;
 }
 .teacherCourses_container .heading .Formbutton svg{
     width:1.1rem;
@@ -44,6 +49,7 @@
     justify-content: center;
     align-items: center;
     background-color:#fff;
+    border:0.5px solid rgba(71, 70, 70, 0.25);
     border-radius:0.5rem;
     padding:1.5rem;
     transition: all 0.3s linear;
