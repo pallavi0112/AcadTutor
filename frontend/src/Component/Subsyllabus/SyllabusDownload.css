@@ -2,7 +2,7 @@
     position: relative;
     width:15vw;
     margin:2rem auto;
-    border:1px solid #FF9900;
+    /* border:1px solid #FF9900;/ */
 }
 .download_con button{
     position: absolute;
@@ -26,17 +26,16 @@
     height:1.2em;
 }
 .download_con .download-links{
-    position: absolute;
-    top:50%;
-    left: 0%;
+    position:absolute;
+    top:0%;
+    left:0%;
     width:100%;
     padding:1rem;
     background-color: #fff;
 }
 .download_con .download-links li{
     list-style:none;
-    text-align: center;
-    margin:0.8rem auto;
+    margin:1rem auto;
 }
 .download_con .download-links li a{
     text-decoration:none;

@@ -10,7 +10,7 @@ const SyllabusDownload = (props) => {
        <div className='download-links'>
          <ul>
           <li><a href={props.syllabus_link} download="Syllabus"><TbDownload/> Syllabus</a></li>
-          <li><a href={props.syllabus_link} download="book"><TbDownload/> Book</a></li>
+          <li><a href={props.book_link} download="book"><TbDownload/> Book</a></li>
          </ul>
         
        </div>

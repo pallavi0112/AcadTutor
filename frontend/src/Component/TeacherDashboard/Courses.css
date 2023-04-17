@@ -1,5 +1,6 @@
 .teacherCourses_container{
     width:100%;
+    height: auto;
 }
 .teacherCourses_container .grid_container{
     width:90%;

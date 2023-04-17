@@ -93,8 +93,8 @@
   position: sticky;
   top: 0%;
   height:7.2vh;
-  width:100vw;
-  background:#ffff !important ;
+  /* width:100%; */
+  background:#099156 !important ;
 } 
 .navbar2 .navbar-logo {
   color:#000 !important;
