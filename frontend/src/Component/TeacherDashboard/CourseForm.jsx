@@ -17,7 +17,7 @@ const CourseForm = () => {
             syllabus: "",
             book: "",
             date: "",
-            weightage: "",
+            img: "",
         }
     );
     const AddCourse = (e) => {
@@ -39,8 +39,8 @@ const CourseForm = () => {
                     // branch: course.branch,
                     sem: course.sem,
                     summary: course.summary,
-                    weightage:course.weightage,
-                    date:course.date,
+                    weightage: course.weightage,
+                    date: course.date,
                     // b_file:course.book,
                     // s_file:course.syllabus,
                 },
@@ -60,7 +60,6 @@ const CourseForm = () => {
     };
     return (
         <div className="CourseForm_Container">
-            <h2>Create Course</h2>
             <div className="Courseform_Wrapper">
                 <div className="left_side">
                     <div className="quote_bx">
@@ -72,7 +71,7 @@ const CourseForm = () => {
                     </div>
                 </div>
                 <div className="right_side">
-                    <form action="#" className="CourseForm">
+                    <form className="CourseForm">
                         <div>
                             <label>Title</label>
                             <input
@@ -84,71 +83,72 @@ const CourseForm = () => {
                         </div>
                         <div id="row_col_area">
                             <div>
-                               <div>
-                                <label>Branch</label>
-                                <input
-                                    type="text"
-                                    value={course.branch}
-                                    name="branch"
-                                    onChange={AddCourse}
-                                />
-                               </div>
-                               <div>
-                                <label>Semester</label>
-                                <input
-                                    type="text"
-                                    value={course.sem}
-                                    name="sem"
-                                    onChange={AddCourse}
-                                />
-                               </div>
+                                <div>
+                                    <label>Branch</label>
+                                    <input
+                                        type="text"
+                                        value={course.branch}
+                                        name="branch"
+                                        onChange={AddCourse}
+                                    />
+                                </div>
+                                <div>
+                                    <label>Semester</label>
+                                    <input
+                                        type="text"
+                                        value={course.sem}
+                                        name="sem"
+                                        onChange={AddCourse}
+                                    />
+                                </div>
                             </div>
                             <div>
-                               <div>
-                                <label for="syllabus" className="uploadfile" >Upload Syllabus<img src={UploadIcon}/></label>
-                                <input
-                                    type="file"
-                                    value={course.syllabus}
-                                    name="syllabus"
-                                    id="syllabus"
-                                    onChange={AddCourse}
-                                />
-                               </div>
-                               <div>
-                                <label>Start Date</label>
-                                <input
-                                    type="Date"
-                                    value={course.date}
-                                    name="date"
-                                    onChange={AddCourse}
-                                />
-                               </div>
+                                <div>
+                                    <label>Start Date</label>
+                                    <input
+                                        type="Date"
+                                        value={course.date}
+                                        name="date"
+                                        onChange={AddCourse}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="syllabus" className="uploadfile" >Upload Syllabus<img src={UploadIcon} /></label>
+                                    <input
+                                        type="file"
+                                        value={course.syllabus}
+                                        name="syllabus"
+                                        id="syllabus"
+                                        onChange={AddCourse}
+                                    />
+                                </div>
                             </div>
                             <div>
-                            <div>
-                                <label for="book" className="uploadfile" >Upload Book <img src={UploadIcon}/></label>
-                                <input
-                                    type="file"
-                                    value={course.book}
-                                    name="book"
-                                    onChange={AddCourse}
-                                    id="book"
-                                />
-                            </div>
-                            <div>
-                                <label>Weightage</label>
-                                <input
-                                    type="text"
-                                    value={course.weightage}
-                                    name="weightage"
-                                    onChange={AddCourse}
-                                />
-                            </div>
+                                <div>
+                                    <label htmlFor="book" className="uploadfile" >Upload Subject Book <img src={UploadIcon} /></label>
+                                    <input
+                                        type="file"
+                                        value={course.book}
+                                        name="book"
+                                        onChange={AddCourse}
+                                        id="book"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="img" className="uploadfile" >Upload Subject Image <img src={UploadIcon} /></label>
+                                    <input
+                                        type="file"
+                                        value={course.img}
+                                        name="img"
+                                        onChange={AddCourse}
+                                        id="img"
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="description">
                             <label>Description</label>
-                            <input
+                            <textarea
                                 type="textarea"
                                 value={course.summary}
                                 name="summary"

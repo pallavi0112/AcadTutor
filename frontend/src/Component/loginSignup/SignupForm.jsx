@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
-import axios from "axios";
 import './SignupForm.css';
-import Cookies from 'js-cookie';
 import { NewStudent } from '../../features/student/AddStudentSlice';
 import { NewTeacher } from '../../features/teacher/AddTeacherSlice';
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
 const SignupForm = () => {
   const dispatch = useDispatch();
-  const stud_status = useSelector((state) => state.StudentSignUp.status)
-  const stud_error = useSelector((state) => state.StudentSignUp.error)
-  
-  const tea_status = useSelector((state) => state.TeacherSignUp.status)
-  const tea_error = useSelector((state) => state.TeacherSignUp.error)
-
+  const navigate = useNavigate()
   const [newstudent, setNewstudent] = useState({
     student_name: "",
     student_email: "",
@@ -21,16 +15,6 @@ const SignupForm = () => {
     Branch: "",
     semester: ""
   })
-  const AddNewStudent = (e) => {
-    const { name, value } = e.target;
-    setNewstudent((predata) => {
-      return {
-        ...predata,
-        [name]: value
-      }
-    })
-  }
-  
   const [newteacher, setNewteacher] = useState({
     teacher_name: "",
     teacher_email: "",
@@ -38,18 +22,31 @@ const SignupForm = () => {
     teacher_cpswd: "",
     teacher_refc: ""
   })
-  const AddNewteacher = (e) => {
-    const { name , value } = e.target;
-    setNewteacher((predata) => {
-      return {
-        ...predata,
-        [name]: value
-      }
-    })
-  }
   const [teacher, setTeacher] = useState(false)
   const [student, setStudent] = useState(true)
   const [slide, setSlide] = useState(true)
+  const [emailError , setEmailError] = useState({
+    iserror : false,
+    error : ''
+  });
+  const [passError , setPassError] = useState({
+    iserror : false,
+    error : ''
+  })
+  const [nameError , setNameError] = useState({
+    iserror : false,
+    error : ''
+  })
+  const [confirmError , setConfirmError] = useState({
+    iserror : false,
+    error : ''
+  })
+  const stud_status = useSelector((state) => state.StudentSignUp.status)
+  const stud_error = useSelector((state) => state.StudentSignUp.error)
+
+  const tea_status = useSelector((state) => state.TeacherSignUp.status)
+  const tea_error = useSelector((state) => state.TeacherSignUp.error)
+
   const updateTeacherForm = () => {
     setSlide(false)
     setTeacher(true);
@@ -60,21 +57,66 @@ const SignupForm = () => {
     setTeacher(false);
     setStudent(true);
   }
-  
-  const AddStudent = (e)=>{
-       e.preventDefault()
-       dispatch(NewStudent(newstudent))
-       setNewstudent({
-        student_name: "",
-        student_email: "",
-        student_pswd: "",
-        student_cpswd: "",
-        Branch: "",
-        semester: ""
-      })
+  const validateForm = () => {
+    const nameRegex = /^[A-Za-z]+$/;
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    if (!nameRegex.test(newstudent.student_name)) {
+      alert()
+      setNameError({
+        iserror : true,
+        error : 'Please enter a valid name'
+      });
+      return false;
+    }
+    if (!emailRegex.test(newstudent.student_email)) {
+      alert()
+      setEmailError({
+        iserror : true,
+        error : 'Please enter a valid email address.'
+      });
+      return false;
+    }
+    if (!passwordRegex.test(newstudent.student_pswd)) {
+      setPassError({
+        iserror : true,
+        error : 'Please enter a valid password(at least 6 characters long and containing at least one letter and one number)'
+      });
+      return false;
+    }
+    if (newstudent.student_cpswd !== newstudent.student_cpswd){
+      setConfirmError({
+        iserror : true,
+        error : 'Password does not match'
+      });
+      return false
+    }
+    return true;
   }
-  const AddTeacher = (e)=>{
+  const AddNewStudent = (e) => {
+    const { name, value } = e.target;
+    setNewstudent({ ...newstudent, [name]: value })
+  }
+  const AddNewteacher = (e) => {
+    const { name, value } = e.target;
+    setNewteacher({ ...newteacher, [name]: value })
+  }
+  const AddStudent = (e) => {
     e.preventDefault()
+   if(validateForm()){ 
+    dispatch(NewStudent(newstudent))
+    setNewstudent({
+      student_name: "",
+      student_email: "",
+      student_pswd: "",
+      student_cpswd: "",
+      Branch: "",
+      semester: ""
+    })}
+  }
+  const AddTeacher = (e) => {
+    e.preventDefault()
+    if(validateForm()){
     dispatch(NewTeacher(newteacher))
     setNewteacher({
       teacher_name: "",
@@ -82,62 +124,26 @@ const SignupForm = () => {
       teacher_pswd: "",
       teacher_cpswd: "",
       teacher_refc: ""
-    })
+    })}
   }
 
-  // const AddStudent = async (e) => {
-  //   e.preventDefault();
-  //   console.log(newstudent)
-  //   console.log(" AddStudent Function is running");
-  //   try {
-  //     const response = await axios.post(
-  //       `http://127.0.0.1:8000/accounts/register`,
-  //       {
-  //         email: newstudent.student_email,
-  //         password : newstudent.student_pswd,
-  //         re_password : newstudent.student_cpswd,
-  //         name : newstudent.student_name,
-  //         branch : newstudent.Branch,
-  //         semester : newstudent.semester
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "X-CSRFToken": Cookies.get('csrftoken')
+  if (stud_status === "loading" || tea_status === "loading") {
+    console.log("loading");
+  }
 
-  //         },
-  //       }
-  //     );
-  //     console.log({ BACKEND_RESPONSE: response });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  //   setNewstudent('')
-  // };
-  // const AddTeacher = async () => {
-  //   console.log(" AddTeacher Function is running");
-  //   try {
-  //     const response = await axios.post(
-  //       `http://127.0.0.1:8000/accounts/teacher_register`,
-  //       {
-  //         name : newteacher.teacher_name,
-  //         email: newteacher.teacher_email,
-  //         password : newteacher.teacher_pswd,
-  //         re_password : newteacher.teacher_cpswd,
-  //         refc : newteacher.teacher_refc
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     console.log({ BACKEND_RESPONSE: response });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  //   AddNewteacher('')
-  // };
+  if (stud_status === "failed") {
+    console.log(stud_error);
+  }
+  if (tea_status === "failed") {
+    console.log(tea_error);
+  }
+
+  if (stud_status === "succeeded") {
+    navigate("/");
+  }
+  if (tea_status === "succeeded") {
+    navigate("/");
+  }
 
   return (
     <>
@@ -151,10 +157,14 @@ const SignupForm = () => {
           <div className='innerForm-container'>
             <form action="#" className={student ? "student_form" : "student_signup"} onSubmit={AddStudent}>
               <input type="text" placeholder='Your Name' value={newstudent.student_name} name='student_name' onChange={AddNewStudent} />
+              <p>{nameError.error}</p>
               <input type="email" placeholder="Email Address" value={newstudent.student_email} name='student_email' onChange={AddNewStudent} />
+              <p>{emailError.error}</p>
               <div className='pswd_box'>
                 <input type="password" placeholder="Password" value={newstudent.student_pswd} name='student_pswd' onChange={AddNewStudent} />
+                <p>{passError.error}</p>
                 <input type="password" placeholder="Confirm Password" value={newstudent.student_cpswd} name='student_cpswd' onChange={AddNewStudent} />
+                <p>{confirmError.error}</p>
               </div>
               <div className='select_box'>
                 <select value={newstudent.Branch} onChange={AddNewStudent} name="Branch">
@@ -181,28 +191,26 @@ const SignupForm = () => {
               </div>
               <button
                 type="submit"
-                // onClick={AddStudent}
               >
                 Signup
               </button>
-              <p className="signup-link">Already have an account? <a href="/">Sign in</a></p>
+              <p className="signup-link">Already have an account? <Link to="/">Sign in</Link></p>
             </form>
             <form action="#" className={teacher ? "teacher_form" : "teacher_signup "} onSubmit={AddTeacher}>
-              <input type="txt" placeholder="Your Name" name='teacher_name' value={newteacher.teacher_name} onChange={AddNewteacher}/>
-              <input type="email" placeholder="Email Address" name='teacher_email' value={newteacher.teacher_email} onChange={AddNewteacher}/>
+              <input type="txt" placeholder="Your Name" name='teacher_name' value={newteacher.teacher_name} onChange={AddNewteacher} />
+              <input type="email" placeholder="Email Address" name='teacher_email' value={newteacher.teacher_email} onChange={AddNewteacher} />
               <div className='pswd_box'>
                 <input type="password" placeholder="Password" name='teacher_pswd' value={newteacher.teacher_pswd} onChange={AddNewteacher} />
                 <input type="password" placeholder="Confirm Password" name='teacher_cpswd' value={newteacher.teacher_cpswd} onChange={AddNewteacher} />
               </div>
-              <input type="text" placeholder="Referral Code" name='teacher_refc' value={newteacher.teacher_refc} onChange={AddNewteacher}/>
+              <input type="text" placeholder="Referral Code" name='teacher_refc' value={newteacher.teacher_refc} onChange={AddNewteacher} />
               <button
                 type="submit"
                 className="Formbutton"
-                // onClick={AddTeacher}
               >
                 Signup
               </button>
-              <p className="signup-link">Already have an account? <a href="/">Sign in</a></p>
+              <p className="signup-link">Already have an account? <Link to="/">Sign in</Link></p>
             </form>
           </div>
         </div>

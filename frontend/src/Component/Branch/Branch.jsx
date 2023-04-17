@@ -42,9 +42,7 @@ const Branch = () => {
     };
 GetSemesterData(branch);
   }, [])
-// setstate async type ka function hai isliye baad mein update hota hai isliye aisa print krr re, 
-//aur jo do baar axios run ho ra hai
-// vo stictmode ki vajah se hai 
+
 useEffect(() => {
   console.log("semester data",semesterData);
 

@@ -1,11 +1,14 @@
+
 import {createSlice , createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 axios.defaults.withCredentials = true
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
+
 export const NewStudent = createAsyncThunk(
     "accounts/register",
     async (student , { rejectWithValue }) => {
+        console.log(student)
       try{
         const response = await axios.post("http://127.0.0.1:8000/accounts/register",
         {
@@ -41,13 +44,13 @@ export const NewStudent = createAsyncThunk(
         .addCase(NewStudent.rejected , (state , action)=>{
             state.status = "failed"
             console.log("failed")
-            console.log(action)
+            console.log(action.payload)
             state.error = action.payload
         })
         .addCase(NewStudent.fulfilled , (state , action)=>{
             state.status = "succeeded"
         })
 
-    }
-  })
-  export default StudentSignUpSlice.reducer ;
+  }
+})
+export default StudentSignUpSlice.reducer;

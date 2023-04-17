@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import "./Login.css";
-// import Cookies from "js-cookie";
-// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { showHide } from "../../features/Reducer";
 import { loginUser } from "../../features/users/authSlice";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const showLogin = useSelector((state) => state.showLoginSlice.showHide);
   const user = useSelector((state) => state.auth.user);
@@ -16,62 +14,46 @@ const LoginForm = (props) => {
   const error = useSelector((state) => state.auth.error);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [emailError, setEmailError] = useState({
+    iserror: false,
+    error: ''
+  });
   const Navigate = useNavigate();
-  // const LoginUser = async (event) => {
-  //   event.preventDefault();
-  //   console.log({ EVENT: event });
-  //   try {
-  //     const response = await axios.post(
-  //       `http://127.0.0.1:8000/accounts/login`,
-  //       {
-  //         email,
-  //         password,
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "X-CSRFToken": Cookies.get("csrftoken"),
-  //         },
-  //       }
-  //     );
-  //     console.log({ BACKEND_RESPONSE: response });
-  //     localStorage.setItem("type", response.data.type);
-  //     if (response.data.type == "teacher") {
-  //       return Navigate("/teacherdashboard");
-  //     } else if (response.data.type == "student") {
-  //       return Navigate("/studentprofile");
-  //     } else {
-  //       return Navigate("/");
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  //   setEmail("");
-  //   setPassword("");
-  // };
-
+  const validateForm = () => {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError({
+        iserror: true,
+        error: 'Please enter a valid email address.'
+      });
+      return false;
+    }
+    return true;
+  }
   const LoginUser = (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
-    setEmail("");
-    setPassword("");
+    if (validateForm()) {
+      dispatch(loginUser({ email, password }));
+    }
   };
-  if (status === "loading") {
-    return console.log("loading");
-  }
+  // if (status === "loading") {
+  //   return console.log("loading");
+  // }
 
-  if (status === "failed") {
-    return console.log(error);
-  }
+  // if (status === "failed") {
+  //   return console.log(error);
+  // }
 
   if (status === "succeeded") {
     if (user === "teacher") {
-            return Navigate("/teacherdashboard");
+        Navigate("/teacherdashboard");
     } else if (user === "student") {
-            return Navigate("/studentprofile");
-    }else {
-            return Navigate("/");
-          }
+        Navigate("/studentprofile");
+    } else {
+      // Navigate("/");
+    }
+    setEmail("");
+    setPassword("");
   }
   if (!showLogin) {
     return null;
@@ -83,22 +65,28 @@ const LoginForm = (props) => {
           <FaTimes />
         </button>
         <h2>Login Page</h2>
+        {error && <div><div className="res-error" >{error}</div></div>}
         <form className="LoginForm" onSubmit={LoginUser}>
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
+          <div>
+            <input
+              type="text"
+              placeholder="Email Address"
+              value={email}
+              name="email"
+              className={emailError.iserror ? 'field_error' : ''}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <p className="error">{emailError.error}</p>
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <a to="/" className="FP">
             Forgot Password ?
           </a>

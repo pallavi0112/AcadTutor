@@ -2,6 +2,7 @@ import React from 'react'
 import './Courses.css'
 import { CoursesData } from '../../Data/Courses'
 import { FaPlusCircle } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 const Courses = () => {
     return (
         <>
@@ -12,7 +13,9 @@ const Courses = () => {
                         type="button"
                         className="Formbutton"
                     >
-                        Create New Course <FaPlusCircle />
+                        <Link to='/teacherdashboard/createcourse'>
+                            Create New Course  +
+                        </Link>
                     </button>
                 </div>
                 <div className='grid_container'>

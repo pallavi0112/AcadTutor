@@ -1,7 +1,56 @@
+/* *************************************************************** */
+#teacherDashboard{
+  position: relative;
+  top: 10%;
+  display: flex;
+  height:auto;
+  width:100vw;
+  background-color:#0c0c0c;
+}
+#teacherDashboard  .sidebar_container{
+  position: fixed;
+  top:10%;
+  left: 0;
+  width: 15vw;
+  height:calc(100% - 10vh); 
+  background-color: #f1f1f1;
+}
+
+#teacherDashboard  .sidebarDetail_container{
+  flex-grow: 1;
+  margin-left:15vw;
+  border: 1px solid red;
+}
+/* /* #teacherDashboard .dashboard_container{
+  width:100vw;
+  height:calc(100vh - 8vh);
+  /* display:flex;
+  flex-direction: row;
+  justify-content: space-between; 
+}  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ********************************************************************************** */
 #dash_container {
   position:relative;
-  width: 93%;
-  margin: 1.5rem auto;
+  width:98%;
   border:1px solid green;
 }
 #dash_container h3 {
@@ -10,23 +59,23 @@
   font-weight: 600;
   font-size: 1.3rem;
   letter-spacing: 0.35px;
-
   color: #000000;
 }
 .Courses_Subdetail_Container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   margin: 1rem auto;
 }
 .Courses_Subdetail_Container > div {
-  width: 13.5rem;
+  /* width: 13.5rem; */
   height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  flex-grow:1;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
@@ -120,7 +169,7 @@
   font-weight: 600;
 }
 .other_actions > div .notes_container {
-  margin: 1.2rem 0;
+  margin: 1.2rem 0 0;
   display: flex;
   justify-content: space-around;
 }
@@ -263,3 +312,12 @@
     background-color: rgba(0, 0, 0, 0.09);
     border: 1px solid rgba(0, 0, 0, 0.09);
 }
+
+
+
+
+
+/* ****************************************************************************************************************************************** */
+
+
+

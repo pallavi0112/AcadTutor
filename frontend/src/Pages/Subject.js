@@ -43,7 +43,7 @@ const Subject = () => {
       <Heading heading="Machine Learning"/>
       <Container />
       <Container2 summary={subjectData.summary} img={subjectData.img_link}/>
-      <SyllabusDownload syllabus_link={subjectData.syllabus_link} />
+      <SyllabusDownload syllabus_link={subjectData.syllabus_link} book_link={subjectData.book_link} />
       {
       unit.map((val , index)=>{ 
         return <Unit unit_name={val.u_name} unit_id={val.unit_id} key={index} id={index+1} sub_id={sub_id}/>
