@@ -1,15 +1,17 @@
-.navbar {
+header{
   position: sticky;
   top: 0%;
   left:0%;
+  z-index: 900;
+  background:var(--bg-primary);
+}
+.navbar {
   height:8vh;
   width: 100%;
-  background:var(--bg-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease-in-out;
-  z-index: 900;
   padding: 0% 2.5rem;
 }
 .navbar-logo {
@@ -90,11 +92,8 @@
 
 
 .navbar2 {
-  position: sticky;
-  top: 0%;
-  height:7.2vh;
-  /* width:100%; */
-  background:#099156 !important ;
+  width:100%;
+  background:#ffffff !important ;
 } 
 .navbar2 .navbar-logo {
   color:#000 !important;

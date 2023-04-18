@@ -1,19 +1,18 @@
 /* *************************************************************** */
 #teacherDashboard{
-  position: relative;
-  top: 10%;
   display: flex;
   height:auto;
   width:100vw;
-  background-color:#0c0c0c;
+  margin-top:8vh;
+  background-color:hsl(0, 9%, 80%);
 }
 #teacherDashboard  .sidebar_container{
   position: fixed;
-  top:10%;
+  top:8vh;
   left: 0;
   width: 15vw;
   height:calc(100% - 10vh); 
-  background-color: #f1f1f1;
+  background-color: #db8484;
 }
 
 #teacherDashboard  .sidebarDetail_container{
