@@ -36,13 +36,12 @@ const CourseForm = () => {
                 `http://127.0.0.1:8000/content/addsubj`,
                 {
                     subj_name: course.subj_name,
-                    // branch: course.branch,
+                    branch: course.branch,
                     sem: course.sem,
                     summary: course.summary,
-                    weightage: course.weightage,
                     date: course.date,
-                    // b_file:course.book,
-                    // s_file:course.syllabus,
+                    b_file:course.book,
+                    s_file:course.syllabus,
                 },
                 {
                     headers: {

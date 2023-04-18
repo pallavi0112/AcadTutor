@@ -52,16 +52,8 @@ return (
   <div className='branch'>
     <Container branch={branch} />
     {semesterData.map((val , index) =>{
-       console.log("val : " , val.img_link)
-       return  <Semester subData={val.sub} sem={index + 1} fade="fade-up-right" key={index} />
+       return   index%2 == 0 ? <Semester subData={val.sub} sem={index + 1} fade="fade-up-right" key={index} />: <Semester subData={val.sub} sem={index + 1} fade="fade-up-left" key={index} />
     })}
-    {/* <Semester subData={props.subData} sem='7th' fade='fade-up-left' />
-    <Semester subData={props.subData} sem='6th' fade="fade-up-right" />
-    <Semester subData={props.subData} sem='5th' fade='fade-up-left' />
-    <Semester subData={props.subData} sem='4th' fade="fade-up-right" />
-    <Semester subData={props.subData} sem='3rd' fade='fade-up-left' />
-    <Semester subData={props.subData} sem='2nd' fade="fade-up-right" />
-    <Semester subData={props.subData} sem='1st' fade='fade-up-left' /> */}
   </div>
 )
 }
