@@ -40,9 +40,11 @@ const TopicForm = (props) => {
         {
             subtopic_name: "",
             link: "",
+            v_link: "",
         }
     );
     const [notes , setNotes] = useState('')
+    const [file , setFile] = useState(null)
     const handleChange = (e) =>{
         setNotes(e)
     }
@@ -56,18 +58,32 @@ const TopicForm = (props) => {
         })
     }
     const createTopic = async () => {
+        let formData = new FormData();
+        formData.append('subtopic_name' , Topic.subtopic_name)
+        formData.append('link' , Topic.link)
+        formData.append('notes' ,notes)
+        formData.append('v_link' ,Topic.v_link)
+        formData.append('file' , file)
+        formData.append('unit_id' , '643fbd6f457b54d986798334')
         try {
-
+            console.log(formData)
+            console.log(Topic)
+            console.log(file)
+            console.log(notes)
             const response = await axios.post(
                 `http://127.0.0.1:8000/content/addsubtopic`,
-                {
-                    subtopic_name: Topic.subtopic_name,
-                    link: Topic.link,
-                    notes: Topic.notes,
-                },
+                
+                    // subtopic_name: Topic.subtopic_name,
+                    // link: Topic.link,
+                    // notes: Topic.notes,
+                    // v_link:Topic.Youtube,
+                    // file:file,
+                    formData
+
+                ,
                 {
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "multipart/form-data",
                         "X-CSRFToken": Cookies.get('csrftoken')
 
                     },
@@ -110,8 +126,8 @@ const TopicForm = (props) => {
                                         <label>Video Link</label>
                                         <input
                                             type="text"
-                                            value={Topic.Youtbue}
-                                            name="Youtube"
+                                            value={Topic.v_link}
+                                            name="v_link"
                                             onChange={AddTopic}
                                         />
                                     </div>
@@ -135,13 +151,13 @@ const TopicForm = (props) => {
                                         <img src={UploadIcon} alt="icon"/>
                                     </div>
                                     <div className="file_field">
-                                        <label for="syllabus" className="uploadfile" >Upload Image/Video/File</label>
+                                        <label htmlFor="syllabus" className="uploadfile" >Upload Image/Video/File</label>
                                         <input
                                             type="file"
-                                            value={Topic.file}
+                                            // value={file}
                                             name="file"
                                             id="syllabus"
-                                            onChange={AddTopic}
+                                            onChange={(e)=>setFile(e.target.files[0])}
                                         />
                                     </div>
                                 </div>

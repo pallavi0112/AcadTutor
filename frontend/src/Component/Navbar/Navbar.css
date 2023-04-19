@@ -71,6 +71,14 @@ header{
   padding: 0%;
   cursor: pointer;
 }
+.profile_pic{
+  width:40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius:50%;
+  object-fit: cover;
+
+}
 .scrolled-navbar {
   background-color:#fff;
   color: #000;
