@@ -46,9 +46,9 @@ const LoginForm = () => {
 
   if (status === "succeeded") {
     if (user === "teacher") {
-        Navigate("/teacherdashboard");
+        Navigate("/teacher/dashboard");
     } else if (user === "student") {
-        Navigate("/studentprofile");
+        Navigate("/student/dashboard");
     } else {
       // Navigate("/");
     }

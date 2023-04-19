@@ -1,98 +1,76 @@
 /* *************************************************************** */
 #teacherDashboard{
-  position: relative;
-  top: 10%;
   display: flex;
   height:auto;
-  width:100vw;
-  background-color:#0c0c0c;
+  width:100%;
+  background-color:#f2f2f2;
 }
 #teacherDashboard  .sidebar_container{
   position: fixed;
-  top:10%;
   left: 0;
-  width: 15vw;
-  height:calc(100% - 10vh); 
-  background-color: #f1f1f1;
+  width: 13vw;
+  height:calc(100% - 9vh); 
 }
 
 #teacherDashboard  .sidebarDetail_container{
   flex-grow: 1;
-  margin-left:15vw;
-  border: 1px solid red;
+  margin-left:13vw;
+  padding:0.6rem 0;
+  /* border: 1px solid red; */
 }
-/* /* #teacherDashboard .dashboard_container{
-  width:100vw;
-  height:calc(100vh - 8vh);
-  /* display:flex;
-  flex-direction: row;
-  justify-content: space-between; 
-}  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 /* ********************************************************************************** */
 #dash_container {
-  position:relative;
-  width:98%;
-  border:1px solid green;
+  width:92%;
+  margin-inline:auto;
+  padding:0.4rem 0;
+  /* border:1px solid green; */
 }
 #dash_container h3 {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   letter-spacing: 0.35px;
   color: #000000;
 }
 .Courses_Subdetail_Container {
+  width:100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content:space-between;
   align-items: center;
-  margin: 1rem auto;
+  margin: 0.85rem auto;
 }
 .Courses_Subdetail_Container > div {
-  /* width: 13.5rem; */
+  width:13vw;
   height: 8rem;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction:column;
+  justify-content:space-between;
   align-items: center;
-  flex-grow:1;
   background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.25);
   border-radius: 8px;
 }
 .Courses_Subdetail_Container > div .title {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 .Assignments_Subdetail_Container {
   background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.25);
   border-radius: 10px;
-  padding: 1rem;
+  padding:0.5rem 1rem;
   margin: 1rem auto;
 }
+
 .Assignments_Subdetail {
   display: flex;
   justify-content: space-between;
@@ -100,24 +78,24 @@
   margin: 0.8rem auto;
 }
 .Assignments_Subdetail > div {
-  width: 13rem;
+  width: 13.5rem;
   height: 7rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 .Assignments_Subdetail > div .ImgBx {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  border-radius:50%;
+  width:40px;
+  height:40px;
 }
 .Assignments_Subdetail > div .ImgBx img {
-  width: 2rem;
-  height: 2rem;
+  width:80%;
+  height:80%;
   object-fit: contain;
 }
 .Assignments_Subdetail > div .range {
@@ -125,26 +103,22 @@
   font-style: normal;
   font-weight: 600;
   font-size: 1.3rem;
+  line-height:2rem;
 }
+
 .Assignments_Subdetail > div .title {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 1rem;
-  letter-spacing: 0.35px;
+  line-height:1rem;
   color: rgba(0, 0, 0, 0.5);
 }
-.Assignments_Subdetail > div .heading {
+.Assignments_Subdetail_Container .heading {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 1.06rem;
-}
-.Assignments_Subdetail_Container > span {
-  font-size: 1.05rem;
-  font-weight: 600;
-  font-family: "Inter";
-  font-style: normal;
 }
 .Assignments_Subdetail > div.vertical_line {
   display: table-cell;
@@ -153,6 +127,9 @@
   background-color: rgba(0, 0, 0, 0.09);
   border: 1px solid rgba(0, 0, 0, 0.09);
 }
+
+
+/* ************************************************************************* */
 .other_actions {
   display: flex;
   justify-content: space-between;
@@ -160,6 +137,7 @@
 }
 .other_actions > div {
   flex-basis: 32%;
+  height:280px;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;

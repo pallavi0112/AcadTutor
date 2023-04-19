@@ -1,15 +1,17 @@
-.navbar {
+header{
   position: sticky;
   top: 0%;
   left:0%;
+  z-index: 900;
+  background:var(--bg-primary);
+}
+.navbar {
   height:8vh;
   width: 100%;
-  background:var(--bg-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease-in-out;
-  z-index: 900;
   padding: 0% 2.5rem;
 }
 .navbar-logo {
@@ -69,6 +71,14 @@
   padding: 0%;
   cursor: pointer;
 }
+.profile_pic{
+  width:40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius:50%;
+  object-fit: cover;
+
+}
 .scrolled-navbar {
   background-color:#fff;
   color: #000;
@@ -90,11 +100,8 @@
 
 
 .navbar2 {
-  position: sticky;
-  top: 0%;
-  height:7.2vh;
-  /* width:100%; */
-  background:#099156 !important ;
+  width:100%;
+  background:#ffffff !important ;
 } 
 .navbar2 .navbar-logo {
   color:#000 !important;

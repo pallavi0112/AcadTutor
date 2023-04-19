@@ -7,6 +7,7 @@ function Navbar2(props) {
 
   return (
     <>
+    <header>
       <nav className="navbar navbar2">
         <Link to="/" className="navbar-logo">
           Acad<span>Tutor</span>
@@ -15,6 +16,7 @@ function Navbar2(props) {
             
         </div>
       </nav>
+    </header>
     </>
   );
 }

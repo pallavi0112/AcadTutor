@@ -1,5 +1,5 @@
 import React from 'react'
-import './SyllabusDownload.css';
+import './Subsyllabus.css';
 import { FaDownload } from 'react-icons/fa';
 import { TbDownload} from "react-icons/tb";
 import { MdOutlineDownloadForOffline, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md"

@@ -1,18 +1,27 @@
-import React, { useState, useEffect , Fragment} from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./Navbar.css";
 import Dropdown from "./Dropdown";
 import Button from "./Button";
+import dp from "../../Images/user.png"
 
 function Navbar(props) {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+
+  console.log(isAuthenticated)
   const guestLinks = (
-   <Fragment>
-    <div className="btnBlock">
-            <Button title="SignIn" cname="btn signin" />
-            <Button title="SignUp" cname="btn signup" path="/signup" />
-    </div>
-   </Fragment>
+    <Fragment>
+      <div className="btnBlock">
+        <Button title="SignIn" cname="btn signin" />
+        <Button title="SignUp" cname="btn signup" path="/signup" />
+      </div>
+    </Fragment>
   );
+  const profilepic = (
+     <Link to="/"><img src={dp} alt="profile pic" className="profile_pic"/></Link>
+     
+  )
 
   const [dropdown, setDropdown] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -26,42 +35,40 @@ function Navbar(props) {
 
   return (
     <>
-      <nav className={scrollPosition > 0 ? "navbar  scrolled-navbar" : "navbar"}>
-        <Link to="/" className="navbar-logo">
-          Acad<span>Tutor</span>
-        </Link>
-        <div className="menu-container">
-          <ul className="nav-items">
-            {props.menu.map((item) => {
-              if (item.title === "Branches") {
+      <header className={scrollPosition > 0 ? "scrolled-navbar" : ""}>
+        <nav className="navbar">
+          <Link to="/" className="navbar-logo">
+            Acad<span>Tutor</span>
+          </Link>
+          <div className="menu-container">
+            <ul className="nav-items">
+              {props.menu.map((item) => {
+                if (item.title === "Branches") {
+                  return (
+                    <li
+                      key={item.id}
+                      className={item.cName}
+                      onMouseEnter={() => setDropdown(true)}
+                      onMouseLeave={() => setDropdown(false)}
+                      onClick={() => setDropdown(true)}
+                    >
+                      <Link to={item.path}>{item.title}</Link>
+                      {dropdown && <Dropdown submenu={props.submenu} />}
+                    </li>
+                  );
+                }
                 return (
-                  <li
-                    key={item.id}
-                    className={item.cName}
-                    onMouseEnter={() => setDropdown(true)}
-                    onMouseLeave={() => setDropdown(false)}
-                    onClick={() => setDropdown(true)}
-                  >
-                    <Link to={item.path}>{item.title}</Link>
-                    {dropdown && <Dropdown submenu={props.submenu} />}
+                  <li key={item.id} className={item.cName}>
+                    <Link to={`${item.path}`}>{item.title}</Link>
                   </li>
                 );
-              }
-              return (
-                <li key={item.id} className={item.cName}>
-                  <Link to={`${item.path}`}>{item.title}</Link>
-                </li>
-              );
-            })}
-          </ul>
-          {guestLinks}
-          
-          {/* <div className="btnBlock">
-            <Button title="SignIn" cname="btn signin" />
-            <Button title="SignUp" cname="btn signup" path="/signup" />
-          </div> */}
-        </div>
-      </nav>
+              })}
+            </ul>
+            
+            {(isAuthenticated === 'true') ? profilepic : guestLinks}
+          </div>
+        </nav>
+      </header>
     </>
   );
 }

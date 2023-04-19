@@ -1,5 +1,5 @@
 .submenu {
-  width:max-content;
+  width:300px;
   position: absolute;
   top:110%;
   list-style: none;
@@ -14,22 +14,18 @@
   margin:6px auto;
   cursor: pointer;
   padding:5px;
-  transition: all 0.5s linear;
 }
 .submenu li a{
   text-align: start;
   text-decoration: none;
   color:#000;
   font-size:14px;
-}
-.submenu li:hover{
-  background-color:var(--color2);
+  transition: all 0.5s linear;
 }
 .submenu li:hover a{
-  /* background-color:var(--color2); */
   margin-right:0;
-  padding:0px 10px ;
   border-radius:0;
+  color:var(--color2);
 }
 .submenu.clicked {
   display: none;

@@ -13,7 +13,7 @@ const Courses = () => {
                         type="button"
                         className="Formbutton"
                     >
-                        <Link to='/teacherdashboard/createcourse'>
+                        <Link to='/teacher/dashboard/createcourse'>
                             Create New Course  +
                         </Link>
                     </button>
