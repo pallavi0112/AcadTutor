@@ -144,6 +144,7 @@ def addSubTopic(request):
     if (request.method == 'POST'):
         data = request.data
         user = request.user
+        print(data)
         try:
             isAuth = user.is_authenticated
             if isAuth:

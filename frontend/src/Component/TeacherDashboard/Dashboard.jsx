@@ -26,7 +26,7 @@ const Dashboard = () => {
             <span className='sem'> semester</span>
           </div>
           <div>
-            <img src=" "  alt=''/>
+            <img src=" " alt='' />
             <span className='title'>Python</span>
             <span className='sem'> semester</span>
           </div>
@@ -36,13 +36,13 @@ const Dashboard = () => {
             <span className='sem'> semester</span>
           </div>
           <div>
-            <img src=" "  alt=''/>
+            <img src=" " alt='' />
             <span className='title'>View all Courses</span>
 
           </div>
         </div>
         <div className='Assignments_Subdetail_Container'>
-          <span>Assignments Overview</span>
+          <span className='heading'>Assignments Overview</span>
           <div className='Assignments_Subdetail'>
             <div>
               <div className='ImgBx' style={{ backgroundColor: "#FFC694" }}>
@@ -119,7 +119,7 @@ const Dashboard = () => {
             <span>Notes/Anouncements</span>
             <div>
               <div className='notes_container'>
-                <div className='ImgBx'><img src={PdfIcon} /></div>
+                {/* <div className='ImgBx'><img src={PdfIcon} /></div> */}
                 <div className='notes'>
                   <span className='heading'>Compelete Assignment of Unit-01</span>
                   <span className='desc'>Last Date for Submission of Assignment</span>
@@ -128,7 +128,7 @@ const Dashboard = () => {
                 <div className='editIcon'><FaEllipsisV /></div>
               </div>
               <div className='notes_container'>
-                <div className='ImgBx'><img src={PdfIcon} /></div>
+                {/* <div className='ImgBx'><img src={PdfIcon} /></div> */}
                 <div className='notes'>
                   <span className='heading'>Compelete Assignment of Unit-01</span>
                   <span className='desc'>Last Date for Submission of Assignment</span>

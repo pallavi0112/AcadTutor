@@ -24,10 +24,10 @@ export const loginUser = createAsyncThunk(
 );
 
 const initialState = {
-  user: localStorage.getItem("userType") ,
+  user: localStorage.getItem("userType") || null ,
   status: "idle",
   error: null,
-  isAuthenticated: localStorage.getItem("isAuthenticated"),
+  isAuthenticated: localStorage.getItem("isAuthenticated") || "false",
 };
 
 const authSlice = createSlice({
@@ -35,8 +35,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.isAuthenticated = localStorage.setItem("isAuthenticated" , false);
-      state.user = localStorage.setItem("userType" , null);
+      localStorage.setItem("isAuthenticated" , false);
+      localStorage.setItem("userType" , null);
 
       console.log(state.isAuthenticated)
       console.log(state.user)
@@ -56,7 +56,6 @@ const authSlice = createSlice({
         state.status = "succeeded";
         localStorage.setItem("userType" , action.payload.type)
         localStorage.setItem("isAuthenticated" , true)
-        state.isAuthenticated = true ;
         state.user = action.payload.type;
       });
   },
