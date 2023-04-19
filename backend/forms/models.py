@@ -1,5 +1,7 @@
 from  django.db import models
 from accounts.models import CustomUser
+
+
 class Options(models.Model):
     optn = models.CharField(max_length=1000)
     is_correct = models.BooleanField(default=False)
@@ -11,10 +13,13 @@ class Question(models.Model):
     q_type = models.CharField(max_length=30)
     options = models.ManyToManyField(Options,related_name="options")
     points = models.IntegerField(null=True)
+    postive_score = models.IntegerField(default=0)
+    negative_score = models.IntegerField(default=0)
 
 class Ans(models.Model):
     corresponds  = models.ForeignKey(Question,on_delete=models.CASCADE,related_name="corresponds")
     ans = models.CharField(max_length=10000)
+    score = models.IntegerField(default=0)
 
 class Exam(models.Model):
     uuid = models.CharField(max_length=30)
@@ -36,3 +41,4 @@ class Responses(models.Model):
     responder_email = models.EmailField(blank = True,null=True)
     response = models.ManyToManyField(Ans, related_name = "response")
     submittedAt = models.DateTimeField(auto_now_add=True)
+    total_score = models.IntegerField(default=0)

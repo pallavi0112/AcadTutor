@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.defaults import permission_denied,page_not_found,server_error
 from django.urls import reverse
+from django.contrib.auth import logout
 from django.http import HttpResponse,JsonResponse,HttpResponseRedirect
 from django.http.response import StreamingHttpResponse
 from .models import Options,Question,Ans,Exam,Responses
@@ -12,8 +13,13 @@ import string
 import uuid
 
 # Create your views here.
+def logout_request(request):
+	logout(request)
+	return HttpResponse("logout success")
+
 def index(request):
     form = Exam.objects.filter(owner=request.user.email)
+    print(request.user)
     if request.method == "GET":
         if form.count() == 0:
             return render(request,'index.html')
@@ -30,7 +36,17 @@ def create(request):
             exam_id = str(uuid.uuid4()).replace('-','')[0:30]
             form = Exam(uuid= exam_id, title= title, owner= request.user)
             form.save()
-            return JsonResponse({"message": "Sucess", "code": exam_id})
+            return JsonResponse({"message": "Sucessfully created exam", "code": exam_id})
+        else:
+            return JsonResponse({'status':'false','message':"You are not authorised to access this form"}, status=401)
+        
+
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+
+
+################################################## Forms Config API ##########################################################
 
 def edit_form(request,id):
     form = Exam.objects.filter(uuid=id)
@@ -110,6 +126,14 @@ def edit_desc(request,id):
         form.save()
         return JsonResponse({"message": "Success", "description": form.desc})
 
+################################################## Forms Config API END ##########################################################
+
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+
+################################################## Question API START ##########################################################
+
 def add_question(request,id):
     form = Exam.objects.filter(uuid=id)
     if form.count() == 0:
@@ -137,59 +161,7 @@ def add_question(request,id):
             form.questions.add(question)
             form.save()
             return JsonResponse({'question': {'ques': "Untitled Question", 'q_type': question.q_type, 'req': False, 'id': question.id}})
-
-def edit_choice(request,id):
-    form = Exam.objects.filter(uuid=id)
-    if form.count() == 0:
-        return HttpResponse("exam form not found")
-    else:
-        form = form[0]
-    if form.owner != request.user:
-        return HttpResponse("You are not authorised to access this form")
-    if request.method == "POST":
-        data = json.loads(request.body)
-        optn_id = data["id"]
-        choice = Options.objects.filter(id=optn_id)
-        if choice.count() == 0:
-            return HttpResponse("choices not found")
-        else:
-            choice = choice[0]
-        choice.optn = data["option"]
-        choice.save()
-        return JsonResponse({"message": "Success"})
-
-def add_choice(request,id):
-    form = Exam.objects.filter(uuid=id)
-    if form.count() == 0:
-        return HttpResponse("exam form not found")
-    else:
-        form = form[0]
-    if form.owner != request.user:
-        return HttpResponse("You are not authorised to access this form")
-    if request.method == "POST":
-        data = json.loads(request.body)
-        choice = Options(optn="Option")
-        choice.save()
-        form.questions.get(pk=data["question"]).options.add(choice)
-        form.save()
-        return JsonResponse({"message":"Success", "choice": choice.optn,"id": choice.id})
-
-def remove_choice(request,id):
-    form = Exam.objects.filter(uuid=id)
-    if form.count() == 0:
-        return HttpResponse("exam form not found")
-    else:
-        form = form[0]
-    if form.owner != request.user:
-        return HttpResponse("You are not authorised to access this form")
-    if request.method == "POST":
-        data = json.loads(request.body)
-        choice = Options.objects.filter(id=data["id"])
-        if choice.count() == 0:
-            return HttpResponse("choices not found")
-        else: choice = choice[0]
-        choice.delete()
-        return JsonResponse({"message": "Success"})
+        
 
 def edit_question(request,id):
     form = Exam.objects.filter(uuid=id)
@@ -231,6 +203,78 @@ def delete_question(request,id,q_id):
             choice.delete()
         question.delete()
         return JsonResponse({"message" : "Success"})
+    
+
+################################################## Question API END ##########################################################
+
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+
+################################################## Choice API START ##########################################################
+
+def add_choice(request,id):
+    form = Exam.objects.filter(uuid=id)
+    if form.count() == 0:
+        return HttpResponse("exam form not found")
+    else:
+        form = form[0]
+    if form.owner != request.user:
+        return HttpResponse("You are not authorised to access this form")
+    if request.method == "POST":
+        data = json.loads(request.body)
+        choice = Options(optn="Option")
+        choice.save()
+        form.questions.get(pk=data["question"]).options.add(choice)
+        form.save()
+        return JsonResponse({"message":"Success", "choice": choice.optn,"id": choice.id})
+    
+
+def edit_choice(request,id):
+    form = Exam.objects.filter(uuid=id)
+    if form.count() == 0:
+        return HttpResponse("exam form not found")
+    else:
+        form = form[0]
+    if form.owner != request.user:
+        return HttpResponse("You are not authorised to access this form")
+    if request.method == "POST":
+        data = json.loads(request.body)
+        optn_id = data["id"]
+        choice = Options.objects.filter(id=optn_id)
+        if choice.count() == 0:
+            return HttpResponse("choices not found")
+        else:
+            choice = choice[0]
+        choice.optn = data["option"]
+        choice.save()
+        return JsonResponse({"message": "Success"})
+
+
+def remove_choice(request,id):
+    form = Exam.objects.filter(uuid=id)
+    if form.count() == 0:
+        return HttpResponse("exam form not found")
+    else:
+        form = form[0]
+    if form.owner != request.user:
+        return HttpResponse("You are not authorised to access this form")
+    if request.method == "POST":
+        data = json.loads(request.body)
+        choice = Options.objects.filter(id=data["id"])
+        if choice.count() == 0:
+            return HttpResponse("choices not found")
+        else: choice = choice[0]
+        choice.delete()
+        return JsonResponse({"message": "Success"})
+
+################################################## Choice API END ##########################################################
+
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+
+################################################## MISC START ##########################################################
 
 def view_exam(request,id):
     form = Exam.objects.filter(uuid=id)
@@ -255,13 +299,14 @@ def submit_exam(request,id):
         return HttpResponse("exam form not found")
     else:
         form = form[0]
-        if request.user.is_authenticted:
-            profile = User.objects.get(id=request.user.id)
+        if request.user.is_authenticated:
+            profile = CustomUser.objects.get(email=request.user.email)
         else: 
             profile = None
     if request.method == "POST":
         response_id = str(uuid.uuid4()).replace('-','')[0:20]
-        response = Responses(response_code=response_id,response_to=form,responder=request.user,responder_ip=get_client_ip(request),responder_email=profile.email)
+        response = Responses(response_code=response_id,response_to=form,responder=request.user,
+                             responder_ip=get_client_ip(request),responder_email=profile.email)
         response.save()
         for i in request.POST:
             if i == "csrfmiddlewaretoken":
@@ -289,7 +334,7 @@ def response(request,id,res_code):
     return render(request, "exam_response.html", {
         "form": form,
         "response": res,
-        'user':res.responder.username
+        'user':res.responder.name
     })
 
 @login_required
@@ -298,7 +343,7 @@ def responses(request,id):
     if form.count()==0:
         return HttpResponse('<h1>page-not-found</h1>')
     else: form = form[0]
-    if form.owner.id != request.user.id:
+    if form.owner.email != request.user.email:
         return HttpResponse('<h1>permission denied>')
     else:
         resps = Responses.objects.filter(response_to=form.id)

@@ -72,7 +72,7 @@
                                     <table class="table my-0" id="dataTable">
                                         <thead>
                                             <tr>
-                                                <th>Username</th>
+                                                <th>Name</th>
                                                 <th>Submitted At</th>
                                                 <th>Email</th>
                                                 <th>View Response</th>
@@ -83,10 +83,10 @@
 
                                             <tr>
                                                 <td>
-                                                    <div class="d-flex justify-content-around">{{i.responder.username|upper}}
+                                                    <div class="d-flex justify-content-around">{{i.responder.name|upper}}
                                                     </div>
                                             </td>
-                                                <td>{{i.submittedAT}}</td>
+                                                <td>{{i.submittedAt}}</td>
                                                 <td>{{i.responder_email}}</td>
                                                 <td>
                                                     <a href="{% url 'response' i.response_to.uuid i.response_code %}">View Form</a></td>
@@ -97,7 +97,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td><strong>Usename</strong></td>
+                                                <td><strong>Namw</strong></td>
                                                 <td><strong>SubmittedAt</strong></td>
                                                 <td><strong>Email</strong></td>
                                                 <td><strong>View Response</strong></td>

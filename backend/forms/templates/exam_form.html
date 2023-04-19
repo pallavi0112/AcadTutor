@@ -89,7 +89,16 @@
                         <div class="card shadow mb-3 question" data-id="{{question.id}}">
                             <div class="card-header py-3">
                                 <p class="text-primary m-0 fw-bold">Question Short Answer</p>
+                                
                             </div>
+                            <!-- <div class="card-header d-flex justify-content-between py-3">
+                                <p class="text-primary m-0 fw-bold">Question Short Answer</p>
+                                <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
+                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" style="height: 22px;width: 40px;margin: 0px;margin-right: 8px;" placeholder="+Ve" />
+                                    <p class="text-primary m-0 fw-bold" style="margin-right: 0;">/</p><input type="text" style="height: 22px;width: 40px;margin-left: 12px;" placeholder="-Ve" />
+                                </div>
+                            </div> -->
+                            
                             <div class="card-body">
                                     <div class="row">
                                         <div class="col">
@@ -171,7 +180,7 @@
                                                 {%for choice in question.options.all %}
 
                                                 <div class="form-check justify-content-between d-flex" data-id="{{question.id}}">
-                                                    <input class="form-check-input" id="{{choice.id}}" disabled type="radio" >
+                                                    <input class="form-check-input" id="{{choice.id}}" name="{{question.id}}" type="radio" >
                                                     <input class="form-control mx-2 edit-choice" value="{{choice.optn}}" data-id="{{choice.id}}">
                                                     <span class="remove-option" title = "Remove" data-id="{{choice.id}}"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
@@ -209,7 +218,7 @@
                                                 {%for choice in question.options.all %}
 
                                                 <div class="form-check justify-content-between d-flex" data-id="{{question.id}}">
-                                                    <input class="form-check-input flex-fill" id="{{choice.id}}" disabled type="checkbox" >
+                                                    <input class="form-check-input flex-fill" id="{{choice.id}}" type="checkbox" >
                                                     <input class="form-control mx-2 edit-choice" value="{{choice.optn}}" data-id="{{choice.id}}">
                                                     <span class="remove-option" title = "Remove" data-id="{{choice.id}}"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
@@ -245,11 +254,11 @@
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.12.5/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
+<!-- <script>
     var editor = ace.edit("editor-fr");
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/javascript");
-</script>
+</script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/script.min.js' %}"></script>
 </body>
