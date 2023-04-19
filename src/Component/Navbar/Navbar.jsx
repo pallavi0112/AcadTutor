@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 import "./Navbar.css";
 import Dropdown from "./Dropdown";
 import Button from "./Button";
-
+import dp from "../../Images/user.png"
 
 function Navbar(props) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+
   console.log(isAuthenticated)
   const guestLinks = (
     <Fragment>
@@ -17,6 +18,10 @@ function Navbar(props) {
       </div>
     </Fragment>
   );
+  const profilepic = (
+     <Link to="/"><img src={dp} alt="profile pic" className="profile_pic"/></Link>
+     
+  )
 
   const [dropdown, setDropdown] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -59,18 +64,13 @@ function Navbar(props) {
                 );
               })}
             </ul>
-            {isAuthenticated ? "" : guestLinks}
-           
-
-            {/* <div className="btnBlock">
-            <Button title="SignIn" cname="btn signin" />
-            <Button title="SignUp" cname="btn signup" path="/signup" />
-          </div> */}
+            
+            {(isAuthenticated === 'true') ? profilepic : guestLinks}
           </div>
         </nav>
       </header>
-      </>
-      );
+    </>
+  );
 }
 
-      export default Navbar;
+export default Navbar;

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Container2.css';
+import './Subsyllabus.css';
 const Container2 = (props) => {
   return (
     <div className='sub_con'>

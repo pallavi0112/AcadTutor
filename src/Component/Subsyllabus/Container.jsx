@@ -1,5 +1,5 @@
 import React from 'react'
-import './Container.css'
+import './Subsyllabus.css'
 import youtube from '../../Images/YouTube.png'
 import HOD from '../../Images/HOD.jpg'
 const Container = () => {
