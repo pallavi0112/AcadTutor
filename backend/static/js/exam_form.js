@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({})
         })
         .then(()=>{
-            window.location = '/form'
+            window.location = '/forms/form'
         })
     })
 
@@ -162,14 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     element.setAttribute('data-id',question_id)
                     if(this.dataset.type === "mcq"){
                         element.innerHTML = `
-                        <input class="form-check-input flex-fill" id="${result["id"]}" disabled type="radio" >
+                        <input class="form-check-input flex-fill" id="${result["id"]}" name="${question_id}" type="radio" >
                         <input class="form-control mx-2 edit-choice" value="${result["choice"]}" data-id="${result["id"]}">
                         <span class="remove-option" title = "Remove" data-id="${result["id"]}"><i class="fa-solid fa-xmark"></i></span>
                         `;
                     }
                     else if(this.dataset.type === 'msq'){
                         element.innerHTML = `
-                        <input class="form-check-input flex-fill" id="${result["id"]}" disabled type="checkbox" >
+                        <input class="form-check-input flex-fill" id="${result["id"]}" type="checkbox" >
                         <input class="form-control mx-2 edit-choice" value="${result["choice"]}" data-id="${result["id"]}">
                         <span class="remove-option" title = "Remove" data-id="${result["id"]}"><i class="fa-solid fa-xmark"></i></span>
                         `;
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 <label class="form-label" for=""><strong>Options</strong><br></label>
 
                                                 <div class="form-check justify-content-between d-flex" data-id="${result["question"].id}">
-                                                    <input class="form-check-input" id="${result["choices"].id}" disabled type="radio" >
+                                                    <input class="form-check-input" id="${result["choices"].id}" name="${question_id} type="radio" >
                                                     <input class="form-control mx-2 edit-choice" value="${result["choices"].optn}" data-id="${result["choices"].id}">
                                                     <span class="remove-option" title = "Remove" data-id="${result["choices"].id}"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <div class="mb-3 choices" data-id="${result["question"].id}">
                                                 <label class="form-label" for=""><strong>Options</strong><br></label>
                                                 <div class="form-check justify-content-between d-flex" data-id="${result["question"].id}">
-                                                    <input class="form-check-input" id="${result["choices"].id}" disabled type="checkbox" >
+                                                    <input class="form-check-input" id="${result["choices"].id}" type="checkbox" >
                                                     <input class="form-control mx-2 edit-choice" value="${result["choices"].optn}" data-id="${result["choices"].id}">
                                                     <span class="remove-option" title = "Remove" data-id="${result["choices"].id}"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
