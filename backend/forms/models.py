@@ -12,9 +12,7 @@ class Question(models.Model):
     key = models.CharField(max_length=1000,null=True)
     q_type = models.CharField(max_length=30)
     options = models.ManyToManyField(Options,related_name="options")
-    points = models.IntegerField(null=True)
     postive_score = models.IntegerField(default=0)
-    negative_score = models.IntegerField(default=0)
 
 class Ans(models.Model):
     corresponds  = models.ForeignKey(Question,on_delete=models.CASCADE,related_name="corresponds")

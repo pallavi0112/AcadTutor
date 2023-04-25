@@ -43,7 +43,7 @@
                     <div class="col">
                         {% for question in form.questions.all %}
                         <div class="card shadow mb-3 question" data-id="{{question.id}}">
-                            <div class="card-header py-3">
+                            <div class="card-header d-flex justify-content-between py-3">
                                 <p class="text-primary m-0 fw-bold">Question 
                                     {% if question.q_type == "sa" %}
                                     Short Answer
@@ -57,6 +57,10 @@
                                     {% if question.req %}
                                     <span class="require-star">*</span>{% endif %}
                                 </p>
+                                <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
+                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" disabled value="{{question.postive_score}}"/>
+                                </div>
+
                             </div>
                             <div class="card-body">
                                     <div class="row">

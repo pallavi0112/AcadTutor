@@ -9,6 +9,7 @@ from accounts.models import CustomUser
 from django.contrib.auth.decorators import login_required
 import json
 import random
+import requests
 import string
 import uuid
 
@@ -205,6 +206,30 @@ def delete_question(request,id,q_id):
         return JsonResponse({"message" : "Success"})
     
 
+
+def add_score(request,id,q_id):
+    form = Exam.objects.filter(uuid=id)
+    data = json.loads(request.body)
+    if form.count() == 0:
+        return HttpResponse("exam form not found")
+    else:
+        form = form[0]
+    if form.owner != request.user:
+        return HttpResponse("You are not authorised to access this form")
+    if request.method == "POST":
+        question = Question.objects.filter(id=q_id)
+        if question.count() == 0:
+            return HttpResponse("Question not found")
+        else:
+            question = question[0]
+        if data['score'] == '':
+            question.postive_score = 0
+        else:
+            question.postive_score = int(data["score"])
+        question.save()
+    return JsonResponse({"message" : "Success"})
+    
+
 ################################################## Question API END ##########################################################
 
 ##############################################################################################################################
@@ -291,7 +316,6 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
-
 @login_required
 def submit_exam(request,id):
     form = Exam.objects.filter(uuid=id)
@@ -334,7 +358,7 @@ def response(request,id,res_code):
     return render(request, "exam_response.html", {
         "form": form,
         "response": res,
-        'user':res.responder.name
+        'user':res.responder
     })
 
 @login_required
@@ -349,3 +373,28 @@ def responses(request,id):
         resps = Responses.objects.filter(response_to=form.id)
         
         return render(request,'responses.html',context={'user':request.user,'responses':resps})
+
+
+def add_marks(request,id,res_code):
+    form = Exam.objects.filter(uuid=id)
+    if form.count()==0:
+        return HttpResponseRedirect(reverse('404'))
+    else: form = form[0]
+    res = Responses.objects.filter(response_code = res_code)
+    if res.count() == 0:
+        return HttpResponseRedirect(reverse('404'))
+    else: res = res[0]
+    data = json.loads(request.body)
+    answers = res.response.all()
+    ans = answers.filter(corresponds=int(data['qid']))
+    if ans.count() == 0:
+        return HttpResponseRedirect(reverse('404'))
+    print(ans)
+    ans = ans[0]
+    print(ans)
+    if data['score'] == '':
+        return JsonResponse({"message":"Empty Marks cannot be set"}, status=400)
+    else:
+        ans.score = int(data['score'])
+        ans.save()
+    return JsonResponse({"message":"success"})
