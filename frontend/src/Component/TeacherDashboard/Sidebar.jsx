@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import './Sidebar.css'
 import { sidebar } from '../../Data/Sidebar'
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
 import { useSelector , useDispatch } from 'react-redux'
 import { logout } from '../../features/users/authSlice'
 const Sidebar = () => {
+  const navigate = useNavigate();
   const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated)
   const {user} = useSelector((state)=>state.auth)
   const dispatch = useDispatch();
   const [active, setActive] = useState(null)
+  const Logout = () =>{
+    dispatch(logout())
+    navigate("/");
+
+  }
   return (
     <>
       <div className='dashboard_sidebar'>
@@ -35,7 +41,7 @@ const Sidebar = () => {
             }) 
           }
         </ul>
-        <button type='button' className="Formbutton" onClick={()=>dispatch(logout())}>Logout</button>
+        <button type='button' className="Formbutton" onClick={Logout}>Logout</button>
       </div>
     </>
   )
