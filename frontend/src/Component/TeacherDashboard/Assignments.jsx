@@ -3,7 +3,9 @@ import TopicForm from '../UnitsContent/TopicForm'
 
 const Assignments = () => {
   return (
-    <TopicForm/>
+   <>
+    
+   </>
   )
 }
 

@@ -12,7 +12,7 @@
 }
 .Topicform_Wrapper {
   position: relative;
-  width: 40vw;
+  width:max(400px , 42vw);
   background: #ffff;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
