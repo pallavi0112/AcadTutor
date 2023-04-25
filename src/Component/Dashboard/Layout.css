@@ -1,0 +1,19 @@
+#teacher-student-Dashboard{
+    display: flex;
+    height:auto;
+    width:100%;
+    /* background-color:#f2f2f2; */
+  }
+  #teacher-student-Dashboard  .sidebar_container{
+    position: fixed;
+    left: 0;
+    width: 13vw;
+    height:calc(100% - 9vh); 
+  }
+  
+  #teacher-student-Dashboard  .sidebarDetail_container{
+    flex-grow: 1;
+    margin-left:13vw;
+    padding:0.6rem 0;
+    /* border: 1px solid red; */
+  }

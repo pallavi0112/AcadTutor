@@ -1,5 +1,5 @@
 import React from 'react'
-import DeshboardLayout from '../Component/TeacherDashboard/DashboardLayout';
+import DeshboardLayout from '../Component/Dashboard/DashboardLayout';
 const TeacherDashboard = () => {
   return (
     <>
