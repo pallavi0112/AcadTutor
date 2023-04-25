@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
     <script src="https://kit.fontawesome.com/bc6e988caa.js" crossorigin="anonymous"></script>
-    <script src = "{% static 'js/exam_form.js' %}"></script>
+    <script src = "{% static 'js/exam_response.js' %}"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
    
@@ -25,7 +25,7 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <div class="container-fluid justify-content-between" style="margin-bottom: 16px; margin-top:30px;">
-                    <h2 class="text-dark mb-4">Response username : {{user}}</h2>
+                    <h2 class="text-dark mb-4">Response Name : {{user.name}}</h2>
                     <div class="card shadow mb-3">
                         <div class="card-body">
                                 <div class="row">
@@ -45,7 +45,7 @@
                     <div class="col">
                         {% for question in form.questions.all %}
                         <div class="card shadow mb-3 question" data-id="{{question.id}}">
-                            <div class="card-header py-3">
+                            <div class="card-header d-flex justify-content-between py-3">
                                 <p class="text-primary m-0 fw-bold">Question 
                                     {% if question.q_type == "sa" %}
                                     Short Answer
@@ -58,6 +58,18 @@
                                     {% endif %}
                                     {% if question.required %}<span class="require-star">*</span>{% endif %}
                                 </p>
+                                {% if user.is_teach %}
+                                <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
+                                    <p class="text-primary m-0 fw-bold">Score</p>
+                                    
+                                                <input type="text" class="form-control marks" data-qid="{{question.id}}" 
+                                                style="height: 22px;width: 70px;margin-left: 12px;" placeholder="Marks" value="{{response|get_marks:question.id}}" />                                    
+                                
+                                    <p class="text-primary m-0 fw-bold" style="margin-right: 0;">/</p>
+                                    <input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" disabled value="{{question.postive_score}}"/>
+                                </div>
+                                {% endif %}
+
                             </div>
                             <div class="card-body">
                                     <div class="row">
@@ -79,6 +91,7 @@
                                             </p>
                                         </div>
                                     </div>
+                                    </div>
                                     {% elif question.q_type == "la" %}
                                     <div class="row">
                                         <div class="col">
@@ -92,6 +105,7 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                 </p>
+                                        </div>
                                         </div>
                                     </div>
                                     {% elif question.q_type == "mcq" %}

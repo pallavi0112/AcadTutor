@@ -18,8 +18,10 @@ urlpatterns=[
     path('<str:id>/remove_choice', views.remove_choice, name="remove_choice"),
     path('<str:id>/edit_question', views.edit_question, name="edit_question"),
     path('<str:id>/delete_question/<str:q_id>', views.delete_question, name="delete_question"),
+    path('<str:id>/add_score/<str:q_id>', views.add_score, name="add_score"),
     path('<str:id>/responses/', views.responses, name="responses"),
     path('<str:id>/response/<str:res_code>', views.response, name="response"),
+    path('<str:id>/add_marks/<str:res_code>', views.add_marks, name="add_marks"),
 
 
 

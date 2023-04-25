@@ -87,17 +87,13 @@
                         {% for question in form.questions.all %}
                         {% if question.q_type == "sa" %}
                         <div class="card shadow mb-3 question" data-id="{{question.id}}">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 fw-bold">Question Short Answer</p>
-                                
-                            </div>
-                            <!-- <div class="card-header d-flex justify-content-between py-3">
+                            
+                            <div class="card-header d-flex justify-content-between py-3">
                                 <p class="text-primary m-0 fw-bold">Question Short Answer</p>
                                 <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
-                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" style="height: 22px;width: 40px;margin: 0px;margin-right: 8px;" placeholder="+Ve" />
-                                    <p class="text-primary m-0 fw-bold" style="margin-right: 0;">/</p><input type="text" style="height: 22px;width: 40px;margin-left: 12px;" placeholder="-Ve" />
+                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" value="{{question.postive_score}}" />
                                 </div>
-                            </div> -->
+                            </div>
                             
                             <div class="card-body">
                                     <div class="row">
@@ -131,8 +127,12 @@
 
                         {% if question.q_type == "la" %}
                         <div class="card shadow mb-3 question" data-id="{{question.id}}">
-                            <div class="card-header py-3">
+                        
+                            <div class="card-header d-flex justify-content-between py-3">
                                 <p class="text-primary m-0 fw-bold">Question Long Answer</p>
+                                <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
+                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" value="{{question.postive_score}}"/>
+                                </div>
                             </div>
                             <div class="card-body">
                                     <div class="row">
@@ -164,8 +164,11 @@
                         {% endif %}
                         {% if question.q_type == "mcq" %}
                         <div class="card shadow mb-3 question" data-id="{{question.id}}">
-                            <div class="card-header py-3">
+                            <div class="card-header d-flex justify-content-between py-3">
                                 <p class="text-primary m-0 fw-bold">Question MCQ</p>
+                                <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
+                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" value="{{question.postive_score}}"/>
+                                </div>
                             </div>
                             <div class="card-body">
                                     <div class="row">
@@ -180,7 +183,7 @@
                                                 {%for choice in question.options.all %}
 
                                                 <div class="form-check justify-content-between d-flex" data-id="{{question.id}}">
-                                                    <input class="form-check-input" id="{{choice.id}}" name="{{question.id}}" type="radio" >
+                                                    <input class="form-check-input" id="{{choice.id}}" name="{{question.id}}" data-qid="{{question.id}}" disabled type="radio" >
                                                     <input class="form-control mx-2 edit-choice" value="{{choice.optn}}" data-id="{{choice.id}}">
                                                     <span class="remove-option" title = "Remove" data-id="{{choice.id}}"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
@@ -202,8 +205,11 @@
                         {% endif %}
                         {% if question.q_type == "msq" %}
                         <div class="card shadow mb-3 question" data-id="{{question.id}}">
-                            <div class="card-header py-3">
+                            <div class="card-header d-flex justify-content-between py-3">
                                 <p class="text-primary m-0 fw-bold">Question MSQ</p>
+                                <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
+                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" value="{{question.postive_score}}"/>
+                                </div>
                             </div>
                             <div class="card-body">
                                     <div class="row">
@@ -218,7 +224,7 @@
                                                 {%for choice in question.options.all %}
 
                                                 <div class="form-check justify-content-between d-flex" data-id="{{question.id}}">
-                                                    <input class="form-check-input flex-fill" id="{{choice.id}}" type="checkbox" >
+                                                    <input class="form-check-input flex-fill" id="{{choice.id}}" data-qid="{{question.id}}" disabled type="checkbox" >
                                                     <input class="form-control mx-2 edit-choice" value="{{choice.optn}}" data-id="{{choice.id}}">
                                                     <span class="remove-option" title = "Remove" data-id="{{choice.id}}"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
