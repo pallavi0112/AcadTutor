@@ -15,6 +15,10 @@ export const sidebar = [
         title : "Doubts",
         Icon : require('../Images/doubtIcon.png')
     },
+    {
+        title : "Settings",
+        Icon : require('../Images/settings.png')
+    }
 ];
 
 

@@ -1,0 +1,172 @@
+.profile-container{
+    width:88%;
+    margin-inline: auto;
+    padding:2rem;
+    background-color:#fff;
+}
+.profile-header{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.profile-header h3{
+    font-size:1.5rem;
+    letter-spacing:0.05rem;
+}
+.profile-container button{
+    outline:none;
+    border:none;
+    padding:0.6rem 1.2rem;
+    color: #fff;
+    background-color: #ff9900;
+    border-radius:0.5rem;
+    font-weight: 600;
+    cursor:pointer;
+}
+.profile-container form .grid-container{
+    width:100%;
+    display: grid;
+    grid-template-columns:repeat(2 , minmax(250px , 1fr));
+    gap:1.2rem;
+}
+.profile-container form label{
+    color: rgba(0,0,0,0.7);
+    font-size:1rem;
+    line-height:2rem;
+    font-weight:600;
+}
+.profile-container  form .grid-container .form-group{
+    display: flex;
+    flex-direction:column;
+    width:100%;
+}
+.profile-container  form .grid-container .form-group input ,
+.profile-container  form .grid-container .form-group select{
+    width:100%;
+    padding:0.5rem;
+    outline:none;
+    border:0.02rem solid rgba(0, 0,0,0.3);
+    border-radius:0.5rem;
+}
+
+.profile-container  form .grid-container .password-box,
+.profile-container  form .grid-container .email-box,
+.profile-container  form .grid-container .about-box{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.profile-container  form .grid-container .about-box textarea{
+   
+    width:100%;
+    height:80px;
+    /* padding:0.5rem; */
+    outline:none;
+    border:0.02rem solid rgba(0, 0,0,0.3);
+    border-radius:0.5rem;
+}
+.profile-container  form .grid-container .password-box .grid-container{
+    width:100% !important;
+}
+.profile-container .profile-picture{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin:0.8rem 0;
+}
+.profile-container .profile-picture img{
+    object-fit: cover;
+    width:60px ;
+    height:60px;
+    border-radius: 50%;
+    background-color: #000;
+}
+.profile-buttons{
+    margin-left:1rem;
+}
+.profile-buttons button{
+    margin:0 0.5rem;
+}
+.profile-buttons .btn-remove{
+    background-color: #000;
+}
+
+
+
+/* ********************************************************************************** */
+.student-doubt-section{
+    width:90%;
+    background-color: #fff;
+    margin-inline:auto;
+    padding:2rem;
+}
+
+.student-doubt-section .student-details ,
+.student-doubt-section .doubt-reply{
+    display: flex;
+}
+.student-doubt-section .doubt-reply{
+    width:94%;
+    margin-left:4rem;
+    margin-top:1rem;
+}
+.student-doubt-section .student-details>div ,
+.student-doubt-section .doubt-reply>div{
+   margin-left:1rem;
+}
+.student-doubt-section img{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    background-color: #000;
+    object-fit: cover;
+}
+.student-doubt-section .ques-ans{
+    margin:1rem auto;
+    color: rgba(0, 0,0,0.7);
+    font-weight:600;
+}
+.student-doubt-section .comment-section{
+    width:100%;
+    border:1px solid #15A6FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.student-doubt-section .comment-section input{
+    width:90%;
+    outline: none;
+    border:none;
+    background-color: transparent;
+    padding: 0.5rem;
+}
+.student-doubt-section .comment-section input::placeholder{
+    font-weight:500;
+}
+.student-doubt-section .comment-section button{
+    height:100%;
+    flex-grow:1;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+.student-doubt-section .comment-section button svg{
+    color:#15A6FF;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.commented-on{
+    font-size:0.85rem;
+    color:rgba(0, 0,0,0.8);
+    font-weight:400;
+}
+.student-doubt-section h4{
+   color: rgba(0, 0,0,0.8);
+   line-height:1.5rem;
+}
+.student-doubt-section .subject ,
+.student-doubt-section .unit-number,
+.student-doubt-section .interpunct{
+    color: #15A6FF;
+    font-weight:600;
+    margin-inline:0.2rem;
+}

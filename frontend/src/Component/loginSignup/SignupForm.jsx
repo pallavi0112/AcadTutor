@@ -61,14 +61,14 @@ const SignupForm = () => {
     const nameRegex = /^[A-Za-z]+$/;
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-    if (!nameRegex.test(newstudent.student_name)) {
-      alert()
-      setNameError({
-        iserror : true,
-        error : 'Please enter a valid name'
-      });
-      return false;
-    }
+    // if (!nameRegex.test(newstudent.student_name)) {
+    //   alert()
+    //   setNameError({
+    //     iserror : true,
+    //     error : 'Please enter a valid name'
+    //   });
+    //   return false;
+    // }
     if (!emailRegex.test(newstudent.student_email)) {
       alert()
       setEmailError({

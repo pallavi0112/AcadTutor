@@ -1,48 +1,66 @@
-.contents_container{
-    position: relative;
+/* .contents_container{
     display: flex;
+    height:auto;
     width:100%;
-}
-.topics{
+  }
+  .contents_container  .topics_cont{
+    position: fixed;
+    left: 0;
+    width:max(180px , 18vw);
+    height:calc(100% - 13.5vh);
+  }
+  
+  .contents_container  .rightcont{
+    position: fixed;
+    flex-grow: 1;
+    height:100%;
+    margin-left:max(180px , 18vw);
+    padding:1rem;
+    overflow-y:auto;
+    overscroll-behavior: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius:0.9rem;
+    
+  }
+.contents_container  .topics_cont .topics{
+    width:98%;
+    border-top-right-radius:0.9rem;
+    border-top-left-radius:0.9rem;
+    background-color: #fff; 
     position:relative;
     flex-basis:17%;
-    min-width:230px;
-    padding:0.8rem 0.8rem 0;
+    min-width:230px; */
+/* padding:0.8rem 0.8rem 0;
+}
+.contents_container  .topics_cont .topics h2{
+    background-color: #ff9900;
+    border-top-right-radius:0.9rem;
+    border-top-left-radius:0.9rem;
+    text-align: center;
+    font-size:1.3rem;
+    font-weight:500;
+    padding:0.7rem;
+    color: #fff;
+
 }
 .topics ul{
-    height:65vh;
-    width:100%;
-    margin:0.5rem auto 0;
+    height:600px;
+    margin-top:max(1rem , 2vh);
     list-style: none;
-    overflow: auto;
-   
+    overflow: auto;   
+    background-color: #fff;
 }
-.topics h2{
-    font-size:1.4rem;
-    font-weight:400;
-    padding:0.6rem;
- 
-}
+
 .topics ul li{
     margin:0.3rem 0;
     padding:0.4rem;
     font-size:1rem;
     font-weight:500;
     transition:0.5s ease; 
-}
-.contents_container .rightcont{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-basis:75%;
-    height:80vh;
-    flex-direction: column;
-    margin:0 auto; 
-    padding:2rem;
-    background-color: white;
-    border-radius: 15px;
-    overflow: auto;
 }
 .contents_container .rightcont .video_note{
     margin:2rem auto;
@@ -68,20 +86,118 @@
     box-shadow: 0px 0px 8px 0px rgba(89,89,89,0.69);
 }
 .contents_container .rightcont .notes_container h2{
-    background-color: var(--color);
+    background-color: #000000;
     color:#fff;
     padding:1rem;
-    font-size:2rem;
+    font-size:1.8rem;
     border-top-right-radius:1rem;
     border-top-left-radius:1rem;
 }
 .contents_container .rightcont .notes_container .note{
     /* border:1px solid rgba(0,0,0,0.5); */
-    padding:1.5rem;
+/* padding:1.5rem;
     line-height:1.3rem;
     overflow: auto;
-}
+} */
 /* .contents_container .rightcont .video_note{
     position:absolute;
     height: inherit;  
 }  */
+
+.contents_container {
+  display: flex;
+  height: auto;
+  width: 100%;
+}
+
+.contents_container .topics_cont {
+  position: fixed;
+  left: 0;
+  width: max(180px, 18vw);
+  height: calc(100% - 13.5vh);
+}
+
+.contents_container .rightcont {
+  position: fixed;
+  flex-grow: 1;
+  height: 100%;
+  margin-left: max(180px , 18vw);
+  padding: 1rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: white;
+  border-radius: 0.9rem;
+}
+
+.contents_container .rightcont .video_note {
+  margin: 2rem auto;
+  width: 90%;
+}
+
+.contents_container .rightcont .video_note .yt_video {
+  width: 100%;
+  height: 60vh;
+  margin: 0 auto;
+  box-shadow: 0px 0px 8px 0px rgba(89, 89, 89, 0.6);
+}
+
+.contents_container .rightcont .video_note .yt_video div {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit:cover;
+}
+
+.contents_container .rightcont .notes_container {
+  width: 100%;
+  margin-bottom:10rem;
+  margin-top:3rem;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  box-shadow: 0px 0px 8px 0px rgba(89, 89, 89, 0.69);
+}
+
+.contents_container .rightcont .notes_container h2 {
+  background-color: #000000;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.8rem;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+.contents_container .rightcont .notes_container .note {
+  padding: 1.5rem;
+  line-height: 1.3rem;
+  overflow: auto;
+}
+
+.contents_container .topics_cont .topics {
+  width: 98%;
+  border-top-right-radius: 0.9rem;
+  border-top-left-radius: 0.9rem;
+  background-color: #fff;
+}
+
+.contents_container .topics_cont .topics h2 {
+  background-color: #ff9900;
+  border-top-right-radius: 0.9rem;
+  border-top-left-radius: 0.9rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 0.7rem;
+  color: #fff;
+}
+
+.topics ul {
+  height: 600px;
+  margin-top: max(1rem, 2vh);
+  list-style: none;
+  overflow: auto;
+  background-color: #fff;
+}
+
+.topics ul li {
+  margin: 0.3rem 0;
+  padding: 0.5rem;
+}
