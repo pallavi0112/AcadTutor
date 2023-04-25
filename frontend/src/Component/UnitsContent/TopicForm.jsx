@@ -7,6 +7,7 @@ import UploadIcon from '../../Images/UploadIcon.png';
 import link from '../../Images/Link.png'
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { AddTopic , TopicFormStatus } from "../../features/Reducer";
 import ReactQuill from 'react-quill'
 import '../../../node_modules/react-quill/dist/quill.snow.css';
 // import { showHide } from "../../features/Reducer";
@@ -36,6 +37,8 @@ const formats = [
 ];
 
 const TopicForm = (props) => {
+    const dispatch = useDispatch()
+    const {unit_id} = useSelector((state)=>state.showLoginSlice)
     const [Topic, setTopic] = useState(
         {
             subtopic_name: "",
@@ -48,7 +51,7 @@ const TopicForm = (props) => {
     const handleChange = (e) =>{
         setNotes(e)
     }
-    const AddTopic = (e) => {
+    const AddTopicData = (e) => {
         const { name, value } = e.target;
         setTopic((predata) => {
             return {
@@ -64,7 +67,7 @@ const TopicForm = (props) => {
         formData.append('notes' ,notes)
         formData.append('v_link' ,Topic.v_link)
         formData.append('file' , file)
-        formData.append('unit_id' , '643fbd6f457b54d986798334')
+        formData.append('unit_id' , unit_id)
         try {
             console.log(formData)
             console.log(Topic)
@@ -72,12 +75,6 @@ const TopicForm = (props) => {
             console.log(notes)
             const response = await axios.post(
                 `http://127.0.0.1:8000/content/addsubtopic`,
-                
-                    // subtopic_name: Topic.subtopic_name,
-                    // link: Topic.link,
-                    // notes: Topic.notes,
-                    // v_link:Topic.Youtube,
-                    // file:file,
                     formData
 
                 ,
@@ -90,7 +87,12 @@ const TopicForm = (props) => {
                 },
             );
             console.log({ BACKEND_RESPONSE: response });
+            if (response.status === 200){
+                console.log("condition is working")
+                dispatch(TopicFormStatus(true)) 
+            }
         } catch (err) {
+            console.log("error")
             console.error(err);
         }
 
@@ -100,7 +102,7 @@ const TopicForm = (props) => {
             <div className="Topicform_Wrapper">
                 <div className="addtopic">
                     <h2>Add New Topic</h2>
-                    <button className="crossbtn2">
+                    <button className="crossbtn2" onClick={()=>dispatch(AddTopic(false))}>
                         <FaTimes />
                     </button>
                 </div>
@@ -112,7 +114,7 @@ const TopicForm = (props) => {
                                 type="text"
                                 value={Topic.subtopic_name}
                                 name="subtopic_name"
-                                onChange={AddTopic}
+                                onChange={AddTopicData}
                             />
                         </div>
                         <div>
@@ -128,7 +130,7 @@ const TopicForm = (props) => {
                                             type="text"
                                             value={Topic.v_link}
                                             name="v_link"
-                                            onChange={AddTopic}
+                                            onChange={AddTopicData}
                                         />
                                     </div>
                                 </div>
@@ -142,7 +144,7 @@ const TopicForm = (props) => {
                                             type="text"
                                             value={Topic.link}
                                             name="link"
-                                            onChange={AddTopic}
+                                            onChange={AddTopicData}
                                         />
                                     </div>
                                 </div>

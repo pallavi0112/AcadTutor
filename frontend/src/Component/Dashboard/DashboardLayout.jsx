@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar2 from '../Navbar/Navbar2';
-import './TeacherDashboard.css'
-import Sidebar from './Sidebar';
+import './Layout.css'
+import Sidebar from '../TeacherDashboard/Sidebar';
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 const DeshboardLayout = () => {
@@ -11,7 +11,7 @@ const DeshboardLayout = () => {
             {isAuthenticated ? 
                <React.Fragment>
                <Navbar2 />
-               <section id='teacherDashboard'>
+               <section id='teacher-student-Dashboard'>
               <div className='sidebar_container'>
                      <Sidebar />
                 </div>

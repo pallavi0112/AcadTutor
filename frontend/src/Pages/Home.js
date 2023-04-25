@@ -2,7 +2,6 @@ import React from 'react'
 import { navItems, BranchSubmenu } from "../Data/Menu";
 import Navbar from '../Component/Navbar/Navbar'
 import LoginForm from '../Component/loginSignup/LoginForm';
-import CourseForm from '../Component/TeacherDashboard/CourseForm';
 import Section from '../Component/Homesections.jsx/Container'
 import Img from '../Component/Homesections.jsx/Img'
 import Content from '../Component/Homesections.jsx/Content'

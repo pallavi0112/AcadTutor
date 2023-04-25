@@ -13,6 +13,10 @@ import Courses from "./Component/TeacherDashboard/Courses";
 import Assignments from "./Component/TeacherDashboard/Assignments";
 import Doubts from "./Component/TeacherDashboard/Doubts";
 import Dashboard from "./Component/TeacherDashboard/Dashboard";
+
+import SDashboard from "./Component/StudentDashboard/SDashboard";
+import SDoubt from "./Component/StudentDashboard/SDoubt";
+import SAssignment from "./Component/StudentDashboard/SAssignment";
 import StudentProfile from "./Pages/StudentProfile";
 import TeacherProfile from "./Pages/TeacherProfile";
 import ProtectedRoute from './ProtectedRoute';
@@ -20,6 +24,7 @@ import Navbar from './Component/Navbar/Navbar'
 import { navItems, BranchSubmenu } from "./Data/Menu";
 import { useSelector } from "react-redux";
 import Unauthorized from "./Pages/Unauthorized";
+import Profile from "./Component/StudentDashboard/Profile";
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
   const userRole = useSelector((state) => state.auth.user);
@@ -28,15 +33,15 @@ const App = () => {
       {/* <Navbar menu={navItems} submenu={BranchSubmenu} /> */}
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
-        <Route path="teacher/dashboard" element={
+        <Route path="/teacher/dashboard" element={
           <ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['teacher', 'admin']} userRole={userRole}>
             <TeacherDashboard />
           </ProtectedRoute>}
         />
-          
 
 
-        <Route path="student/dashboard" element={
+
+        <Route path="/student/dashboard" element={
           <ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['student', 'admin']} userRole={userRole}>
             <StudentDashboard />
           </ProtectedRoute>}
@@ -51,16 +56,24 @@ const App = () => {
           </Route>
         </Route>
         <Route path="/signup" element={<SignUp />} />
-      
-          <Route path="/student/profile" element={<StudentProfile />}></Route>
-         <Route path="/teacher/profile" element={<TeacherProfile />}></Route> 
-         <Route exact path="/teacher/dashboard" element={<TeacherDashboard />}>
-         <Route index element={<Dashboard />} />
-           <Route path="courses" element={<Courses />} />
-         <Route path="assignment" element={<Assignments />} />
-       <Route path="doubts" element={<Doubts />} />
-           <Route path="createcourse" element={<CourseForm />} />
-         </Route>
+        <Route path="/student/profile" element={<StudentProfile />}></Route>
+        <Route path="/teacher/profile" element={<TeacherProfile />}></Route>
+
+        <Route exact path="/student/dashboard" element={<StudentDashboard />}>
+          <Route exact index element={<SDashboard />} />
+          <Route exact path="courses" element={<Courses />} />
+          <Route exact path="assignment" element={<SAssignment />} />
+          <Route exact path="doubts" element={<SDoubt />} />
+          <Route exact  path="settings" element={<Profile />} />
+        </Route>
+
+        <Route exact path="/teacher/dashboard" element={<TeacherDashboard />}>
+          <Route exact index element={<Dashboard />} />
+          <Route exact  path="courses" element={<Courses />} />
+          <Route exact path="assignment" element={<Assignments />} />
+          <Route exact path="doubts" element={<Doubts />} />
+          <Route exact path="createcourse" element={<CourseForm />} />
+        </Route>
       </Routes>
 
     </>
