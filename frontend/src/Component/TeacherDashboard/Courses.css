@@ -67,7 +67,9 @@
 }
 .teacherCourses_container .grid_container div .title{
     font-size:1.1rem;
+    line-height:1.5rem;
     font-weight:600;
+    text-align: center;
     margin:0.8rem auto 0.5rem;
 }
 .teacherCourses_container .grid_container div .sem{

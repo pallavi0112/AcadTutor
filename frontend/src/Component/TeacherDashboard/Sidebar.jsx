@@ -9,7 +9,7 @@ const Sidebar = () => {
   const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated)
   const {user} = useSelector((state)=>state.auth)
   const dispatch = useDispatch();
-  const [active, setActive] = useState(null)
+  const [active, setActive] = useState('Dashboard')
   const Logout = () =>{
     dispatch(logout())
     navigate("/");

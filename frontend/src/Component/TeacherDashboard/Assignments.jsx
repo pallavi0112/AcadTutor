@@ -1,10 +1,10 @@
 import React from 'react'
-import TopicForm from '../UnitsContent/TopicForm'
+import Announcement from './AnnouncementContainer'
 
 const Assignments = () => {
   return (
    <>
-    
+    <Announcement/>
    </>
   )
 }

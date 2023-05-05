@@ -6,7 +6,7 @@ import CourseFormImg from '../../Images/CourseFormImg.png';
 import UploadIcon from '../../Images/UploadIcon.png';
 import { CreateCourse } from "../../features/teacher/CreateCourseSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -14,7 +14,7 @@ axios.defaults.xsrfCookieName = "csrftoken";
 
 
 const CourseForm = () => {
-
+    const navigate = useNavigate();
     const [course, setCourse] = useState(
         {
             subj_name: "",
@@ -67,6 +67,23 @@ const CourseForm = () => {
             console.log({ BACKEND_RESPONSE: response.data.subject_id });
             console.log({ BACKEND_RESPONSE: response.status });
             console.log(formData)
+            if(response.status === 200){
+                setCourse(
+                    {
+                        subj_name: "",
+                        branch: "",
+                        sem: "",
+                        summary: "",
+                        date: "",
+                    }
+                )
+                setBfile(null)
+                setImgfile(null)
+                setSfile(null)
+                navigate("/teacher/dashboard/courses")
+
+                window.location.reload();
+            }
         } catch (err) {
             console.error(err);
         }
