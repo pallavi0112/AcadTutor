@@ -30,16 +30,18 @@ const Subject = () => {
         
         setSubjectData(response.data)
         setUnit(response.data.units);
-
-      } catch (err) {
+        // console.log(response)
+      }
+   
+      catch (err) {
         console.error(err);
       }
     };
     GetSubjectData(sub_id);
   }, []);
-  unit.map((u)=>console.log(u));
+  // unit.map((u)=>console.log(u));
   useEffect(()=>{
-    console.log(subjectData)
+    // console.log(subjectData)
   },[subjectData])
 
 

@@ -88,10 +88,25 @@ const TopicForm = (props) => {
             );
             console.log({ BACKEND_RESPONSE: response });
             if (response.status === 200){
+                localStorage.setItem(unit_id , true )
+                 setTopic(
+                    {
+                        subtopic_name: "",
+                        link: "",
+                        v_link: "",
+                    }
+                 )
+                 setFile(null)
+                 setNotes('')
+                 window.location.reload();
                 console.log("condition is working")
-                dispatch(TopicFormStatus(true)) 
             }
+            // else{
+            //     localStorage.setItem(unit_id , false)
+            // }
+            
         } catch (err) {
+            localStorage.setItem(unit_id , false )
             console.log("error")
             console.error(err);
         }
