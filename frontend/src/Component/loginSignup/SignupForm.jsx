@@ -25,21 +25,21 @@ const SignupForm = () => {
   const [teacher, setTeacher] = useState(false)
   const [student, setStudent] = useState(true)
   const [slide, setSlide] = useState(true)
-  const [emailError , setEmailError] = useState({
-    iserror : false,
-    error : ''
+  const [emailError, setEmailError] = useState({
+    iserror: false,
+    error: ''
   });
-  const [passError , setPassError] = useState({
-    iserror : false,
-    error : ''
+  const [passError, setPassError] = useState({
+    iserror: false,
+    error: ''
   })
-  const [nameError , setNameError] = useState({
-    iserror : false,
-    error : ''
+  const [nameError, setNameError] = useState({
+    iserror: false,
+    error: ''
   })
-  const [confirmError , setConfirmError] = useState({
-    iserror : false,
-    error : ''
+  const [confirmError, setConfirmError] = useState({
+    iserror: false,
+    error: ''
   })
   const stud_status = useSelector((state) => state.StudentSignUp.status)
   const stud_error = useSelector((state) => state.StudentSignUp.error)
@@ -57,37 +57,57 @@ const SignupForm = () => {
     setTeacher(false);
     setStudent(true);
   }
-  const validateForm = () => {
-    const nameRegex = /^[A-Za-z]+$/;
+  const StudentvalidateForm = () => {
+    console.log("Validate Form is running")
+    // const nameRegex = /^[A-Za-z]+$/;
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-    // if (!nameRegex.test(newstudent.student_name)) {
-    //   alert()
-    //   setNameError({
-    //     iserror : true,
-    //     error : 'Please enter a valid name'
-    //   });
-    //   return false;
-    // }
-    if (!emailRegex.test(newstudent.student_email)) {
-      alert()
+    if (!emailRegex.test(newstudent.student_email) ) {
       setEmailError({
-        iserror : true,
-        error : 'Please enter a valid email address.'
+        iserror: true,
+        error: 'Please enter a valid email address.'
       });
       return false;
     }
     if (!passwordRegex.test(newstudent.student_pswd)) {
       setPassError({
-        iserror : true,
-        error : 'Please enter a valid password(at least 6 characters long and containing at least one letter and one number)'
+        iserror: true,
+        error: 'Please enter a valid password(at least 6 characters long and containing at least one letter and one number)'
       });
       return false;
     }
     if (newstudent.student_cpswd !== newstudent.student_cpswd){
       setConfirmError({
-        iserror : true,
-        error : 'Password does not match'
+        iserror: true,
+        error: 'Password does not match'
+      });
+      return false
+    }
+    return true;
+  }
+  const TeachervalidateForm = () => {
+    console.log("Validate Form is running")
+    // const nameRegex = /^[A-Za-z]+$/;
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    if (!emailRegex.test(newteacher.teacher_email) ) {
+      setEmailError({
+        iserror: true,
+        error: 'Please enter a valid email address.'
+      });
+      return false;
+    }
+    if (!passwordRegex.test(newteacher.teacher_pswd)) {
+      setPassError({
+        iserror: true,
+        error: 'Please enter a valid password(at least 6 characters long and containing at least one letter and one number)'
+      });
+      return false;
+    }
+    if (newteacher.teacher_cpswd !== newteacher.teacher_cpswd){
+      setConfirmError({
+        iserror: true,
+        error: 'Password does not match'
       });
       return false
     }
@@ -103,28 +123,32 @@ const SignupForm = () => {
   }
   const AddStudent = (e) => {
     e.preventDefault()
-   if(validateForm()){ 
-    dispatch(NewStudent(newstudent))
-    setNewstudent({
-      student_name: "",
-      student_email: "",
-      student_pswd: "",
-      student_cpswd: "",
-      Branch: "",
-      semester: ""
-    })}
+    if (StudentvalidateForm()) {
+      console.log("Validate form returning true")
+      dispatch(NewStudent(newstudent))
+      setNewstudent({
+        student_name: "",
+        student_email: "",
+        student_pswd: "",
+        student_cpswd: "",
+        Branch: "",
+        semester: ""
+      })
+    }
   }
   const AddTeacher = (e) => {
     e.preventDefault()
-    if(validateForm()){
-    dispatch(NewTeacher(newteacher))
-    setNewteacher({
-      teacher_name: "",
-      teacher_email: "",
-      teacher_pswd: "",
-      teacher_cpswd: "",
-      teacher_refc: ""
-    })}
+    if (TeachervalidateForm()) {
+      console.log("Validate form returning true")
+      dispatch(NewTeacher(newteacher))
+      setNewteacher({
+        teacher_name: "",
+        teacher_email: "",
+        teacher_pswd: "",
+        teacher_cpswd: "",
+        teacher_refc: ""
+      })
+    }
   }
 
   if (stud_status === "loading" || tea_status === "loading") {
@@ -198,10 +222,14 @@ const SignupForm = () => {
             </form>
             <form action="#" className={teacher ? "teacher_form" : "teacher_signup "} onSubmit={AddTeacher}>
               <input type="txt" placeholder="Your Name" name='teacher_name' value={newteacher.teacher_name} onChange={AddNewteacher} />
+              <p>{nameError.error}</p>
               <input type="email" placeholder="Email Address" name='teacher_email' value={newteacher.teacher_email} onChange={AddNewteacher} />
+              <p>{emailError.error}</p>
               <div className='pswd_box'>
                 <input type="password" placeholder="Password" name='teacher_pswd' value={newteacher.teacher_pswd} onChange={AddNewteacher} />
+                <p>{passError.error}</p>
                 <input type="password" placeholder="Confirm Password" name='teacher_cpswd' value={newteacher.teacher_cpswd} onChange={AddNewteacher} />
+                <p>{confirmError.error}</p>
               </div>
               <input type="text" placeholder="Referral Code" name='teacher_refc' value={newteacher.teacher_refc} onChange={AddNewteacher} />
               <button

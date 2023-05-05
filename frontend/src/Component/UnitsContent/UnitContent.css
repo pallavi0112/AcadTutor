@@ -121,6 +121,7 @@
   position: fixed;
   flex-grow: 1;
   height: 100%;
+  width: calc(100% - 18vw);
   margin-left: max(180px , 18vw);
   padding: 1rem;
   overflow-y: auto;

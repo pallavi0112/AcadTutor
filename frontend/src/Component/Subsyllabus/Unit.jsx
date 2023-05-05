@@ -11,26 +11,33 @@ import { useDispatch } from 'react-redux';
 const Unit = (props) => {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  const topicformstatus = useSelector((state) => state.showLoginSlice.topicformstatus)
   const [show , setShow] = useState(false)
-  // console.log(topicformstatus)
+
+
+  useEffect(() => {
+    const isViewTopicBtnVisible = localStorage.getItem(props.unit_id);
+    console.log(isViewTopicBtnVisible , "isviewtopicbth")
+    if (isViewTopicBtnVisible) {
+      setShow(JSON.parse(isViewTopicBtnVisible));
+    } 
+  },[]);
+ 
   const BtnHandler = (unit_id) => {
     dispatch(AddTopic(true))
-    dispatch(AddUnitId(unit_id))
-    
-    setShow(true)
+    dispatch(AddUnitId(unit_id))    
   }
+
   return ( 
     <div className='unit_con'>
+    {console.log(props.unit_name)}
       <span>{props.unit_name}</span>
       {
         (user === "student")
           ? <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }} onClick={()=>dispatch(AddUnitId(props.unit_id))}>Start Learning<FaRegPlayCircle /></button></Link>
-          : !show ? <button type='button' style={{ backgroundColor: "#FF9900" }} onClick={() => BtnHandler(props.unit_id)}>Add Topic <AiFillPlusCircle /></button> : <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }}>View Topics<FaRegPlayCircle /></button></Link>
+          : show ? <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }}>View Topics<FaRegPlayCircle /></button></Link> : <button type='button' style={{ backgroundColor: "#FF9900" }} onClick={() => BtnHandler(props.unit_id)}>Add Topic <AiFillPlusCircle /></button>
+            
       }
-
-
-
+          {/* : (topicformstatus && show ) ? <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }}>View Topics<FaRegPlayCircle /></button></Link> :  <button type='button' style={{ backgroundColor: "#FF9900" }} onClick={() => BtnHandler(props.unit_id)}>Add Topic <AiFillPlusCircle /></button> */}
     </div>
   )
 }
