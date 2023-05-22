@@ -52,6 +52,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     is_teach = models.BooleanField(default=False)
+    is_HOD = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
     img = models.CharField(default="https://acadtutor.blob.core.windows.net/acadtutor/6769264_60111.jpg",max_length=100)
     USERNAME_FIELD = 'email'
@@ -96,6 +97,7 @@ class Teacher(models.Model):
         return CustomUser.get_email(self.user) + " - is_teacher"
 
 class Student(models.Model):
+    about = models.CharField(null=True,blank=True,max_length=1000)
     branch = models.CharField(null=True,blank=True,max_length=10)
     sem = models.IntegerField(null=True,blank=True)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,primary_key=True)

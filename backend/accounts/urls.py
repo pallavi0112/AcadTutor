@@ -6,6 +6,8 @@ urlpatterns = [
     path('teacher_register',views.teacher_register),
     path('csrf_cookie',views.get_CSRF_token),
     path('login',views.Login),
+    path('change_password',views.changePassword),
+    path('upload_pic',views.uploadPP),
     path('authenticated',views.IsAuthenticated),
     path('logout',views.Logut)
 ]

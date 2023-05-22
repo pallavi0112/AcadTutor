@@ -4,6 +4,7 @@ from django.shortcuts import render
 from acadtutor.utils import get_collection_handle,get_db_handle
 from acadtutor.azure import ALLOWED_EXTENTIONS,upload
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
+from datetime import datetime
 from rest_framework.decorators import permission_classes,api_view,parser_classes
 from rest_framework.parsers import MultiPartParser,FormParser,FileUploadParser
 from rest_framework.response import Response
@@ -17,6 +18,8 @@ subj_collection_handle = get_collection_handle(db_handle, "subjects")
 unit_collection_handle = get_collection_handle(db_handle, "units")
 branch_collection_handle = get_collection_handle(db_handle, "branches")
 subtopic_collection_handle = get_collection_handle(db_handle, "subtopics")
+assignment_collections_handle = get_collection_handle(db_handle,"assignments")
+class_comment_collection_handle = get_collection_handle(db_handle,"classComment")
 # uncomment to create branches
 # def createbranch():
 #     dict=[{
@@ -230,3 +233,84 @@ def getSubtopic(request,subtopic_id):
                 return Response(data)
             else:
                 return Response({'error':"Invalid request"})
+
+@csrf_protect
+@api_view(('GET',))
+def getMyCourses(request):
+    if (request.method == 'GET'):
+            obj = subj_collection_handle.find({"author_email": request.user.email},{
+                "_id": { "$toString": "$_id" },
+                "c_name": 1,
+                "sem": 1,
+                "summary": 1,
+                "branch": 1,
+                "units": 1,
+                "start_date": 1,
+                "author_email": 1,
+                "author_name": 1,
+                "syllabus_link": 1,
+                "book_link": 1,
+                "img_link": 1
+                })
+            data = obj
+            if obj is not None:
+                return Response(list(data))
+            else:
+                return Response({'error':"Invalid request"})
+
+
+@csrf_protect
+@api_view(('POST',))
+@parser_classes([MultiPartParser,FormParser])
+def addAssignment(request):
+    if (request.method == 'POST'):
+        data = request.data
+        user = request.user
+        try:
+            isAuth = user.is_authenticated
+            if isAuth:
+                is_teach = CustomUser.objects.get(email=request.user.email).is_teach
+                if is_teach:
+                    file = request.FILES['file']
+                    f_upload_link = upload(file)
+                    ext = Path(file.name).suffix
+                    if not f_upload_link :
+                        return Response({'error':f"{ext} not allowed only accept {', '.join(ext for ext in ['.pdf','.doc','.docx'])} "})
+                    dict = {
+                        "assignment_name":data['name'],
+                        "instructions": data['instructions'],
+                        "marks":data['marks'],
+                        "subject_id": data["subj_id"],
+                        "subject_name":data["subj_name"],
+                        "due_date":data['date'],
+                        "created_at": datetime.today().strftime('%Y-%m-%d'),
+                        "author_email":user.email,
+                        "author_name":user.name,
+                    }
+                    assgn = assignment_collections_handle.insert_one(dict)
+                    dict = {
+                        "assignment_name":data['name'],
+                        "marks":data['marks'],
+                        "subject_id": data["subj_id"],
+                        "due_date":data['date'],
+                        "created_at": datetime.today().strftime('%Y-%m-%d'),
+                        "author_email":user.email,
+                        "author_name":user.name,
+                        "file_link":f_upload_link,
+                        "video_link":data['v_link'],
+                        "link":data['link']
+                    }
+                    # subj_collection_handle.find_one_and_update(
+                    #     {
+                    #         "_id": ObjectId(data['subj_id'])
+                    #     },
+                    #     {'$push': {'units': {"unit_id":str(unit.inserted_id),"u_name":data['u_name']}}}
+                    # )
+                    return Response({'success':f"add assignment successfully,assignment id:{assgn.inserted_id}"})
+                else:
+                    return Response({'success':"you are not authorized to access"})
+            else:
+                return Response({'error':'You are not authenticated, please login first'})
+        except Exception as e:
+            # return Response({ 'error': 'Something went wrong when checking authentication status' })
+            return Response({ 'error': str(e) })

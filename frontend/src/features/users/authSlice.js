@@ -37,7 +37,13 @@ const authSlice = createSlice({
     logout: (state) => {
       localStorage.setItem("isAuthenticated" , false);
       localStorage.setItem("userType" , null);
-
+      // try {
+      //   const response = axios.post("http://127.0.0.1:8000/accounts/logout");
+      //   console.log(response)
+        
+      // } catch (error) {
+      //   console.log(error)
+      // }
       console.log(state.isAuthenticated)
       console.log(state.user)
     },

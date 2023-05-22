@@ -14,6 +14,7 @@ class CustomUserAdmin(BaseUserAdmin):
             'groups',
             'is_student',
             'is_teach',
+            'is_HOD',
             
             'user_permissions',
         )}),
@@ -29,7 +30,7 @@ class CustomUserAdmin(BaseUserAdmin):
     )
 
     list_display = ('email', 'name', 'is_staff', 'last_login')
-    list_filter = ('is_staff', 'is_teach','is_student','is_superuser', 'is_active', 'groups')
+    list_filter = ('is_staff', 'is_teach','is_student','is_superuser','is_HOD', 'is_active', 'groups')
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)

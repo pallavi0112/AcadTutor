@@ -19,15 +19,18 @@ def logout_request(request):
 	return HttpResponse("logout success")
 
 def index(request):
-    form = Exam.objects.filter(owner=request.user.email)
-    print(request.user)
-    if request.method == "GET":
-        if form.count() == 0:
-            return render(request,'index.html')
-        if form[0].owner != request.user:
-            return HttpResponse("You are not authorised to access this form")
-        else:
-            return render(request,'index.html', context={'form':form,'count':form.count()})
+    user = request.user
+    if user.is_authenticated:
+        form = Exam.objects.filter(owner=request.user.email)
+        if request.method == "GET":
+            if form.count() == 0:
+                return render(request,'index.html')
+            if form[0].owner != request.user:
+                return HttpResponse("You are not authorised to access this form")
+            else:
+                return render(request,'index.html', context={'form':form,'count':form.count()})
+    else:
+        return HttpResponseRedirect("http://127.0.0.1:3000")
 
 def create(request):
     if request.method == "POST":
