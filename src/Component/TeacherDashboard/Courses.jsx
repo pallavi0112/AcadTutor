@@ -8,7 +8,7 @@ const Courses = () => {
     const { user } = useSelector((state) => state.auth)
     return (
         <>
-            <div className='teacherCourses_container'>
+            {/* <div className='teacherCourses_container'>
                 <div className='heading'>
                     <h3>Courses</h3>
                     {
@@ -24,8 +24,8 @@ const Courses = () => {
                             </button>
 
                     }
-                </div>
-                <div className='grid_container'>
+                </div> */}
+                <div className='Courses grid_container'>
                     {
                         CoursesData.map((item) => {
                             return (
@@ -44,7 +44,7 @@ const Courses = () => {
                         })
                     }
                 </div>
-            </div>
+            {/* </div> */}
         </>
     )
 }

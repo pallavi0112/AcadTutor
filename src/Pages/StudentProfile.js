@@ -1,8 +1,8 @@
 import React from 'react'
-
+import SProfile from '../Component/StudentDashboard/SProfile'
 const StudentProfile = () => {
   return (
-    <div>StudentProfile</div>
+   <SProfile/>
   )
 }
 

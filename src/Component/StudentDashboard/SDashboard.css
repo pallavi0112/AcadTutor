@@ -49,6 +49,7 @@
     border-radius:0.5rem;
 }
 
+.profile-container form .grid-container .name-group,
 .profile-container  form .grid-container .password-box,
 .profile-container  form .grid-container .email-box,
 .profile-container  form .grid-container .about-box{
@@ -58,8 +59,8 @@
 .profile-container  form .grid-container .about-box textarea{
    
     width:100%;
-    height:80px;
-    /* padding:0.5rem; */
+    height:100px;
+    padding:0.5rem;
     outline:none;
     border:0.02rem solid rgba(0, 0,0,0.3);
     border-radius:0.5rem;

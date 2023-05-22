@@ -178,16 +178,17 @@
   border-top-left-radius: 0.9rem;
   background-color: #fff;
 }
-
-.contents_container .topics_cont .topics h2 {
+.contents_container .topics_cont .topics .topic-heading{
   background-color: #ff9900;
   border-top-right-radius: 0.9rem;
   border-top-left-radius: 0.9rem;
-  text-align: center;
+  padding: 0.7rem;
+}
+.contents_container .topics_cont .topics h2 {
   font-size: 1.3rem;
   font-weight: 500;
-  padding: 0.7rem;
   color: #fff;
+  text-align: center;
 }
 
 .topics ul {

@@ -34,7 +34,7 @@ const Unit = (props) => {
       {
         (user === "student")
           ? <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }} onClick={()=>dispatch(AddUnitId(props.unit_id))}>Start Learning<FaRegPlayCircle /></button></Link>
-          : show ? <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }}>View Topics<FaRegPlayCircle /></button></Link> : <button type='button' style={{ backgroundColor: "#FF9900" }} onClick={() => BtnHandler(props.unit_id)}>Add Topic <AiFillPlusCircle /></button>
+          : show ? <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }}  onClick={()=>dispatch(AddUnitId(props.unit_id))}>View Topics<FaRegPlayCircle /></button></Link> : <button type='button' style={{ backgroundColor: "#FF9900" }} onClick={() => BtnHandler(props.unit_id)}>Add Topic <AiFillPlusCircle /></button>
             
       }
           {/* : (topicformstatus && show ) ? <Link to={`/cs/${props.sub_id}/${props.unit_id}`} ><button type='button' style={{ backgroundColor: "#000" }}>View Topics<FaRegPlayCircle /></button></Link> :  <button type='button' style={{ backgroundColor: "#FF9900" }} onClick={() => BtnHandler(props.unit_id)}>Add Topic <AiFillPlusCircle /></button> */}

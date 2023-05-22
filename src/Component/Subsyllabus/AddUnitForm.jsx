@@ -46,7 +46,7 @@ const AddUnitForm = () => {
         console.log({ BACKEND_RESPONSE: response});
         if(response.status === 200){
             setU_name('')
-            // window.location.reload();
+            window.location.reload();
         }
        
     } catch (err) {

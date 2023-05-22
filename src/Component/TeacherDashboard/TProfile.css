@@ -1,0 +1,99 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+.profile-container .profile-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.5rem 1rem;
+}
+.profile-container .Courses.grid_container{
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr) ) ;
+  }
+/* .profile-container .Courses.grid_container div{
+    height:200px;
+} */
+  .top-area {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+    align-items: center;
+    margin-top: 20px;
+    padding:1rem;
+  }
+  .top-area .left-side {
+    width:8vw;
+    height:8vw;
+    border-radius:50%;
+    background-color: #000;
+  }
+  .top-area .left-side img {
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit: cover;
+  }
+  .top-area .right-side{
+    margin-left:max(1rem , 2vw);
+  }
+  .top-area .right-side span{
+      font-size:1.2rem;
+      line-height: 2rem;
+      color: #555;
+    }
+ .top-area .right-side p{
+      font-size:1.5rem;
+      line-height:1.8rem;
+      font-weight:600;
+      color: #000;
+    }
+ hr{
+    width:100%;
+    border:0.5px solid #555;
+  }
+  .middle-area {
+    padding: 1rem;
+  }
+  .profile-container h2{
+    font-size:1.4rem;
+    line-height: 2.5rem;
+  }
+  .middle-area p{
+    font-size:1.1rem;
+    color:#555;
+    line-height:1.5rem;
+  } 
+  .social-links-container {
+    display: flex;
+  }
+  .bottom-area{
+    width: 100%;
+    padding: 1rem;
+  }
+  .bottom-area .social-links-container{
+    margin-top:max(1rem , 1vw);
+  }
+  .bottom-area .social-links-container a{
+     text-decoration: none;
+     color: #000;
+  }
+  
+  .bottom-area .social-links-container a svg{
+    color: rgb(81, 219, 240);
+  }
+.profile-container .courses-container{
+    width:100%;
+}
+.social-link{
+    background-color: #fff;
+    box-shadow:0px 0px 10px 1px rgba(255, 255, 255, 0.75); 
+}
+.social-link:first-child svg{
+   color: red;
+ }
+  

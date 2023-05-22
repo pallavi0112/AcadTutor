@@ -13,6 +13,7 @@ const Branch = () => {
   const path = navigate.pathname;
   const patharray = path.split("/")
   const branch = patharray[patharray.length - 1].toUpperCase();
+  console.log("branch",branch)
   axios.defaults.withCredentials = true
   axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
   axios.defaults.xsrfCookieName = "csrftoken";
