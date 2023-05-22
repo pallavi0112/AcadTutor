@@ -13,8 +13,6 @@ import Footer from "../Component/Footer/Footer";
 const Home = () => {
   return (
     <>
-      <LoginForm />
-        <Navbar menu={navItems} submenu={BranchSubmenu} />
         <Section
           props1={
             <Content

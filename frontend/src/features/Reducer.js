@@ -2,9 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     showHide : false,
+    assignmentForm : false ,
     addunitshowhide : false,
+    assignmentContainer2Show : false ,
     addtopic : false,
     unit_id : '',
+    subject_id:localStorage.getItem("Subject_id") || null,
     topicformstatus : false,
     breadcurmbs : [
         
@@ -17,6 +20,13 @@ export const showLoginSlice = createSlice({
     reducers:{
         showHide:(state,action)=>{
             state.showHide = action.payload
+        },
+        AssignmentFormShow:(state,action)=>{
+            state.assignmentForm = action.payload
+        },
+        AssignmentContainer2Show:(state,action)=>{
+            console.log(action.payload)
+            state.assignmentContainer2Show = action.payload
         },
         AddUnitShowHide:(state,action)=>{
             state.addunitshowhide = action.payload
@@ -39,5 +49,5 @@ export const showLoginSlice = createSlice({
     
 })
 
-export const {showHide , AddUnitShowHide , AddTopic , TopicFormStatus , AddUnitId} = showLoginSlice.actions;
+export const {showHide , AddUnitShowHide , AddTopic , TopicFormStatus , AddUnitId , AssignmentFormShow , AssignmentContainer2Show } = showLoginSlice.actions;
 export default showLoginSlice.reducer 

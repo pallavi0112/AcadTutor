@@ -39,6 +39,7 @@ const formats = [
 const TopicForm = (props) => {
     const dispatch = useDispatch()
     const {unit_id} = useSelector((state)=>state.showLoginSlice)
+    console.log(unit_id)
     const [Topic, setTopic] = useState(
         {
             subtopic_name: "",
@@ -98,7 +99,7 @@ const TopicForm = (props) => {
                  )
                  setFile(null)
                  setNotes('')
-                 window.location.reload();
+                //  window.location.reload();
                 console.log("condition is working")
             }
             // else{
@@ -156,7 +157,7 @@ const TopicForm = (props) => {
                                     <div className="file_field">
                                         <label>Add Link</label>
                                         <input
-                                            type="text"
+                                            type="url"
                                             value={Topic.link}
                                             name="link"
                                             onChange={AddTopicData}

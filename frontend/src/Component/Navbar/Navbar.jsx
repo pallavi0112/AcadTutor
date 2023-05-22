@@ -66,6 +66,7 @@ function Navbar(props) {
             </ul>
             
             {(isAuthenticated === 'true') ? profilepic : guestLinks}
+            {/* {isAuthenticated ? profilepic : guestLinks} */}
           </div>
         </nav>
       </header>
