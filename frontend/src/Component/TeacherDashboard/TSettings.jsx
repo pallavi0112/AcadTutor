@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import './SDashboard.css'
-const Profile = () => {
+import {AiFillYoutube} from 'react-icons/ai'
+import './TSettings.css'
+const TSettings = () => {
     const [savebtn, setSaveBtn] = useState(false)
     const [active, setActive] = useState(false)
     const [pswdshow, setPswdshow] = useState(false)
@@ -27,7 +28,7 @@ const Profile = () => {
 
                 }
             </div>
-            
+
             <form>
                 <div className="form-group">
                     <label>Your Profile Picture </label>
@@ -35,21 +36,27 @@ const Profile = () => {
                         <img src="./images/profile.png" alt="Profile" />
                         <div className="profile-buttons">
                             <button className="btn-upload">Upload New</button>
-                            <button className="btn-remove">Remove Profile Picture</button>
+                            {/* <button className="btn-remove">Remove Profile Picture</button> */}
                         </div>
                     </div>
                 </div>
                 <div className='grid-container'>
-                    <div className="form-group">
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" id="firstName" disabled={!active} />
+                    <div className="form-group name-group">
+                        <label htmlFor="Name">Name</label>
+                        <input type="text" id="Name" disabled={!active} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" id="lastName" disabled={!active} />
+                        <label htmlFor="Designation">Designation</label>
+                        <select id="designation" disabled={!active}>
+                            <option value=""></option>
+                            <option value="HOD">Head Of Department</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Associate Professor">Associate Professor</option>
+                            <option value="Assitant Professor">Assitant Professor</option>
+                        </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="branch">Branch</label>
+                    <label htmlFor="branch">Branch</label>
                         <select id="branch" disabled={!active}>
                             <option value=""></option>
                             <option value="cse">Computer Science</option>
@@ -57,19 +64,6 @@ const Profile = () => {
                             <option value="et&t">Elecetronics & Telecommunications</option>
                             <option value="ce">Civil</option>
                             <option value="me">Mechanical</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="semester">Semester</label>
-                        <select id="semester" disabled={!active}>
-                            <option value=""></option>
-                            <option value="1">1st</option>
-                            <option value="2">2nd</option>
-                            <option value="3">3rd</option>
-                            <option value="4">4th</option>
-                            <option value="6">6th</option>
-                            <option value="7">7th</option>
-                            <option value="8">8th</option>
                         </select>
                     </div>
                     <div className="password-box">
@@ -94,32 +88,6 @@ const Profile = () => {
                         }
 
                     </div>
-
-                    <div className="form-group email-box">
-                        <label>Email Address </label>
-                        {
-                            emailshow ?
-                                <div className='grid-container'>
-                                    <div className="form-group">
-                                        <label htmlFor="password">New Emaiil</label>
-                                        <input type="email" id="password" disabled={!active} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="password">Confirm email</label>
-                                        <input type="email" id="password" disabled={!active} />
-                                    </div>
-                                </div> :
-
-                                <div className='grid-container'>
-                                    <p>Your Email Address is <span>user@gmail.com</span></p>
-                                    <div>
-                                        <button className="btn-change-email" onClick={()=>setEmailshow(true)}>Change Email</button>
-                                    </div>
-                                </div>
-                        }
-
-                    </div>
-
                     <div className="form-group about-box">
                         <label>About:</label>
                         <textarea
@@ -129,16 +97,27 @@ const Profile = () => {
                     vitae. Proin sagittis, lectus a facilisis fermentum, sem erat
                     scelerisque elit, in ultrices elit nisi at mi. Duis quis ex et nunc
                     elementum consectetur. Morbi blandit dolor magna, quis hendrerit
-                        tellus volutpat sit amet."
-
-                        />
-
-
+                        tellus volutpat sit amet."/>
                     </div>
-                </div>
+                    <div className='social-links'>
+                        <h3>Social Links</h3>
+                        <div className='grid-container'>
+                        <div className="form-group">
+                            <label htmlFor="Linkedin">Linkedin</label>
+                            <input type="text" id="Linkedin" disabled={!active} />
+                        </div>
+                        <div className="form-group">
+                        <label htmlFor="Youtube">Youtube</label>
+                            <input type="text" id="Youtube" disabled={!active} />
+                        </div>
+                        </div>
+                    </div>
+                </div> 
             </form>
         </div>
     )
 }
 
-export default Profile
+
+
+export default TSettings;

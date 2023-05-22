@@ -79,6 +79,11 @@ header{
   object-fit: cover;
 
 }
+.profile_pic img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
 .scrolled-navbar {
   background-color:#fff;
   color: #000;

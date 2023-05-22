@@ -1,0 +1,130 @@
+.CourseForm_Container {
+    width:90%;
+    height:auto;
+    background-color: #ffffff;
+    filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.2));
+    border-radius: 25px;
+    padding:2rem;
+    margin:1rem auto;
+  }
+  .CourseForm_Container .Courseform_Wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+  }
+  .CourseForm_Container .Courseform_Wrapper .left_side {
+    flex-basis: 42%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   padding:max(0.5rem , 1.5vh);
+  }
+  .CourseForm_Container .Courseform_Wrapper .left_side .quote_bx {
+    font-family: "Solway";
+    font-style: normal;
+    font-weight: 500;
+    font-size:0.95rem;
+    line-height:1.3rem;
+    text-align: center;
+    letter-spacing: 0.35px;
+    color: rgba(73, 73, 73, 0.48);
+  }
+  .CourseForm_Container .Courseform_Wrapper .left_side .quote_bx blockquote{
+      margin:0.6rem auto;
+  }
+  .CourseForm_Container .Courseform_Wrapper .right_side {
+    flex-basis: 58%;
+  }
+  .CourseForm_Container .Courseform_Wrapper .left_side .Imgbx {
+    width: max(200px , 20vw);
+  }
+  .CourseForm_Container .Courseform_Wrapper .left_side .Imgbx img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .CourseForm_Container
+    .Courseform_Wrapper
+    .right_side
+    form{
+           width: 100%;
+           display: grid;
+           grid-template-columns:repeat(2 , minmax(250px , 1fr));
+           gap: 1.5rem;
+    }
+    .right_side form div:first-child ,
+    .right_side form .description{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    .right_side form div{
+      display: flex;
+      flex-direction: column;
+    }
+    .right_side form input ,
+    .right_side form select,
+    .right_side form textarea{
+      width: 100%;
+    }
+  .Courseform_Wrapper .right_side form label {
+    font-size: 1.1rem;
+    line-height:2rem;
+    color:rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .Courseform_Wrapper .right_side form input ,
+  .Courseform_Wrapper .right_side form select {
+    padding: 0.5rem 0.6rem;
+    border: 1px solid rgba(136, 152, 170, 0.55);
+    box-shadow: 0px 1px 2px rgba(50, 50, 93, 0.12);
+    outline: none;
+    border-radius:0.5rem;
+  }
+  .Courseform_Wrapper .right_side form .file{
+    display: flex;
+    align-self: flex-end;
+  }
+  .Courseform_Wrapper .right_side form .uploadfile {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    color: #ffff;
+    padding: 0.5rem 0.6rem;
+    border-radius:0.5rem;
+    cursor:pointer;
+  }
+  form .uploadfile img {
+    width: 2rem;
+  }
+  .CourseForm_Container .Courseform_Wrapper .right_side form input[type="file"] {
+    display: none;
+  }
+  .CourseForm_Container .Courseform_Wrapper .right_side form .description textarea {
+    height: 100px;
+    text-align:left;
+    vertical-align: top;
+    outline: none;
+    padding:0.3rem;
+  } 
+  .CourseForm_Container .Courseform_Wrapper .right_side form .Formbutton {
+    background-color: #ff9900;
+    color: #ffff;
+    font-weight: bold;
+    border: none;
+    text-transform: uppercase;
+    padding: 0.6rem 0.3rem !important;
+    width: 160px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 6px rgba(50, 50, 93, 0.11);
+    align-self: flex-start;
+    margin:1rem 0 0rem;
+    cursor:pointer;
+  }
+  
+  

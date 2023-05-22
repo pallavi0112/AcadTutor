@@ -1,8 +1,10 @@
 import React from 'react'
-
+import TProfile from '../Component/TeacherDashboard/TProfile'
 const TeacherProfile = () => {
   return (
-    <div>TeacherProfile</div>
+    <section>
+      <TProfile/>
+      </section>
   )
 }
 

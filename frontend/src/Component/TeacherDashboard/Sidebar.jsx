@@ -4,6 +4,11 @@ import { sidebar } from '../../Data/Sidebar'
 import { Link , useNavigate } from 'react-router-dom'
 import { useSelector , useDispatch } from 'react-redux'
 import { logout } from '../../features/users/authSlice'
+import axios from 'axios';
+axios.defaults.withCredentials = true
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated)
@@ -12,7 +17,14 @@ const Sidebar = () => {
   const [active, setActive] = useState('Dashboard')
   const Logout = () =>{
     dispatch(logout())
+    try {
+      const resp = axios.post("http://127.0.0.1:8000/accounts/logout")
+      console.log(resp)
+    } catch (error) {
+      console.error(error)
+    }
     navigate("/");
+    // window.location.reload(false)
 
   }
   return (

@@ -24,7 +24,7 @@ export const loginUser = createAsyncThunk(
 );
 
 const initialState = {
-  user: localStorage.getItem("userType") || null ,
+  user:localStorage.getItem("userType") || null ,
   status: "idle",
   error: null,
   isAuthenticated: localStorage.getItem("isAuthenticated") || "false",
