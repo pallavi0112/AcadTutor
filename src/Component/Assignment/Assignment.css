@@ -394,6 +394,22 @@
     width: 100%;
     margin-top:1rem;
   }
+  .AssignmentContainer2 button.Formbutton{
+    background-color: #ff9900;
+    color: #ffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    border: none;
+    text-transform: uppercase;
+    padding: 0.6rem 0.3rem;
+    /* width: 160px; */
+    border-radius: 5px;
+    box-shadow: 0px 5px 6px rgba(50, 50, 93, 0.11);
+    align-self: flex-start;
+    /* margin: 2rem 0; */
+    cursor: pointer;
+  }
   .assignment-container button.Formbutton ,
   .AssignmentContainer2 .class-comment button.Formbutton{
     background-color: #ff9900;
@@ -495,9 +511,9 @@ color: #ff9900;
 .AssignmentContainer2 hr{
   border: 0.5px solid #55555536
 }
-.AssignmentContainer2 div:nth-child(4){
+/* .AssignmentContainer2 div:nth-child(4){
   padding: 1rem;
-}
+} */
 .AssignmentContainer2 .instruct-container{
   padding: 1rem 0;
 }
@@ -579,4 +595,7 @@ color: #ff9900;
 }
 .assignment-submit-container .bottom-container .teacher-comment{
         margin-left:4.5rem;
+}
+.AssignmentContainer2 div:nth-child(5){
+  padding: 1rem 0;
 }
