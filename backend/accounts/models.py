@@ -89,10 +89,12 @@ class HOD(models.Model):
 
 class Teacher(models.Model):
     hod = models.ForeignKey(HOD,on_delete=models.CASCADE)
+    branch = models.CharField(null=True,choices=BRANCH_CHOICES, blank=True,max_length=10)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,primary_key=True)
     designation = models.CharField(max_length=30,blank=True)
     youtube_link =  models.CharField(max_length=30,blank=True)
-    bio = models.CharField(max_length=256,blank=True)
+    linkedin_link =  models.CharField(max_length=30,blank=True)
+    about = models.CharField(max_length=256,blank=True)
     def __str__(self):
         return CustomUser.get_email(self.user) + " - is_teacher"
 

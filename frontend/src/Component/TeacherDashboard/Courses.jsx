@@ -1,11 +1,39 @@
 import React from 'react'
+import { useEffect,useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Courses.css'
-import { CoursesData } from '../../Data/Courses'
+import axios from 'axios';
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 const Courses = () => {
     const { user } = useSelector((state) => state.auth)
+    const [CoursesData,setCoursesData] = useState([])
+    const navigate = useNavigate();
+    useEffect(()=>{
+        const GetCoursesData = async () => {
+            try {
+              const response = await axios.get(
+                `http://127.0.0.1:8000/accounts/teacher_dashboard`,
+              );
+              const courses = response.data
+              console.log(courses)
+              courses.map((object, index) => {
+                const sub = object.subjects
+                setCoursesData((item) => [
+                  ...item,
+                  
+                    object
+                  
+                ]);
+              });
+      
+            } catch (err) {
+        console.error(err);
+      }
+          };
+      GetCoursesData();
+    },[])
     return (
         <>
             {/* <div className='teacherCourses_container'>
@@ -30,12 +58,14 @@ const Courses = () => {
                         CoursesData.map((item) => {
                             return (
                                 <div>
-                                    <img src={item.Icon} />
-                                    <span className='title'>{item.title}</span>
-                                    <span className='sem'>{item.sem} semester</span>
+                                    <img src={item.img_link} />
+                                    <span className='title'>{item.c_name}</span>
+                                    <span className='sem'>Semester : {item.sem}</span>
                                     <button
                                         type="button"
-                                        className="Formbutton"
+                                        className="Formbutton" value={item._id} onClick={(e)=>{
+                                            navigate(`/cs/${e.target.value}`, { replace: true });
+                                        }}
                                     >
                                         view course
                                     </button>

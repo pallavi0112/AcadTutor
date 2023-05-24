@@ -14,12 +14,18 @@
     <script src="https://kit.fontawesome.com/bc6e988caa.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
-   
 </head>
 
 <body id="page-top">
 <div id="wrapper">
+    
         <div class="d-flex flex-column" id="content-wrapper">
+            <div>
+                <video id="video" width="640" height="480" autoplay></video>
+                <canvas id="canvas" width="640" height="480"></canvas>
+            </div>
+            
+
             <div id="content">
                 
                 <div class="container-fluid justify-content-between" style="margin-bottom: 16px; margin-top:30px;">
@@ -147,6 +153,9 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/script.min.js' %}"></script>
+    <script defer src="{% static 'js/face-api.js' %}"></script>
+    <script src="{% static 'js/FaceDetector.js' %}"></script>
+    <script defer src="{% static 'js/view_exam.js' %}"></script>
 </body>
 
 </html>

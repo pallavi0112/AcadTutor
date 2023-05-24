@@ -101,6 +101,7 @@ const TopicForm = (props) => {
                  setNotes('')
                 //  window.location.reload();
                 console.log("condition is working")
+                window.location.reload();
             }
             // else{
             //     localStorage.setItem(unit_id , false)
