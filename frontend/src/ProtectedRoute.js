@@ -1,27 +1,23 @@
 import React, { useEffect } from 'react';
 import { Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-const AuthenticatedRoute = (props) => {
-  console.log(props);
-  let { isAuthenticated, allowedRoles, userRole, children, Component }=props
+const AuthenticatedRoute = ({ isAuthenticated, allowedRoles, userRole, children, Component }) => {
   console.log(Component)
-  // console.log(allowedRoles.includes(userRole))
+  console.log(allowedRoles.includes(userRole))
   const navigate = useNavigate();
   useEffect(() => {
+     const isAuth = JSON.parse(localStorage.getItem('isAuthenticated'))
+     console.log(isAuth)
     // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
     // console.log(isAuthenticated);
-    if (isAuthenticated === 'false') {
-  console.log("AMAN")
-
+    if (!isAuth) {
       return navigate("/")
     } 
-    // else if (!(allowedRoles.includes(userRole))) {
-    //   return navigate('/unauthorized')
-    // } 
+    else if (!(allowedRoles.includes(userRole))) {
+      return navigate('/unauthorized')
+    } 
     else {
-  console.log("AMAN1")
-
-      return children
+      return Component
     }
   })
 

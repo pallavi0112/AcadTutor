@@ -36,8 +36,8 @@ const App = () => {
   return (
     <>
       {/* <Navbar menu={navItems} submenu={BranchSubmenu} /> */}
-    <Routes>
-      {/* <Route  element={<MainHome/>}>
+      <Routes>
+        {/* <Route  element={<MainHome/>}>
         <Route path="/" element={<Home/>}/>
         <Route path='/:branch' element={<AuthenticatedRoute Component={BranchPage} />}>
           <Route index  element={<AuthenticatedRoute Component={Branch} />}/>
@@ -58,54 +58,53 @@ const App = () => {
         <Route path="/student/profile" element={<AuthenticatedRoute Component={StudentProfile} />}></Route>
         <Route path="/teacher/profile" element={<AuthenticatedRoute Component={TeacherProfile} />}></Route>
       </Route> */}
-      <Route  element={<MainHome/>}>
-        <Route path="/" element={<Home/>}/>
-      </Route>
-      <Route path='*' element={<div>error 404</div>} />
-      <Route path="/unauthorized" element={<Unauthorized />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/teacher/dashboard" element={
-        <AuthenticatedRoute isAuthenticated={isAuthenticated} allowedRoles={['teacher', 'admin']} userRole={userRole}>
-          <TeacherDashboard />
-        </AuthenticatedRoute>}
-      />
-
-
-      <Route path="/student/dashboard" element={
-        <AuthenticatedRoute isAuthenticated={isAuthenticated} allowedRoles={['student', 'admin']} userRole={userRole}>
-          <StudentDashboard />
-        </AuthenticatedRoute>}
-      />
-     
-
-      <Route exact path=":branch">
-        <Route index element={<BranchPage />} />
-        <Route path=":subject_id">
-          <Route index element={<Subject />} />
-          <Route path=":unit" element={<ContentPage />} />
+        <Route element={<MainHome />}>
+          <Route path="/" element={<Home />} />
         </Route>
-      </Route> 
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/student/profile" element={<StudentProfile />}></Route>
-      <Route path="/teacher/profile" element={<TeacherProfile />}></Route>
+        <Route path='*' element={<div>error 404</div>} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/teacher/dashboard" element={
+          <AuthenticatedRoute isAuthenticated={isAuthenticated} allowedRoles={['teacher', 'admin']} userRole={userRole}>
+            <TeacherDashboard />
+          </AuthenticatedRoute>}
+        />
 
-      <Route exact path="/student/dashboard" element={<StudentDashboard />}>
-        <Route exact index element={<SDashboard />} />
-        <Route exact path="courses" element={<Courses />} />
-        <Route exact path="assignment" element={<SAssignment />} />
-        <Route exact path="doubts" element={<SDoubt />} />
-        <Route exact path="settings" element={<Profile />} />
-      </Route>
+        <Route exact path="/student/dashboard" element={
+          <AuthenticatedRoute isAuthenticated={isAuthenticated} allowedRoles={['student', 'admin']} userRole={userRole}
+            Component={StudentDashboard}/>
+       }
+        />
 
-      <Route exact path="/teacher/dashboard" element={<TeacherDashboard />}>
-        <Route exact index element={<Dashboard />} />
-        <Route exact path="courses" element={<Courses />} />
-        <Route exact path="assignment" element={<Assignments />} />
-        <Route exact path="doubts" element={<Doubts />} />
-        <Route exact path="createcourse" element={<CourseForm />} />
-        <Route exact path="settings" element={<TSettings />} />
-      </Route>
-    </Routes>
+
+        <Route exact path=":branch">
+          <Route index element={<BranchPage />} />
+          <Route path=":subject_id">
+            <Route index element={<Subject />} />
+            <Route path=":unit" element={<ContentPage />} />
+          </Route>
+        </Route>
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/student/profile" element={<StudentProfile />}></Route>
+        <Route path="/teacher/profile" element={<TeacherProfile />}></Route>
+
+        <Route exact path="/student/dashboard" element={<StudentDashboard />}>
+          <Route exact index element={<SDashboard />} />
+          <Route exact path="courses" element={<Courses />} />
+          <Route exact path="assignment" element={<SAssignment />} />
+          <Route exact path="doubts" element={<SDoubt />} />
+          <Route exact path="settings" element={<Profile />} />
+        </Route>
+
+        <Route exact path="/teacher/dashboard" element={<TeacherDashboard />}>
+          <Route exact index element={<Dashboard />} />
+          <Route exact path="courses" element={<Courses />} />
+          <Route exact path="assignment" element={<Assignments />} />
+          <Route exact path="doubts" element={<Doubts />} />
+          <Route exact path="createcourse" element={<CourseForm />} />
+          <Route exact path="settings" element={<TSettings />} />
+        </Route>
+      </Routes>
 
     </>
   );

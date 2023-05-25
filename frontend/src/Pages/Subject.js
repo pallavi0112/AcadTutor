@@ -5,7 +5,7 @@ import UnitBtn from '../Component/Subsyllabus/UnitBtn';
 import Heading from '../Component/Subsyllabus/Heading';
 import Unit from '../Component/Subsyllabus/Unit';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation , useParams} from 'react-router-dom';
 import Navbar2 from '../Component/Navbar/Navbar2';
 import { useSelector } from 'react-redux';
 import AddUnitForm from '../Component/Subsyllabus/AddUnitForm';
@@ -16,28 +16,30 @@ const Subject = () => {
   const {addunitshowhide} = useSelector((state)=>state.showLoginSlice)
   const [subjectData, setSubjectData] = useState({})
   const [unit, setUnit] = useState([]);
-  const navigate = useLocation()
-  const path = navigate.pathname;
-  const patharray = path.split("/")
-  const sub_id = patharray[patharray.length - 1];
-  console.log(sub_id)
+  const {subject_id } = useParams()
+  // const navigate = useLocation()
+  // const path = navigate.pathname;
+  // const patharray = path.split("/")
+  // const sub_id = patharray[patharray.length - 1];
+  // console.log(sub_id)
   useEffect(() => { 
-    const GetSubjectData = async (sub_id) => {
+    const GetSubjectData = async (subject_id) => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/content/${sub_id}/get_subj`, { 'withCredentials': true }
+          `http://127.0.0.1:8000/content/${subject_id}/get_subj`, { 'withCredentials': true }
         );
         
         setSubjectData(response.data)
         setUnit(response.data.units);
-        // console.log(response)
+        localStorage.setItem("Subject_Name" , response.data.c_name)
+        console.log(response)
       }
    
       catch (err) {
         console.error(err);
       }
     };
-    GetSubjectData(sub_id);
+    GetSubjectData(subject_id);
   }, []);
   // unit.map((u)=>console.log(u));
   useEffect(()=>{
@@ -60,7 +62,7 @@ const Subject = () => {
        
      {
        unit.map((val , index)=>{ 
-        return <Unit unit_name={val.u_name} unit_id={val.unit_id} key={index} sub_id={sub_id}/>
+        return <Unit unit_name={val.u_name} unit_id={val.unit_id} key={index} sub_id={subject_id}/>
       }) }
      
     

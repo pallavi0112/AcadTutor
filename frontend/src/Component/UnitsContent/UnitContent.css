@@ -203,3 +203,9 @@
   margin: 0.3rem 0;
   padding: 0.5rem;
 }
+.contents_container .rightcont .notes_container .external-resources{
+  padding: 1rem 1.5rem;
+}
+.contents_container .rightcont .notes_container .external-resources a{
+  margin:1rem 0;
+}
