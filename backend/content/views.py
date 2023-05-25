@@ -253,9 +253,9 @@ def getMyCourses(request):
                 "author_name": 1,
                 "img_link": 1
                 })
-            data = obj
-            if obj is not None:
-                return Response(list(data))
+                data = obj
+                if obj is not None:
+                    return Response(list(data))
             else:
                 return Response({'error':"Invalid request"})
         else:
@@ -320,3 +320,37 @@ def addAssignment(request):
         except Exception as e:
             # return Response({ 'error': 'Something went wrong when checking authentication status' })
             return Response({ 'error': str(e) })
+
+
+@csrf_protect
+@api_view(('GET',))
+def getTeacherAssignment(request):
+    user = request.user
+    try:
+        if user.is_authenticated:
+            if user.is_teach:
+                if (request.method == 'GET'):
+                    obj = assignment_collections_handle.find({"author_email": request.user.email},{
+                "_id": { "$toString": "$_id" },
+                "assignment_name": 1,
+                "instructions": 1,
+                "marks": 1,
+                "subject_id":1,
+                "subject_name":1,
+                "due_date":1,
+                "created_at":1,
+                "author_email": 1,
+                "author_name": 1,
+                "img_link": 1
+                })
+                data = obj
+                print(data)
+                if obj is not None:
+                    return Response(list(data))
+            else:
+                return Response({'error':"Invalid request"})
+        else:
+            return Response({ 'message': 'Not Authenticated' },status=status.HTTP_401_UNAUTHORIZED)
+    except Exception as e:
+        # return Response({ 'error': 'Something went wrong when checking authentication status' })
+        return Response({ 'message': str(e) })

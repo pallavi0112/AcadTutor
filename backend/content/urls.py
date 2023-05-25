@@ -7,6 +7,7 @@ urlpatterns = [
     path('addunit',views.addUnit,name='addunit'),
     path('addsubtopic',views.addSubTopic,name='addsubtopic'),
     path('add_assignment',views.addAssignment,name='addassignment'),
+    path('get_teacher_assignment',views.getTeacherAssignment,name='getTassignment'),
     path('<str:unit_id>/get_unit',views.getUnit,name='getunit'),
     path('<str:branch>/get_branch',views.getBranch,name='getbranch'),
     path('<str:subj_id>/get_subj',views.getSubj,name='getsubj'),

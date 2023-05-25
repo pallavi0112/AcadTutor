@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import './AssignmentForm.css'
 import Cookies from 'js-cookie';
 import axios from "axios";
@@ -43,7 +43,8 @@ const AssignmentForm = (props) => {
   );
   const [instructions, setInstructions] = useState('')
   const [file, setFile] = useState(null)
- 
+  const [CoursesData,setCoursesData] = useState([])
+
   const AddAssignmentData = (e) => {
     const { name, value } = e.target;
     setAssignment((predata) => {
@@ -53,7 +54,8 @@ const AssignmentForm = (props) => {
       }
     })
   }
-  const createAssignment = async () => {
+  const createAssignment = async (e) => {
+    e.preventDefault();
     let formData = new FormData();
     formData.append('name', assignment.name)
     formData.append('link', assignment.link)
@@ -62,7 +64,8 @@ const AssignmentForm = (props) => {
     formData.append('instructions', instructions)
     formData.append('v_link', assignment.v_link)
     formData.append('file', file)
-    formData.append('subj_id' , localStorage.getItem("Subject_id"))
+    formData.append('subj_id' , assignment.subject_id)
+    formData.append('subj_name' , assignment.subject_name)
 
     try {
       console.log(formData)
@@ -90,11 +93,12 @@ const AssignmentForm = (props) => {
             link: "",
             v_link: "",
             marks : "",
-            date : ""
+            date : "",
           }
         )
         setFile(null)
         setInstructions('')
+        // dispatch(AssignmentFormShow(false))
          window.location.reload();
         console.log("condition is working")
       }
@@ -110,8 +114,30 @@ const AssignmentForm = (props) => {
 
   };
   useEffect(()=>{
-    console.log("hello")
+      const GetCoursesData = async () => {
+          try {
+            const response = await axios.get(
+              `http://127.0.0.1:8000/content/teacher_courses`,
+            );
+            const courses = response.data
+            console.log(courses)
+            courses.map((object, index) => {
+              const sub = object.subjects
+              setCoursesData((item) => [
+                ...item,
+                
+                  object
+                
+              ]);
+            });
+    
+          } catch (err) {
+      console.error(err);
+    }
+        };
+    GetCoursesData();
   },[])
+ 
   return (
     <div className="AssignmentForm_Container">
       <div className="AssignmentForm_Wrapper">
@@ -122,7 +148,7 @@ const AssignmentForm = (props) => {
           </button>
         </div>
         <div className="form_container">
-          <form action="#" className="AssignmentForm">
+          <form action="#" className="AssignmentForm" onSubmit={createAssignment}>
             <div>
               <label>Assignment Name</label>
               <input
@@ -146,18 +172,21 @@ const AssignmentForm = (props) => {
               <div>
                 <div>
                   <label htmlFor="semester">Subjects</label>
-                  <select id="semester"
-                   
-                    name="subject"
+                  <select id="semester" 
+                    name="subject_id"
+                    onChange={(e)=>{
+                      console.log(e.target.selectedOptions[0].text)
+                      setAssignment((predata) => {
+                          return {
+                            ...predata,
+                            subject_id: e.target.value,
+                            subject_name:e.target.selectedOptions[0].text
+                          }
+                        })
+                    }}
                    >
                     <option value=""></option>
-                    <option value="1">1st</option>
-                    <option value="2">2nd</option>
-                    <option value="3">3rd</option>
-                    <option value="4">4th</option>
-                    <option value="6">6th</option>
-                    <option value="7">7th</option>
-                    <option value="8">8th</option>
+                    { CoursesData.map((item) => <option value={item._id}>{item.c_name}</option>) }
                   </select>
                 </div>
                 <div>
@@ -229,9 +258,9 @@ const AssignmentForm = (props) => {
               </div>
             </div>
             <button
-              type="button"
+              type="submit"
               className="Formbutton"
-              onClick={createAssignment}
+              
             >
               Assign
             </button>

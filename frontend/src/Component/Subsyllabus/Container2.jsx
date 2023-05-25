@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import './Subsyllabus.css';
 import axios from "axios";
 
 const Container2 = (props) => {
+  const {subject_id} = useParams()
+ 
   const [profile, setProfile] = useState(
     {
         name: "",
@@ -37,7 +40,7 @@ useEffect(()=>{
 }
 GetProfile()
 },[])  
-
+console.log(subject_id)
   return (
     <div className='sub_con'>
       <h3>About the Subject</h3>
