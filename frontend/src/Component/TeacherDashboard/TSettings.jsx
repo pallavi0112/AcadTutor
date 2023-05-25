@@ -245,7 +245,7 @@ const TSettings = () => {
                             <option value=""></option>
                             <option value="CS">Computer Science</option>
                             <option value="EE">Electrical & Electronics</option>
-                            <option value="ET">Elecetronics & Telecommunications</option>
+                            <option value="ET">Electronics & Telecommunications</option>
                             <option value="CE">Civil</option>
                             <option value="ME">Mechanical</option>
                         </select>

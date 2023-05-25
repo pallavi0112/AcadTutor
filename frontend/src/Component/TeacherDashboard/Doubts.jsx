@@ -1,37 +1,91 @@
 import React from 'react'
-
+import './TeacherDashboard.css'
+import { TbSend } from "react-icons/tb";
 const Doubts = () => {
-  const viewProfile = () =>{
-
+  const viewProfile = () => {
   }
-  const deleteComment = () =>{
-    
+  const deleteComment = () => {
+
   }
   return (
-      <div className="student-details">
-        <img className="profile-picture" src="profile_picture_url" alt="Profile Picture" />
-        <div className="student-name">Student Name</div>
-        <div className="commented-on">
-          <span className="subject">Subject</span>
-          <span className="interpunct">·</span>
-          <span className="unit-number">Unit Number</span>
-          <span className="interpunct">·</span>
-          <span className="time-ago">Hours Ago</span>
-        </div>
-        <div className="more-options">
-        <button className="more-options-button">&#8230;</button>
-        <div className="more-options-dropdown">
-        <div className="dropdown-option" onClick={() => viewProfile()}>View Profile</div>
-        <div className="dropdown-option" onClick={() => deleteComment()}>Delete Comment</div>
-        </div>
-        <div className="comment-section">
-          <textarea className="comment-textarea" placeholder="Reply"></textarea>
-          <button className="submit-comment">Submit</button>
-        </div>
+      <div>
+        <h3>Doubt Corner</h3>
+        <div className='student-doubt-section'>
+            <div className="student-details">
+                <img className="profile-picture" src="profile_picture_url" alt="Profile Picture" />
+                <div>
+                    <h4 className="student-name">B Rahul</h4>
+                    <div className="commented-on">
+                        <span>Commented on</span>
+                        <span className="subject">Subject</span>
+                        <span className="unit-number">unit 1</span>
+                        <span className="interpunct">·</span>
+                        <span className="time-ago">time</span>
+                    </div>
+                    <div className='ques-ans'>
+                        dfhlsedoighldifjkvnlSOfsefdnsjvfurhsgvndsjkigowasjnlzxlcxkhsiefdnjsvkiogjvkxdnligfjedkfindgregjndgvalfkhiawnskcazsfdsmgldlrighd
+                    </div>
+                </div>
+            </div>
+            <div className="doubt-reply">
+                <img className="profile-picture" src="profile_picture_url" alt="Profile Picture" />
+                <div>
+                    <h4 className="teacher-name">Shanu K Rakesh</h4>
+                    <div className="commented-on">
+                        <span>Replied on</span>
+                        <span className="subject">Subject</span>
+                        <span className="unit-number">unit 1</span>
+                        <span className="interpunct">·</span>
+                        <span className="time-ago">time</span>
+                    </div>
+                    <div className='ques-ans'>
+                        dfhlsedoighldifjkvnlSOfsefdnsjvfurhsgvndsjkigowasjnlzxlcxkhsiefdnjsvkiogjvkxdnligfjedkfindgregjndgvalfkhiawnskcazsfdsmgldlrighd
+                    </div>
+                    <div className="comment-section">
+                        <input className="comment-textarea" placeholder="Reply"/>
+                        <button className="submit-comment"><TbSend/></button>
+                    </div>
+                </div>
+            </div>
+            <br></br>
+            <div className="student-details">
+                <img className="profile-picture" src="profile_picture_url" alt="Profile Picture" />
+                <div>
+                    <h4 className="student-name">Nishan Kumar</h4>
+                    <div className="commented-on">
+                        <span>Commented on</span>
+                        <span className="subject">Subject</span>
+                        <span className="unit-number">unit 1</span>
+                        <span className="interpunct">·</span>
+                        <span className="time-ago">time</span>
+                    </div>
+                    <div className='ques-ans'>
+                        dfhlsedoighldifjkvnlSOfsefdnsjvfurhsgvndsjkigowasjnlzxlcxkhsiefdnjsvkiogjvkxdnligfjedkfindgregjndgvalfkhiawnskcazsfdsmgldlrighd
+                    </div>
+                </div>
+            </div>
+            <div className="doubt-reply">
+                <img className="profile-picture" src="profile_picture_url" alt="Profile Picture" />
+                <div>
+                    <h4 className="teacher-name">Shanu K Rakesh</h4>
+                    <div className="commented-on">
+                        <span>Replied on</span>
+                        <span className="subject">Subject</span>
+                        <span className="unit-number">unit 1</span>
+                        <span className="interpunct">·</span>
+                        <span className="time-ago">time</span>
+                    </div>
+                    <div className='ques-ans'>
+                        dfhlsedoighldifjkvnlSOfsefdnsjvfurhsgvndsjkigowasjnlzxlcxkhsiefdnjsvkiogjvkxdnligfjedkfindgregjndgvalfkhiawnskcazsfdsmgldlrighd
+                    </div>
+                    <div className="comment-section">
+                        <input className="comment-textarea" placeholder="Reply"/>
+                        <button className="submit-comment"><TbSend/></button>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
-
-
   )
 }
 
