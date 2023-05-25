@@ -8,6 +8,11 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
 from rest_framework.parsers import MultiPartParser,FormParser
+from acadtutor.utils import get_collection_handle,get_db_handle
+db_handle, mongo_client = get_db_handle()
+subj_collection_handle = get_collection_handle(db_handle, "subjects")
+
+
 
 @ensure_csrf_cookie
 @permission_classes([permissions.AllowAny])
@@ -82,7 +87,7 @@ def teacher_register(request):
                         user.is_active = True
                         user.save()
                         Hod = HOD.objects.get(refid=ref)
-                        teacher = Teacher(hod=Hod,user=user)
+                        teacher = Teacher(hod=Hod,user=user,branch = Hod.branch)
                         teacher.save()
                         return Response({ 'message': 'User created successfully' })
                     else:
@@ -146,12 +151,11 @@ def uploadPP(request):
         if isAuth:
             file_link = upload(request.FILES['file'])
             usr = CustomUser.objects.filter(email=request.user.email)
-            print(file_link)
             if usr.count():
                 usr = usr[0]
                 usr.img = file_link
                 usr.save()
-                print(usr)
+                print(usr.img)
             return Response({ 'message': 'successfully uploaded profile pic' })
         else:
             return Response({ 'message': 'Not Authenticated' },status=status.HTTP_401_UNAUTHORIZED)
@@ -170,15 +174,45 @@ def updateProfile(request):
         if isAuth:
             if user.is_teach:
                 name = data['name']
-                branch = data['confirm_password']
-                
-            # usr = CustomUser.objects.filter(email=request.user.email)
-            # if usr.count():
-            #     usr = usr[0]
-            #     usr.set_password(password)
-            #     usr.save()
-            #     print(usr)
-            return Response({ 'message': 'successfully password changed' })
+                branch = data['branch']
+                desig = data['designation']
+                about = data['about']
+                linkedin = data['linkedin']
+                youtube = data['youtube']
+                usr = CustomUser.objects.filter(email=request.user.email)
+                if usr.count():
+                    usr = usr[0]
+                    teacher = Teacher.objects.filter(user = usr)
+                    if teacher.count():
+                        teacher = teacher[0]
+                        usr.name = name
+                        teacher.designation = desig
+                        teacher.branch = branch
+                        teacher.about = about
+                        teacher.linkedin_link = linkedin
+                        teacher.youtube_link = youtube
+                    usr.save()
+                    teacher.save()
+                    return Response({ 'message': 'successfully profile updated' })        
+            if user.is_student:
+                name = data['name']
+                branch = data['branch']
+                sem = int(data['semester'])
+                about = data['about']
+                usr = CustomUser.objects.filter(email=request.user.email)
+                if usr.count():
+                    usr = usr[0]
+                    student = Student.objects.filter(user = usr)
+                    if student.count():
+                        student = student[0]
+                        usr.name = name
+                        student.branch = branch
+                        student.about= about
+                    usr.save()
+                    student.save()
+                    return Response({ 'message': 'successfully profile updated' })
+            return Response({ 'message': 'Invalid User' },status=status.HTTP_401_UNAUTHORIZED)
+
         else:
             return Response({ 'message': 'Not Authenticated' },status=status.HTTP_401_UNAUTHORIZED)
     except Exception as e:
@@ -218,4 +252,88 @@ def Logut(request):
         return Response({ 'message': 'Loggout Out' })
     except Exception as e:
         # return Response({ 'error': 'Something went wrong while Lggout' })
+        return Response({ 'message': str(e) })
+    
+@permission_classes([permissions.IsAuthenticated])
+@csrf_protect
+@api_view(('GET',))
+def getProfile(request):
+    user = request.user
+    try:
+        isAuth = user.is_authenticated
+        if isAuth:
+            if user.is_teach:
+                usr = CustomUser.objects.filter(email=request.user.email)
+                if usr.count():
+                    usr = usr[0]
+                    teacher = Teacher.objects.filter(user = usr)
+                    if teacher.count():
+                        teacher = teacher[0]
+                        desig = teacher.designation
+                        if user.is_HOD:
+                            desig = "Head Of Department"
+                        dict = {
+                            "profilePic" : usr.img,
+                            "name" : usr.name,
+                            "designation" : desig,
+                            "branch": teacher.branch,
+                            "about": teacher.about,
+                            "linkedin":teacher.linkedin_link,
+                            "youtube":teacher.youtube_link
+                        }
+                        return Response(dict)
+            elif user.is_student:
+                usr = CustomUser.objects.filter(email=request.user.email)
+                if usr.count():
+                    usr = usr[0]
+                    student = Student.objects.filter(user=usr)
+                    if student.count():
+                        student = student[0]
+                        dict = {
+                            "profilePic" : usr.img,
+                            "name" : usr.name,
+                            "branch": student.branch,
+                            "semester" : student.sem,
+                            "about": student.about,
+                        }
+                        return Response(dict)
+            return Response({ 'message': 'Invalid User' },status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response({ 'message': 'Not Authenticated' },status=status.HTTP_401_UNAUTHORIZED)
+    except Exception as e:
+        # return Response({ 'error': 'Something went wrong when checking authentication status' })
+        return Response({ 'message': str(e) })
+
+@permission_classes([permissions.IsAuthenticated])
+@csrf_protect
+@api_view(('GET',))
+def teacherDashboard(request):
+    user = request.user
+    try:
+        if user.is_authenticated:
+            if user.is_teach:
+                if (request.method == 'GET'):
+                    obj = subj_collection_handle.find({"author_email": request.user.email},{
+                "_id": { "$toString": "$_id" },
+                "c_name": 1,
+                "sem": 1,
+                "summary": 1,
+                "branch": 1,
+                "units": 1,
+                "start_date": 1,
+                "author_email": 1,
+                "author_name": 1,
+                "syllabus_link": 1,
+                "book_link": 1,
+                "img_link": 1
+                })
+            data = obj
+            if obj is not None:
+                return Response(list(data))
+            else:
+                return Response({'error':"Invalid request"})
+        else:
+            return Response({ 'message': 'Not Authenticated' },status=status.HTTP_401_UNAUTHORIZED)
+    except Exception as e:
+        # return Response({ 'error': 'Something went wrong when checking authentication status' })
         return Response({ 'message': str(e) })

@@ -11,7 +11,7 @@ urlpatterns = [
     path('<str:branch>/get_branch',views.getBranch,name='getbranch'),
     path('<str:subj_id>/get_subj',views.getSubj,name='getsubj'),
     path('<str:subtopic_id>/get_subtopic',views.getSubtopic,name='getsubtopic'),
-    path('get_my_courses',views.getMyCourses,name='getMyCourses'),
+    path('teacher_courses',views.getMyCourses,name='getMyCourses'),
 
 
 ]

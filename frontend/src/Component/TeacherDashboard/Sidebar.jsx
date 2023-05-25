@@ -24,7 +24,7 @@ const Sidebar = () => {
       console.error(error)
     }
     navigate("/");
-    // window.location.reload(false)
+    window.location.reload()
 
   }
   return (

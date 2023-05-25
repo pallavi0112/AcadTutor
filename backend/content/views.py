@@ -12,6 +12,8 @@ from accounts.models import HOD,Teacher,CustomUser
 from bson.objectid import ObjectId
 from bson.json_util import dumps,loads
 from pathlib import Path
+from rest_framework import status
+
 db_handle, mongo_client = get_db_handle()
 
 subj_collection_handle = get_collection_handle(db_handle, "subjects")
@@ -237,19 +239,18 @@ def getSubtopic(request,subtopic_id):
 @csrf_protect
 @api_view(('GET',))
 def getMyCourses(request):
-    if (request.method == 'GET'):
-            obj = subj_collection_handle.find({"author_email": request.user.email},{
+    user = request.user
+    try:
+        if user.is_authenticated:
+            if user.is_teach:
+                if (request.method == 'GET'):
+                    obj = subj_collection_handle.find({"author_email": request.user.email},{
                 "_id": { "$toString": "$_id" },
                 "c_name": 1,
                 "sem": 1,
-                "summary": 1,
                 "branch": 1,
-                "units": 1,
-                "start_date": 1,
                 "author_email": 1,
                 "author_name": 1,
-                "syllabus_link": 1,
-                "book_link": 1,
                 "img_link": 1
                 })
             data = obj
@@ -257,6 +258,11 @@ def getMyCourses(request):
                 return Response(list(data))
             else:
                 return Response({'error':"Invalid request"})
+        else:
+            return Response({ 'message': 'Not Authenticated' },status=status.HTTP_401_UNAUTHORIZED)
+    except Exception as e:
+        # return Response({ 'error': 'Something went wrong when checking authentication status' })
+        return Response({ 'message': str(e) })
 
 
 @csrf_protect

@@ -1,7 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Subsyllabus.css';
-import HOD from '../../Images/HOD.jpg'
+import axios from "axios";
+
 const Container2 = (props) => {
+  const [profile, setProfile] = useState(
+    {
+        name: "",
+        branch: "",
+        designation: "",
+        about: "",
+        youtube: "",
+        linkedin: ""
+    }
+  );
+  const [ProfilePic , setPP] = useState("")
+
+useEffect(()=>{
+  const GetProfile = async () => {
+    try {
+        const response = await axios.get(`http://127.0.0.1:8000/accounts/get_profile`);
+        const data = response.data
+        console.log(data)
+        setProfile({
+            name: data.name,
+            branch: (data.branch)?data.branch:"",
+            designation: data.designation,
+            about: data.about,
+            youtube: data.youtube,
+            linkedin: data.linkedin
+        })
+        setPP(data.profilePic)
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+GetProfile()
+},[])  
+
   return (
     <div className='sub_con'>
       <h3>About the Subject</h3>
@@ -15,10 +51,10 @@ const Container2 = (props) => {
       </div>
       <h3>Teacher In Charge</h3>
       <div className='teacher-info'>
-        <img src={HOD} alt='teacher-pic'/>
+        <img src={ProfilePic} alt='teacher-pic'/>
         <div>
-        <h4>Dr. Shanu K Rakesh</h4>
-        <span>CSE Department</span>
+        <h4>{profile.name}</h4>
+        <span>{profile.branch} Department</span>
         </div>
       </div>
     </div>

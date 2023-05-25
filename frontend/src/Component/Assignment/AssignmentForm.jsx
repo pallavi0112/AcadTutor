@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './AssignmentForm.css'
 import Cookies from 'js-cookie';
 import axios from "axios";
@@ -32,8 +32,6 @@ const formats = [
 
 const AssignmentForm = (props) => {
   const dispatch = useDispatch()
-  const { unit_id } = useSelector((state) => state.showLoginSlice)
-  console.log(unit_id)
   const [assignment, setAssignment] = useState(
     {
       name: "",
@@ -78,7 +76,7 @@ const AssignmentForm = (props) => {
         ,
         {
           headers: {
-            "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
+            "Content-Type": "multipart/form-data",
             "X-CSRFToken": Cookies.get('csrftoken')
 
           },
@@ -97,7 +95,7 @@ const AssignmentForm = (props) => {
         )
         setFile(null)
         setInstructions('')
-        //  window.location.reload();
+         window.location.reload();
         console.log("condition is working")
       }
       // else{
@@ -105,12 +103,15 @@ const AssignmentForm = (props) => {
       // }
 
     } catch (err) {
-      localStorage.setItem(unit_id, false)
+      // localStorage.setItem(unit_id, false)
       console.log("error")
       console.error(err);
     }
 
   };
+  useEffect(()=>{
+    console.log("hello")
+  },[])
   return (
     <div className="AssignmentForm_Container">
       <div className="AssignmentForm_Wrapper">
