@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Assignment.css'
 import textFile from '../../Images/TextFile.png'
 import { BsArrowDownSquareFill, BsThreeDotsVertical, BsFillArrowLeftSquareFill, BsCheckSquare } from "react-icons/bs";
@@ -6,8 +6,12 @@ import { ImCheckboxUnchecked } from "react-icons/im";
 import { SiObservable } from "react-icons/si";
 import SubmittedAssignmentContainer from './SubmittedAssignmentContainer';
 import InstructionContainer from './InstructionContainer';
+import { useDispatch , useSelector } from 'react-redux';
 // import PDFpreviewer from '../PDF/PDFpreviewer';
 const AssignmentContainer2 = () => {
+    const dispatch  = useDispatch();
+    const {filterData} = useSelector(state => state.GetAssignment)
+    console.log(filterData)
     const [instructionshow, setInstructionShow] = useState(true)
     const [submissionshow, setSubmissionShow] = useState(false)
     const InstructionHandler = () => {
@@ -18,6 +22,7 @@ const AssignmentContainer2 = () => {
         setInstructionShow(false)
         setSubmissionShow(true)
     }
+  
     return (
         <div className='AssignmentContainer2'>
             <div>
@@ -34,10 +39,10 @@ const AssignmentContainer2 = () => {
             </div>
             <div>
                 <span>By Shanu k Rakesh</span>
-                <span>Posted on: 26/4/23</span>
+                <span>Posted on: {filterData[0].created_at}</span>
             </div>
             <div>
-                <h3>Due on : 2/5/13</h3>
+                <h3>Due on : {filterData[0].due_date} </h3>
                 <ul>
                     <li>
                         <button className={instructionshow && 'active'} onClick={InstructionHandler}>Instuction</button>
@@ -49,7 +54,7 @@ const AssignmentContainer2 = () => {
             </div>
             <hr />
             {
-                instructionshow && <InstructionContainer/>
+                instructionshow && <InstructionContainer  marks={filterData[0].marks} instructions={filterData[0].instructions}/>
             }
             {
                 submissionshow && 

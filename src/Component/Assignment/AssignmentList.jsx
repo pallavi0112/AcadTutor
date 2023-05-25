@@ -1,38 +1,27 @@
 import React,{useEffect} from 'react'
 import axios from 'axios'
 import Assignment from './Assignment'
-
+import { useDispatch , useSelector } from 'react-redux'
+import { GetAssignments } from '../../features/teacher/AssignmentSlice'
 const AssignmentList = () => {
+  const dispatch = useDispatch();
+  const {assignmentData} = useSelector((state)=>state.GetAssignment)
 useEffect( ()=>{
-  const GetAssignment = async () => {
-    try {
-      const response = await axios.get(
-        'http://127.0.0.1:8000/content/get_teacher_assignment',
-      );
-      const courses = response.data
-      console.log(courses)
-      // courses.map((object, index) => {
-      //   const sub = object.subjects
-      //   setCoursesData((item) => [
-      //     ...item,
-          
-      //       object
-          
-      //   ]);
-      // });
-
-    } catch (err) {
-              console.error(err);
-              }
-  };
-  GetAssignment()
-},[])
+    dispatch(GetAssignments())
+},[GetAssignments])
   return (
     <div>
+       {
+        assignmentData ? 
+        assignmentData.map((assignment , index)=>{
+            return <Assignment key={index} Data={assignment} index={index}/>
+        })
+        : "There is no Assignment yet"
+       }
+      
+        {/* <Assignment/>
         <Assignment/>
-        <Assignment/>
-        <Assignment/>
-        <Assignment/>
+        <Assignment/> */}
     </div>
   )
 }
