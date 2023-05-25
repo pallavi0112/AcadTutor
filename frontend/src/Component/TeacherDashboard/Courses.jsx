@@ -14,7 +14,7 @@ const Courses = () => {
         const GetCoursesData = async () => {
             try {
               const response = await axios.get(
-                `http://127.0.0.1:8000/accounts/teacher_dashboard`,
+                `http://127.0.0.1:8000/content/teacher_courses`,
               );
               const courses = response.data
               console.log(courses)

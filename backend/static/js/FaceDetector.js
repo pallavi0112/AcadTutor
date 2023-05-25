@@ -1,3 +1,13 @@
+const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+const alert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+      `<div class="alert alert-danger" role="alert">`,
+      `   <div>${message}</div>`
+    ].join('')
+  
+    alertPlaceholder.append(wrapper)
+  }
 class FaceDetector {
     constructor(videoStream, canvas, options = {}) {
         this.options = {
@@ -15,11 +25,6 @@ class FaceDetector {
 
         this.initialized = false
         this.nose_normal = 0.08
-        this.changePage = false
-
-
-        this.movingTimer = null
-        this.movingPage = false
 
     }
 
@@ -121,14 +126,18 @@ class FaceDetector {
         // console.log("this.changePage " + this.changePage)
         // console.log("jaw_left_y_dist " + jaw_left_y_dist + " | jaw_right_y_dist " + jaw_right_y_dist)
         // if (self.movingPage)
-        //     return
-        // console.log(jaw_left_y_dist,jaw_right_y_dist )
-        if (jaw_left_y_dist > 70){
+        // //     return
+        console.log(jaw_left_y_dist,jaw_right_y_dist )
+        if (jaw_left_y_dist > 35){
             // Watching left page - 1
             // self.movingPage = true
             // self.movingTimer = setTimeout(function(){
             //     self.movingPage = false
             // }, 1000)
+
+            alert('Nice, you triggered this alert message!', 'success')
+
+              
             console.log("Change page left")
             // let page = self.controller.currPage
             // $("#scrollLeftTD p").addClass("action_selected")
@@ -136,7 +145,7 @@ class FaceDetector {
             // self.controller.renderPage(page)
 
         }
-        else if ( jaw_right_y_dist > 60){
+        else if ( jaw_right_y_dist > 30){
             // Watching right
             // self.movingPage = true
             // self.movingTimer = setTimeout(function(){
@@ -149,13 +158,13 @@ class FaceDetector {
         }
         else
         {
-            console.log(self.nose_normal - buf_avg ,self.options.buffer_thresh)
+            // console.log(self.nose_normal - buf_avg ,self.options.buffer_thresh)
         //     const speed = - (self.nose_normal - buf_avg) / (self.options.buffer_thresh/2)
         // //     // Check buffer of noise len
         //     if (Math.abs( self.nose_normal - buf_avg ) < self.options.buffer_thresh){
         //         console.log("scroll(speed) "+speed +" <--- self.nose_normal - buf_avg " + (self.nose_normal - buf_avg))
         //     }
-                if((self.nose_normal - buf_avg)< -4*self.options.buffer_thresh){
+                if((self.nose_normal - buf_avg)< -3*self.options.buffer_thresh){
                     console.log("Looking up")
                 }
                 else if((self.nose_normal - buf_avg)> 2*self.options.buffer_thresh){

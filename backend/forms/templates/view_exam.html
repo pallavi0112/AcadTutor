@@ -14,144 +14,191 @@
     <script src="https://kit.fontawesome.com/bc6e988caa.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
-<body id="page-top">
-<div id="wrapper">
-    
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div>
-                <video id="video" width="640" height="480" autoplay></video>
-                <canvas id="canvas" width="640" height="480"></canvas>
-            </div>
-            
-
-            <div id="content">
-                
-                <div class="container-fluid justify-content-between" style="margin-bottom: 16px; margin-top:30px;">
-                    <div class="card shadow mb-3">
-                        <div class="card-body">
-                                <div class="row">
-                                    <h2 class="form-title">{{form.title}}</h2>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <p>{{form.desc}}</p>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <form action="{% url 'submit_exam' form.uuid %}" method="POST" autocomplete="off">
-                    {% csrf_token %}
-                <div class="row main-container">
-                    <div class="col">
-                        {% for question in form.questions.all %}
-                        <div class="card shadow mb-3 question" data-id="{{question.id}}">
-                            <div class="card-header d-flex justify-content-between py-3">
-                                <p class="text-primary m-0 fw-bold">Question 
-                                    {% if question.q_type == "sa" %}
-                                    Short Answer
-                                    {% elif question.q_type == "la" %}
-                                    Long Answer
-                                    {% elif question.q_type == "mcq" %}
-                                    MCQ
-                                    {% elif question.q_type == "msq" %}
-                                    MSQ
-                                    {% endif %}
-                                    {% if question.req %}
-                                    <span class="require-star">*</span>{% endif %}
-                                </p>
-                                <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
-                                    <p class="text-primary m-0 fw-bold">Score</p><input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" disabled value="{{question.postive_score}}"/>
-                                </div>
-
-                            </div>
-                            <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="text-dark">{{question.ques}}</h3>
-                                        </div>
-                                    </div>
-                                    {% if question.q_type == "sa" %}
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3 answer">
-                                            <label class="form-label"><strong>Answer</strong><br></label>
-                                            <input class="form-control short-answer" name="{{question.id}}"
-                                           
-                                            type="text" placeholder="Short Answer" ></div>
-                                        </div>
-                                    </div>
-                                    {% elif question.q_type == "la" %}
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3 answer">
-                                                <label class="form-label" for="">
-                                                <strong>Answer</strong><br></label>
-                                                <textarea class="form-control long-answer" name="{{question.id}}"
-                                               
-                                                placeholder="Long Answer"></textarea></div>
-                                        </div>
-                                    </div>
-                                    {% elif question.q_type == "mcq" %}
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3 choices" data-id="{{question.id}}">
-                                                <label class="form-label" for=""><strong>Options</strong><br></label>
-                                                {%for choice in question.options.all %}
-
-                                                <div class="form-checkd-flex">
-                                                    <input class="form-check-input" id="{{choice.id}}" name="{{question.id}}" id="{{choice.id}}" 
-                                                    value="{{choice.id}}" type="radio" >
-                                                    <label class="form-label" for="{{choice.id}}">{{choice.optn}}</label>
-
-                                                </div>
-                                                {% endfor %}
-                                        </div>
-                                        </div>
-                                    </div>
-
-                                    {% elif question.q_type == "msq" %}
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3 choices" data-id="{{question.id}}">
-                                                <label class="form-label" for=""><strong>Options</strong><br></label>
-                                                {%for choice in question.options.all %}
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="{{question.id}}" id="{{choice.id}}"  
-                                                     value="{{choice.id}}" type="checkbox" >
-                                                    <label class="form-label" for="{{choice.id}}">{{choice.optn}}</label>
-                                                </div>
-                                                {% endfor %}
-                                        </div>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-
-                            </div>
-  
-                        </div>
-                        {% endfor %}
-
-                    </div>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <input class="btn btn-primary" type="submit" value="Submit">
-              </div>
-        </form>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Quizbox 2022</span></div>
-                </div>
-            </footer>
+<body class="vh-100" id="page-top">
+   <div class="d-flex">
+    <div class="pt-3 ps-3" style="background-color: #f8f9fc;">
+        <div >
+            <video id="video"  autoplay></video>
+            <canvas id="canvas" width="320" height="160"></canvas>
         </div>
-        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        <div id="liveAlertPlaceholder"></div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch modal
+  </button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+       <div class = "flex-grow-1 vh-100" id="wrapper">
+               <div class="d-flex flex-column " id="content-wrapper">            
+       
+                   <div id="content">
+                       
+                       <div class="container-fluid justify-content-between" style="margin-bottom: 16px; margin-top:30px;">
+                           <div class="card shadow mb-3">
+                               <div class="card-body">
+                                       <div class="row">
+                                           <h2 class="form-title">{{form.title}}</h2>
+                                       </div>
+                                       <hr>
+                                       <div class="row">
+                                           <p>{{form.desc}}</p>
+                                       </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="container-fluid">
+                       <form action="{% url 'submit_exam' form.uuid %}" method="POST" autocomplete="off">
+                           {% csrf_token %}
+                       <div class="row main-container">
+                           <div class="col">
+                               {% for question in form.questions.all %}
+                               <div class="card shadow mb-3 question" data-id="{{question.id}}">
+                                   <div class="card-header d-flex justify-content-between py-3">
+                                       <p class="text-primary m-0 fw-bold">Question 
+                                           {% if question.q_type == "sa" %}
+                                           Short Answer
+                                           {% elif question.q_type == "la" %}
+                                           Long Answer
+                                           {% elif question.q_type == "mcq" %}
+                                           MCQ
+                                           {% elif question.q_type == "msq" %}
+                                           MSQ
+                                           {% endif %}
+                                           {% if question.req %}
+                                           <span class="require-star">*</span>{% endif %}
+                                       </p>
+                                       <div class="d-flex justify-content-around" style="border-style: none;padding: 0px;">
+                                           <p class="text-primary m-0 fw-bold">Score</p><input type="text" class="form-control positive" data-qid="{{question.id}}" style="height: 22px;width: 55px;margin: 0px;margin-right: 8px; margin-left: 8px;" placeholder="+Ve" disabled value="{{question.postive_score}}"/>
+                                       </div>
+       
+                                   </div>
+                                   <div class="card-body">
+                                           <div class="row">
+                                               <div class="col">
+                                                   <h5 class="text-dark">{{question.ques}}</h3>
+                                               </div>
+                                           </div>
+                                           {% if question.q_type == "sa" %}
+                                           <div class="row">
+                                               <div class="col">
+                                                   <div class="mb-3 answer">
+                                                   <label class="form-label"><strong>Answer</strong><br></label>
+                                                   <input class="form-control short-answer" name="{{question.id}}"
+                                                  
+                                                   type="text" placeholder="Short Answer" ></div>
+                                               </div>
+                                           </div>
+                                           {% elif question.q_type == "la" %}
+                                           <div class="row">
+                                               <div class="col">
+                                                   <div class="mb-3 answer">
+                                                       <label class="form-label" for="">
+                                                       <strong>Answer</strong><br></label>
+                                                       <textarea class="form-control long-answer" name="{{question.id}}"
+                                                      
+                                                       placeholder="Long Answer"></textarea></div>
+                                               </div>
+                                           </div>
+                                           {% elif question.q_type == "mcq" %}
+                                           <div class="row">
+                                               <div class="col">
+                                                   <div class="mb-3 choices" data-id="{{question.id}}">
+                                                       <label class="form-label" for=""><strong>Options</strong><br></label>
+                                                       {%for choice in question.options.all %}
+       
+                                                       <div class="form-checkd-flex">
+                                                           <input class="form-check-input" id="{{choice.id}}" name="{{question.id}}" id="{{choice.id}}" 
+                                                           value="{{choice.id}}" type="radio" >
+                                                           <label class="form-label" for="{{choice.id}}">{{choice.optn}}</label>
+       
+                                                       </div>
+                                                       {% endfor %}
+                                               </div>
+                                               </div>
+                                           </div>
+       
+                                           {% elif question.q_type == "msq" %}
+                                           <div class="row">
+                                               <div class="col">
+                                                   <div class="mb-3 choices" data-id="{{question.id}}">
+                                                       <label class="form-label" for=""><strong>Options</strong><br></label>
+                                                       {%for choice in question.options.all %}
+       
+                                                       <div class="form-check">
+                                                           <input class="form-check-input" name="{{question.id}}" id="{{choice.id}}"  
+                                                            value="{{choice.id}}" type="checkbox" >
+                                                           <label class="form-label" for="{{choice.id}}">{{choice.optn}}</label>
+                                                       </div>
+                                                       {% endfor %}
+                                               </div>
+                                               </div>
+                                           </div>
+                                           {% endif %}
+       
+                                   </div>
+         
+                               </div>
+                               {% endfor %}
+       
+                           </div>
+                       </div>
+                   </div>
+                   <div class="text-center my-2">
+                       <input class="btn btn-primary" type="submit" value="Submit">
+                     </div>
+               </form>
+                   <footer class="bg-white sticky-footer">
+                       <div class="container my-auto">
+                           <div class="text-center my-auto copyright"><span>Copyright © Quizbox 2022</span></div>
+                       </div>
+                   </footer>
+               </div>
+               <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+           </div>
+   </div>
+   <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Proctored Exam Instructions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ol>
+          <li>Ensure you have good internet connection</li>
+          <li>Prepare a quiet and well-lit room</li>
+          <li>Test the proctoring system</li>
+          <li>Avoid unauthorized assistance</li>
+          <li>You will be suspended from exam if multiple faces are detected</li>
+          <li>Focus on the screen</li>
+          <li>Do not turn your face left/right/up/down multiple times else your exam will be suspended</li>
+          <li>Maintain professional conduct</li>
+        </ol>
+        <h5>Click Next to Caliberate your face</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+   <script type="text/javascript">
+    let alert_list = document.querySelectorAll('.alert')
+    alert_list.forEach(function(alert) {
+        new bootstrap.Alert(alert);
+        setTimeout(() => {
+            bootstrap.Alert.getInstance(alert).close();
+        }, 100);
+    });
+</script>
     <script src="{% static 'js/script.min.js' %}"></script>
     <script defer src="{% static 'js/face-api.js' %}"></script>
     <script src="{% static 'js/FaceDetector.js' %}"></script>

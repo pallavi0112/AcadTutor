@@ -6,7 +6,9 @@ import './TSettings.css'
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { logout } from '../../features/users/authSlice'
-
+axios.defaults.withCredentials = true
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 const TSettings = () => {
     const [savebtn, setSaveBtn] = useState(false)
     const [active, setActive] = useState(false)
@@ -33,9 +35,7 @@ const TSettings = () => {
     const dispatch = useDispatch(); 
 
     const hiddenFileInput = React.useRef(null);
-    axios.defaults.withCredentials = true
-    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-    axios.defaults.xsrfCookieName = "csrftoken";
+
     const handleClick = (e) => {
         e.preventDefault();
         hiddenFileInput.current.click();
