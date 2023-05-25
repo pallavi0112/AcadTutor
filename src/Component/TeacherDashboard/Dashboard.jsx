@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react'
 // import './TeacherDashboard.css'
 import '../Dashboard/Dashboard.css'
 import EnrolledCourses from '../Dashboard/EnrolledCourses'
@@ -7,6 +8,9 @@ import Performance from '../Dashboard/Performance'
 import NotesAnnounce from '../Dashboard/NotesAnnounce'
 import Feed from '../Dashboard/Feed'
 const Dashboard = () => {
+  useEffect(()=>{
+    
+  },[])
   return (
     <>
       <div id='dash_container'>
