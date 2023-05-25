@@ -6,6 +6,7 @@ import axios from 'axios';
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+
 const Courses = () => {
     const { user } = useSelector((state) => state.auth)
     const [CoursesData,setCoursesData] = useState([])
